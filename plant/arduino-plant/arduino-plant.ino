@@ -28,8 +28,8 @@ float humidity = 0;         // soil moisture in percentage
 // commands
 #define CMD_OPEN_SOLENOID_VALVE 0x01
 #define CMD_CLOSE_SOLENOID_VALVE 0x02
-#define CMD_READ_SOIL_MOISTURE 0x03
-#define CMD_READ_SOLENOID_VALVE_STATE 0x05
+#define CMD_READ_SOIL_MOISTURE 0x09
+#define CMD_READ_SOLENOID_VALVE_STATE 0x0A
 
 
 // states
@@ -51,6 +51,9 @@ void setup() {
 }
 
 
+/*
+ * Sets the current processed cmd to zero.
+ */
 void clear_cmd() {
  received_cmd = 0; 
 }
@@ -74,7 +77,9 @@ void open_solenoid_valve() {
 }
 
 
-
+/*
+ * Main loop.
+ */
 void loop() {
   sensor_value = analogRead(SOIL_MOISTURE_SENSOR_PIN);    // read the value from the sensor
   humidity = (1.0 - ((float)sensor_value)/MAX_SENSOR_VALUE) * 100;
@@ -97,6 +102,9 @@ void loop() {
 }
 
 
+/*
+ * i2c receive data.
+ */
 void receive_data(int byteCount){ 
   while(Wire.available()) {
    received_cmd = Wire.read();
@@ -104,6 +112,9 @@ void receive_data(int byteCount){
 }
 
 
+/*
+ * Sends humidity value as word over i2c.
+ */
 void send_humidity_word() {
   sensor_value = analogRead(SOIL_MOISTURE_SENSOR_PIN);    // read the value from the sensor
   humidity = (1.0 - ((float)sensor_value)/MAX_SENSOR_VALUE) * 100;
@@ -114,17 +125,25 @@ void send_humidity_word() {
   Wire.write(data, 2);
 }
 
+
+/*
+ * Sends solenoid state value as byte over i2c.
+ */
 void send_solenoid_state_byte() {
   char data[] = { valve_state };
   Wire.write(data, 1);
 }
 
 
+/*
+ * i2c send data.
+ */
 void send_data(){
   if(received_cmd == CMD_READ_SOIL_MOISTURE) {
     send_humidity_word();
     clear_cmd();  
   } else if(CMD_READ_SOLENOID_VALVE_STATE) {
     send_solenoid_state_byte();
+    clear_cmd();
   }
 }

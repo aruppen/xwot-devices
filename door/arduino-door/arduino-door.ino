@@ -10,7 +10,8 @@
  * - 0X02 : Locks the door.
  * - 0x03 : Opens the door.
  * - 0x04 : Closes the door.
- * - 0x05 : Retrieves the state.
+ * - 0x09 : Retrieves the locked / unlocked state.
+ * - 0x0A : Retrieves the open / closed state.
  *
  */
 
@@ -55,6 +56,9 @@ Servo servo;
 #define CMD_OPEN_DOOR 0x03
 #define CMD_CLOSE_DOOR 0x04
 
+#define CMD_READ_LOCK_STATE 0x09
+#define CMD_READ_CLOSE_STATE 0x0A
+
 
 // state variables
 int lock_state = DOOR_UNLOCK_STATE;
@@ -89,10 +93,6 @@ void setup()
   close_state = !is_closed();
 }
 
-
-/*
- * Door close / open behaviour.
- */
 
 /*
  * Unlocks the door.
@@ -134,18 +134,24 @@ void open_door() {
 }
 
 
+/*
+ * Stops the motor of this door.
+ */
 void stop_motor() {
   analogWrite(MOTOR_PIN, 0);
 }
 
 
+/*
+ * Sets the current processed cmd to zero.
+ */
 void clear_cmd() {
  received_cmd = 0; 
 }
 
 
 /*
- * I2C 
+ * i2c receive data.
  */
 void receive_data(int byteCount){ 
    while(Wire.available()) {
@@ -154,30 +160,58 @@ void receive_data(int byteCount){
 }
 
 
+/*
+ * Send lock state as a byte over i2c.
+ */
+void send_lock_state_byte() {
+  char data[] = { lock_state };
+  Wire.write(data, 1);
+}
+
+
+/*
+ * Send close state as a byte over i2c.
+ */
+void send_close_state_byte() {
+  char data[] = { close_state };
+  Wire.write(data, 1);
+}
+
+
+/*
+ * i2c send data.
+ */
 void send_data(){
-  
+  if(received_cmd == CMD_READ_LOCK_STATE) {
+    send_lock_state_byte();
+    clear_cmd();  
+  } else if(CMD_READ_CLOSE_STATE) {
+    send_close_state_byte();
+    clear_cmd();
+  }
 }
 
 
+/*
+ * Returns 1 if the door is located at the close position.
+ */
 int is_closed() {
-  int val = analogRead(MAGNETIC_SENSOR_CLOSE_PIN) > 1017;
-  return val; 
+  return analogRead(MAGNETIC_SENSOR_CLOSE_PIN) > 1017; 
 }
 
 
+/*
+ * Returns 1 if the door is located at the open position.
+ */
 int is_open() {
-  int val = analogRead(MAGNETIC_SENSOR_OPEN_PIN) > 1017;
-  return val; 
+  return analogRead(MAGNETIC_SENSOR_OPEN_PIN) > 1017; 
 }
-
 
 
 /*
  * Main loop.
  */
-
 void loop() {
-  
   if(received_cmd == CMD_UNLOCK_DOOR){
     unlock_door();
     clear_cmd();
@@ -209,8 +243,6 @@ void loop() {
    stop_motor();
    close_state = DOOR_CLOSE_STATE;
   }
-  
-  delay(300);
 }
 
 
