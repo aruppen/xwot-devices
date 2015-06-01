@@ -36,10 +36,10 @@ Servo servo;
 #define LED_PIN 13
 
 // senses if the door is open
-#define MAGNETIC_SENSOR_OPEN_PIN A0
+#define MAGNETIC_SENSOR_OPEN_PIN A2
 
 // senses if the door is closed
-#define MAGNETIC_SENSOR_CLOSE_PIN A2
+#define MAGNETIC_SENSOR_CLOSE_PIN A0
 
 // states
 #define DOOR_LOCK_STATE 0
@@ -47,6 +47,7 @@ Servo servo;
 
 #define DOOR_CLOSE_STATE 0
 #define DOOR_OPEN_STATE 1
+#define DOOR_TRANSITION_STATE 2
 
 
 // commands
@@ -62,7 +63,6 @@ Servo servo;
 
 // state variables
 int lock_state = DOOR_UNLOCK_STATE;
-int close_state = DOOR_OPEN_STATE;
 
 // current cmd that is processed
 int received_cmd = 0x00;
@@ -89,8 +89,23 @@ void setup()
   
   // init
   unlock_door();
-  delay(2000);
-  close_state = !is_closed();
+  //delay(2000);
+}
+
+
+/*
+ * Returns 1 if the door is located at the close position.
+ */
+int is_closed() {
+  return analogRead(MAGNETIC_SENSOR_CLOSE_PIN) > 1000; 
+}
+
+
+/*
+ * Returns 1 if the door is located at the open position.
+ */
+int is_open() {
+  return analogRead(MAGNETIC_SENSOR_OPEN_PIN) > 1000; 
 }
 
 
@@ -173,7 +188,16 @@ void send_lock_state_byte() {
  * Send close state as a byte over i2c.
  */
 void send_close_state_byte() {
-  char data[] = { close_state };
+  char val = DOOR_TRANSITION_STATE;
+  
+  if(is_open()) {
+    val = DOOR_OPEN_STATE;
+  }
+  if(is_closed()) {
+   val = DOOR_CLOSE_STATE; 
+  }
+  
+  char data[] = { val };
   Wire.write(data, 1);
 }
 
@@ -189,22 +213,6 @@ void send_data(){
     send_close_state_byte();
     clear_cmd();
   }
-}
-
-
-/*
- * Returns 1 if the door is located at the close position.
- */
-int is_closed() {
-  return analogRead(MAGNETIC_SENSOR_CLOSE_PIN) > 1017; 
-}
-
-
-/*
- * Returns 1 if the door is located at the open position.
- */
-int is_open() {
-  return analogRead(MAGNETIC_SENSOR_OPEN_PIN) > 1017; 
 }
 
 
@@ -235,14 +243,13 @@ void loop() {
   // ensure that the motor is stopped before we oversteer...  
   if(is_open()){
    stop_motor(); 
-   close_state = DOOR_OPEN_STATE;
   }
   
   // ensure that the motor is stopped before we oversteer...
   if(is_closed()){
    stop_motor();
-   close_state = DOOR_CLOSE_STATE;
   }
+  
 }
 
 
