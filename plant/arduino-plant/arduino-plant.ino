@@ -8,7 +8,7 @@
  * Commands:
  * - 0X01 : Opens solenoid valve.
  * - 0X02 : Closes solenoid valve.
- * - 0X03 : Retrieves the soil moisture percentage value.
+ * - 0X09 : Retrieves the soil moisture percentage value.
  *
  */
 
@@ -43,8 +43,10 @@ int valve_state = VALVE_CLOSED;
 void setup() {
   pinMode(RELAIS_PIN, OUTPUT);
   Serial.begin(9600);
+  
   // initialize i2c as slave
   Wire.begin(SLAVE_ADDRESS);
+  
   // define callbacks for i2c communication
   Wire.onReceive(receive_data);
   Wire.onRequest(send_data);
