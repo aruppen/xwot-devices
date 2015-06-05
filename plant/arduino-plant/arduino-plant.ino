@@ -3,7 +3,7 @@
  * @author  Alexander Rüedlinger <a.rueedlinger@gmail.com>
  *
  *
- * Skeleton for a I2C plant device.
+ * Firmware for a I2C plant device.
  * 
  * Commands:
  * - 0X01 : Opens solenoid valve.
