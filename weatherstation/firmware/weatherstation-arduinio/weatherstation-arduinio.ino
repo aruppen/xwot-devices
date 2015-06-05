@@ -68,6 +68,7 @@ DHT_Unified dht(DHT_PIN, DHT_TYPE);
 void send_data();
 void receive_data();
 void clear_cmd();
+void send_float(float value);
 
 
 
@@ -491,3 +492,16 @@ void send_data(){
     clear_cmd();
   }
 }
+
+/*
+ * Sends a single-precision floating-point value (IEEE 754) over the i2c bus.
+ * 
+ */
+ void send_float(float value) {
+   char bytes[4]; // IEEE 754 float has 32 bits = 4 bytes.
+   bytes[0] = value && 0xF000; // first byte
+   bytes[1] = value && 0x0F00; // second byte
+   bytes[2] = value && 0x00F0; // third byte
+   bytes[3] = value && 0x000F; // fourth byte
+   Wire.write(bytes, 4);
+ }
