@@ -39,6 +39,8 @@ Adafruit_HX8357 tft = Adafruit_HX8357(TFT_CS, TFT_DC, TFT_RST);
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X);
 
 
+// weather station
+
 // sensors
 Adafruit_BMP085 bmp;
 Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 12345);
@@ -50,6 +52,24 @@ DHT_Unified dht(DHT_PIN, DHT_TYPE);
 
 #define VERSION "Weather Station v1.0.0"
 
+// i2c
+#define SLAVE_ADDRESS 0x04
+
+// commands
+#define CMD_READ_TEMPERATURE_1 0x01
+#define CMD_READ_TEMPERATURE_2 0x02
+#define CMD_READ_PRESSURE 0x03
+#define CMD_READ_HUMIDITY 0x04
+#define CMD_READ_ALTITUDE 0x05
+#define CMD_READ_ILLUMINANCE 0x06
+#define CMD_READ_COLOR_K 0x07
+#define CMD_READ_COLOR_LUX 0x08
+
+void send_data();
+void receive_data();
+
+
+
 // state variables
 long illuminance_value = 0;
 float pressure_value = 0.0;
@@ -57,6 +77,8 @@ float temperature_value1 = 0.0;
 float temperature_value2 = 0.0;
 float humidity_value = 0.0;
 float altitude_value = 0.0;
+
+int received_cmd = 0x00;
 
 uint16_t color_temp = 0;
 uint16_t color_lux = 0;
@@ -90,6 +112,14 @@ void print_clock();
  */
 void setup() {
   Serial.begin(9600);
+  
+  // initialize i2c as slave
+  Wire.begin(SLAVE_ADDRESS);
+  
+  // define callbacks for i2c communication
+  Wire.onReceive(receive_data);
+  Wire.onRequest(send_data);
+  
   init_screen();
   init_sensors();
 }
@@ -127,9 +157,11 @@ void init_sensors() {
 
 
 void print_splash() {
-  tft.setCursor(DISPLAY_WIDTH/6, DISPLAY_HEIGHT/2);
+  tft.setCursor(DISPLAY_WIDTH/6, DISPLAY_HEIGHT/3);
   tft.setTextSize(3);
-  tft.println("Weather station...");
+  tft.println("Weather station");
+  tft.setCursor(DISPLAY_WIDTH/6, DISPLAY_HEIGHT/3 + 30);
+  tft.println("loading...");
   delay(3000);
   tft.fillScreen(HX8357_BLACK);
 }
@@ -410,3 +442,51 @@ void loop() {
 }
 
 
+/*
+ * Sets the current processed cmd to zero.
+ */
+void clear_cmd() {
+ received_cmd = 0; 
+}
+
+
+/*
+ * i2c receive data.
+ */
+void receive_data(int byteCount){ 
+  while(Wire.available()) {
+   received_cmd = Wire.read();
+  }
+}
+
+
+/*
+ * i2c send data.
+ */
+void send_data(){
+  if(received_cmd == CMD_READ_TEMPERATURE_1) {
+    // todo
+    clear_cmd();  
+  } else if(received_cmd == CMD_READ_TEMPERATURE_2) {
+    // todo
+    clear_cmd();
+  } else if(received_cmd == CMD_READ_PRESSURE) {
+    // todo
+    clear_cmd();
+  } else if(received_cmd == CMD_READ_HUMIDITY) {
+    // todo
+    clear_cmd();
+  } else if(received_cmd == CMD_READ_ALTITUDE) {
+    // todo
+    clear_cmd();
+  } else if(received_cmd == CMD_READ_COLOR_K) {
+    // todo
+    clear_cmd();
+  } else if(received_cmd == CMD_READ_COLOR_LUX) {
+    // todo
+    clear_cmd();
+  } else if(received_cmd == CMD_READ_ILLUMINANCE) {
+    // todo
+    clear_cmd();
+  }
+}
