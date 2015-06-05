@@ -1,3 +1,15 @@
+/*
+ * @date    05.06.2015
+ * @author  Alexander Rüedlinger <a.rueedlinger@gmail.com>
+ *
+ * Firmware for the weatherstation device.
+ * 
+ * Commands:
+ * - 0X01 : TODO
+ * - 0X02 : TODO
+ * - 0X09 : TODO
+ *
+ */
 
 // sensor dependencies
 #include <Wire.h>
@@ -27,8 +39,8 @@ Adafruit_HX8357 tft = Adafruit_HX8357(TFT_CS, TFT_DC, TFT_RST);
 Adafruit_BMP085 bmp;
 Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 12345);
 
-#define DHT_PIN            2
-#define DHT_TYPE            DHT22
+#define DHT_PIN 2
+#define DHT_TYPE DHT22
 DHT_Unified dht(DHT_PIN, DHT_TYPE);
 
 
@@ -59,6 +71,10 @@ void print_version();
 void print_splash();
 void print_clock();
 
+
+/*
+ * Setups the device.
+ */
 void setup() {
   Serial.begin(9600);
   init_screen();
@@ -66,6 +82,9 @@ void setup() {
 }
 
 
+/*
+ * Setups the tft screen.
+ */
 void init_screen() {
   tft.begin(HX8357D);
   tft.setRotation(3); // 1
@@ -73,16 +92,20 @@ void init_screen() {
   print_version();
 }
 
+
+/*
+ * Setups the sensors.
+ */
 void init_sensors() {
-  if (!bmp.begin()) {
+  if (!bmp.begin()) { // i2c sensor
     Serial.println("Could not find a valid BMP180 sensor, check wiring!");
   }
   
-  if(!tsl.begin()) {
+  if(!tsl.begin()) { // i2c sensor
     Serial.println("Could not find a valid TSL2561 sensor, check wiring!");
   }
   
-  dht.begin();
+  dht.begin(); // uses one-wire protocol
 }
 
 
