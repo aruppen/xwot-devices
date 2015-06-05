@@ -18,11 +18,14 @@
 #include <Adafruit_TSL2561_U.h>
 #include <DHT.h>
 #include <DHT_U.h>
+#include <Adafruit_TCS34725.h>
 
 // tft dependencies
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_HX8357.h>
+
+
 
 // tft 
 #define TFT_CS 10
@@ -33,6 +36,7 @@
 #define DISPLAY_HEIGHT 320
 
 Adafruit_HX8357 tft = Adafruit_HX8357(TFT_CS, TFT_DC, TFT_RST);
+Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X);
 
 
 // sensors
@@ -47,12 +51,19 @@ DHT_Unified dht(DHT_PIN, DHT_TYPE);
 #define VERSION "Weather Station v1.0.0"
 
 // state variables
-float illuminance_value = 0.0;
+long illuminance_value = 0;
 float pressure_value = 0.0;
 float temperature_value1 = 0.0;
 float temperature_value2 = 0.0;
 float humidity_value = 0.0;
 float altitude_value = 0.0;
+
+uint16_t color_temp = 0;
+uint16_t color_lux = 0;
+uint16_t color_r = 0;
+uint16_t color_g = 0;
+uint16_t color_b = 0;
+uint16_t color_c = 0;
 
 void update_sensor_values();
 
@@ -66,6 +77,8 @@ void print_pressure();
 void print_humidity();
 void print_illuminance();
 void print_altitude();
+
+void print_color();
 
 void print_version();
 void print_splash();
@@ -89,7 +102,6 @@ void init_screen() {
   tft.begin(HX8357D);
   tft.setRotation(3); // 1
   tft.fillScreen(HX8357_BLACK);
-  print_version();
 }
 
 
@@ -105,12 +117,21 @@ void init_sensors() {
     Serial.println("Could not find a valid TSL2561 sensor, check wiring!");
   }
   
+  if(tcs.begin()) { // i2c sensor
+    Serial.println("Could not find a valid TSC34725 sensor, check wiring!");
+    tcs.setInterrupt(true);  // turn off LED
+  }
+  
   dht.begin(); // uses one-wire protocol
 }
 
 
 void print_splash() {
-  
+  tft.setCursor(DISPLAY_WIDTH/6, DISPLAY_HEIGHT/2);
+  tft.setTextSize(3);
+  tft.println("Weather station...");
+  delay(3000);
+  tft.fillScreen(HX8357_BLACK);
 }
 
 
@@ -170,7 +191,7 @@ void print_temp1() {
   tft.setCursor(0, 30);
   tft.setTextSize(3);
   tft.print(temperature_value1);
-  tft.println(" C");
+  tft.println(" C    ");
 }
 
 
@@ -180,13 +201,13 @@ void print_temp1() {
 void print_temp2() {
   tft.setTextSize(2);
   tft.setTextColor(HX8357_WHITE, HX8357_BLACK);
-  tft.setCursor(DISPLAY_WIDTH/2 + 30, 70);
+  tft.setCursor(DISPLAY_WIDTH/2 + 40, 70);
   tft.println("Temperature 2: ");
   
-  tft.setCursor(DISPLAY_WIDTH/2 + 30, 90);
+  tft.setCursor(DISPLAY_WIDTH/2 + 40, 90);
   tft.setTextSize(3);
   tft.print(temperature_value2);
-  tft.println(" C");
+  tft.println(" C    ");
 }
 
 
@@ -196,13 +217,75 @@ void print_temp2() {
 void print_temp_avg() {
   tft.setTextSize(2);
   tft.setTextColor(HX8357_WHITE, HX8357_BLACK);
-  tft.setCursor(DISPLAY_WIDTH/2 + 30, 130);
-  tft.println("Temperature avg: ");
+  tft.setCursor(DISPLAY_WIDTH/2 + 40, 130);
+  tft.println("Temperature avg:");
   
-  tft.setCursor(DISPLAY_WIDTH/2 + 30, 150);
+  tft.setCursor(DISPLAY_WIDTH/2 + 40, 150);
   tft.setTextSize(3);
   tft.print((temperature_value1 + temperature_value2)/2.0);
-  tft.println(" C");
+  tft.println(" C    ");
+}
+
+/*
+ * Prints average temperature on the tft screen.
+ */
+void print_color() {
+  tft.setTextSize(2);
+  tft.setTextColor(HX8357_WHITE, HX8357_BLACK);
+  tft.setCursor(DISPLAY_WIDTH/2 + 40, 190);
+  tft.println("Color: ");
+  
+  tft.setCursor(DISPLAY_WIDTH/2 + 40, 210);
+  tft.setTextSize(3);
+  tft.print(color_lux);
+  tft.println(" lx    ");
+  
+  tft.setCursor(DISPLAY_WIDTH/2 + 40, 240);
+  tft.setTextSize(3);
+  tft.print(color_temp);
+  tft.println(" K    ");
+  
+  tft.setCursor(DISPLAY_WIDTH/2 + 40, 270);
+  
+  float r = 0;
+  float g = 0;
+  float b = 0;
+  float sum = color_c;
+  r = (color_r / sum) * 256;
+  g = (color_g / sum) * 256;
+  b = (color_b / sum) * 256;
+  
+  
+  Serial.print("R: "); Serial.print(r); Serial.print(" ");
+  Serial.print("G: "); Serial.print(g); Serial.print(" ");
+  Serial.print("B: "); Serial.print(b); Serial.print(" ");
+  Serial.print("C: "); Serial.print(color_c); Serial.print(" ");
+  Serial.println(" ");
+  
+  if(g > 255 || g < 0) {
+   g = 0; 
+  }
+  
+  if(r > 255 || r < 0) {
+   r = 0; 
+  }
+  
+  if(b > 255 || b < 0) {
+   b = 0; 
+  }
+  
+  tft.setTextSize(2);
+  tft.print("R: ");
+  tft.print((int)r);
+  tft.print(" ");
+  tft.print("G: ");
+  tft.print((int)g);
+  tft.print("    ");
+  
+  tft.setCursor(DISPLAY_WIDTH/2 + 40, 290);
+  tft.print("B: ");
+  tft.print((int)b);
+  tft.print("    ");
 }
 
 
@@ -218,7 +301,7 @@ void print_humidity() {
   tft.setCursor(0, 90);
   tft.setTextSize(3);
   tft.print(humidity_value);
-  tft.println(" %");
+  tft.println(" %    ");
 }
 
 
@@ -234,7 +317,7 @@ void print_pressure() {
   tft.setCursor(0, 150);
   tft.setTextSize(3);
   tft.print(pressure_value);
-  tft.println(" pa");
+  tft.println(" pa   ");
 }
 
 
@@ -250,7 +333,7 @@ void print_illuminance() {
   tft.setCursor(0, 210);
   tft.setTextSize(3);
   tft.print(illuminance_value);
-  tft.println(" lx");
+  tft.println(" lx   ");
 }
 
 
@@ -266,7 +349,7 @@ void print_altitude() {
   tft.setCursor(0, 270);
   tft.setTextSize(3);
   tft.print(altitude_value);
-  tft.println(" m");
+  tft.println(" m    ");
 }
 
 void update_sensor_values() {
@@ -283,23 +366,47 @@ void update_sensor_values() {
   dht.temperature().getEvent(&event);
   temperature_value2 = event.temperature;
   
+  
+  
+  tcs.getRawData(&color_r, &color_g, &color_b, &color_c);
+  color_temp = tcs.calculateColorTemperature(color_r, color_g, color_b);
+  color_lux = tcs.calculateLux(color_r, color_g, color_b);
+  
 }
 
 
 /*
  * main loop.
  */
+int once = 1;
+long last_update = millis();
+#define INTERVAL 2000
+
 void loop() { 
- print_temp1();
- print_temp2();
- print_temp_avg();
- print_humidity();
- print_pressure();
- print_illuminance();
- print_altitude();
- print_clock();
- update_sensor_values();
- delay(1000);
+  if(once) {
+    update_sensor_values();
+    print_splash();
+    once = 0;
+  }
+  
+  print_version();
+  print_clock();
+  
+  print_temp1();
+  print_temp2();
+  print_color();
+  print_temp_avg();
+  print_humidity();
+  print_pressure();
+  print_illuminance();
+  print_altitude();
+  
+  if(millis() - last_update > INTERVAL) {
+    update_sensor_values();
+    last_update = millis();
+    Serial.println("update!");
+  }
+  
 }
 
 
