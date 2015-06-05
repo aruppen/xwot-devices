@@ -40,6 +40,11 @@ float humidity = 0;         // soil moisture in percentage
 int received_cmd = 0x00;
 int valve_state = VALVE_CLOSED;
 
+
+void send_data();
+void receive_data();
+void clear_cmd();
+
 void setup() {
   pinMode(RELAIS_PIN, OUTPUT);
   Serial.begin(9600);
