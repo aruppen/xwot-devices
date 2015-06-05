@@ -67,6 +67,7 @@ DHT_Unified dht(DHT_PIN, DHT_TYPE);
 
 void send_data();
 void receive_data();
+void clear_cmd();
 
 
 
