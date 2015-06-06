@@ -11,6 +11,8 @@
  *
  */
 
+#include <stdint.h>
+
 // sensor dependencies
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
@@ -53,7 +55,7 @@ DHT_Unified dht(DHT_PIN, DHT_TYPE);
 #define VERSION "Weather Station v1.0.0"
 
 // i2c
-#define SLAVE_ADDRESS 0x04
+#define SLAVE_ADDRESS 0x05
 
 // commands
 #define CMD_READ_TEMPERATURE_1 0x01
@@ -66,7 +68,7 @@ DHT_Unified dht(DHT_PIN, DHT_TYPE);
 #define CMD_READ_COLOR_LUX 0x08
 
 void send_data();
-void receive_data();
+void receive_data(int byte_count);
 void clear_cmd();
 void send_float(float value);
 
@@ -74,11 +76,11 @@ void send_float(float value);
 
 // state variables
 long illuminance_value = 0;
-float pressure_value = 0.0;
+long pressure_value = 0.0;
 float temperature_value1 = 0.0;
 float temperature_value2 = 0.0;
 float humidity_value = 0.0;
-float altitude_value = 0.0;
+long altitude_value = 0.0;
 
 int received_cmd = 0x00;
 
@@ -389,7 +391,7 @@ void print_altitude() {
 void update_sensor_values() {
   temperature_value1 = bmp.readTemperature();
   pressure_value = bmp.readPressure();
-  altitude_value = bmp.readAltitude();
+  altitude_value = round(bmp.readAltitude());
   
   sensors_event_t event;
   tsl.getEvent(&event);
@@ -467,41 +469,67 @@ void receive_data(int byteCount){
  */
 void send_data(){
   if(received_cmd == CMD_READ_TEMPERATURE_1) {
-    // todo
+    send_float(temperature_value1);
+    //send_byte(0);
     clear_cmd();  
   } else if(received_cmd == CMD_READ_TEMPERATURE_2) {
-    // todo
+    send_float(temperature_value2);
     clear_cmd();
   } else if(received_cmd == CMD_READ_PRESSURE) {
-    // todo
+    send_long(pressure_value);
     clear_cmd();
   } else if(received_cmd == CMD_READ_HUMIDITY) {
-    // todo
+    send_float(humidity_value);
     clear_cmd();
   } else if(received_cmd == CMD_READ_ALTITUDE) {
-    // todo
+    send_long(altitude_value);
     clear_cmd();
   } else if(received_cmd == CMD_READ_COLOR_K) {
-    // todo
+    send_long(color_temp);
     clear_cmd();
   } else if(received_cmd == CMD_READ_COLOR_LUX) {
-    // todo
+    send_long(color_lux);
     clear_cmd();
   } else if(received_cmd == CMD_READ_ILLUMINANCE) {
-    // todo
+    send_long(illuminance_value);
+    clear_cmd();
+  } else {
+    send_byte(0xA);
     clear_cmd();
   }
 }
 
-/*
- * Sends a single-precision floating-point value (IEEE 754) over the i2c bus.
- * 
- */
- void send_float(float value) {
-   char bytes[4]; // IEEE 754 float has 32 bits = 4 bytes.
-   bytes[0] = value && 0xF000; // first byte
-   bytes[1] = value && 0x0F00; // second byte
-   bytes[2] = value && 0x00F0; // third byte
-   bytes[3] = value && 0x000F; // fourth byte
-   Wire.write(bytes, 4);
- }
+
+void send_float(float value_f) {
+  Serial.println(value_f);
+  int8_t val_i = (int8_t) value_f;
+  int8_t val_f = (int8_t)( fmod(value_f, 1.0) * 100);
+  char data[] = { val_i, val_f };
+  Wire.write(data, 2);
+}
+
+
+void send_byte(char b) {
+  char data[] = { b };
+  Wire.write(data, 1);
+}
+
+
+void send_long(long value_l) {
+  char data[4] = {
+    (value_l & 0xff000000) >> 24,
+    (value_l & 0x00ff0000) >> 16,
+    (value_l & 0x0000ff00) >> 8,
+    value_l & 0x000000ff
+  };
+  Wire.write(data, 4);
+}
+
+
+void send_int(long value_l) {
+  char data[2] = {
+    (value_l & 0xff00) >> 8,
+    value_l & 0x00ff
+  };
+  Wire.write(data, 2);
+}
