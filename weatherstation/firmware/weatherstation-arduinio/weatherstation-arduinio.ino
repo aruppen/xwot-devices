@@ -526,10 +526,10 @@ void send_long(long value_l) {
 }
 
 
-void send_int(long value_l) {
+void send_int(int value_i) {
   char data[2] = {
-    (value_l & 0xff00) >> 8,
-    value_l & 0x00ff
+    (value_i & 0xff00) >> 8,
+    value_i & 0x00ff
   };
   Wire.write(data, 2);
 }
