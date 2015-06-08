@@ -1,5 +1,7 @@
 #Raspberry Pi - Configiration
 
+See the [adafruit i2c config guide](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c).
+
 ## python / pip
 ```
 sudo apt-get install python-pip python-dev
