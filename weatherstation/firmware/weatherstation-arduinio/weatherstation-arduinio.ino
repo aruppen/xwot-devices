@@ -18,8 +18,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BMP085.h>
 #include <Adafruit_TSL2561_U.h>
-#include <DHT.h>
-#include <DHT_U.h>
+#include <Adafruit_AM2315.h>
 #include <Adafruit_TCS34725.h>
 
 // tft dependencies
@@ -46,10 +45,7 @@ Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_700MS, TCS347
 // sensors
 Adafruit_BMP085 bmp;
 Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 12345);
-
-#define DHT_PIN 2
-#define DHT_TYPE DHT22
-DHT_Unified dht(DHT_PIN, DHT_TYPE);
+Adafruit_AM2315 am2315;
 
 
 #define VERSION "Weather Station v1.0.0"
@@ -156,7 +152,9 @@ void init_sensors() {
     tcs.setInterrupt(true);  // turn off LED
   }
   
-  dht.begin(); // uses one-wire protocol
+  if (!am2315.begin()) {
+     Serial.println("Sensor not found, check wiring & pullups!");
+  }
 }
 
 
@@ -274,12 +272,12 @@ void print_color() {
   tft.setCursor(DISPLAY_WIDTH/2 + 40, 210);
   tft.setTextSize(3);
   tft.print(color_lux);
-  tft.println(" lx    ");
+  tft.println(" lx  ");
   
   tft.setCursor(DISPLAY_WIDTH/2 + 40, 240);
   tft.setTextSize(3);
   tft.print(color_temp);
-  tft.println(" K    ");
+  tft.println(" K  ");
   
   tft.setCursor(DISPLAY_WIDTH/2 + 40, 270);
   
@@ -321,7 +319,7 @@ void print_color() {
   tft.setCursor(DISPLAY_WIDTH/2 + 40, 290);
   tft.print("B: ");
   tft.print((int)b);
-  tft.print("    ");
+  tft.print("  ");
 }
 
 
@@ -397,12 +395,8 @@ void update_sensor_values() {
   tsl.getEvent(&event);
   illuminance_value = event.light;
   
-  dht.humidity().getEvent(&event);
-  humidity_value = event.relative_humidity;
-  dht.temperature().getEvent(&event);
-  temperature_value2 = event.temperature;
-  
-  
+  humidity_value = am2315.readHumidity();
+  temperature_value2 = am2315.readTemperature();
   
   tcs.getRawData(&color_r, &color_g, &color_b, &color_c);
   color_temp = tcs.calculateColorTemperature(color_r, color_g, color_b);
