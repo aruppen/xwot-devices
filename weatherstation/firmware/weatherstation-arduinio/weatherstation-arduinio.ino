@@ -314,7 +314,7 @@ void print_color() {
   tft.print(" ");
   tft.print("G: ");
   tft.print((int)g);
-  tft.print("    ");
+  tft.print("  ");
   
   tft.setCursor(DISPLAY_WIDTH/2 + 40, 290);
   tft.print("B: ");
