@@ -495,11 +495,18 @@ void send_data(){
 
 
 void send_float(float value_f) {
+  float *v = &value_f;
+  long *vl = (long*) v;
+  long value_l = *vl;
+  
   Serial.println(value_f);
-  int8_t val_i = (int8_t) value_f;
-  int8_t val_f = (int8_t)( fmod(value_f, 1.0) * 100);
-  char data[] = { val_i, val_f };
-  Wire.write(data, 2);
+  char data[4] = {
+    (value_l & 0xff000000) >> 24,
+    (value_l & 0x00ff0000) >> 16,
+    (value_l & 0x0000ff00) >> 8,
+    value_l & 0x000000ff
+  };
+  Wire.write(data, 4);
 }
 
 
