@@ -6,10 +6,10 @@
  * Firmware for a I2C plant device.
  * 
  * Commands:
- * - 0X01 : Opens solenoid valve.
- * - 0X02 : Closes solenoid valve.
- * - 0X09 : Retrieves the soil moisture percentage value.
- *
+ * - 0x01 : Opens solenoid valve.
+ * - 0x02 : Closes solenoid valve.
+ * - 0x09 : Retrieves the soil moisture percentage value.
+ * - 0x0A : Retrieves the solenoid valve state.
  */
 
 // i2c
@@ -21,7 +21,7 @@
 
 // soil moisture sensor
 #define MAX_SENSOR_VALUE 1023.0  // max value of the analog input pin
-#define SOIL_MOISTURE_SENSOR_PIN A3        // sensor pin
+#define SOIL_MOISTURE_SENSOR_PIN 0        // sensor pin
 int sensor_value = 0;     // analog pin input value
 float humidity = 0;         // soil moisture in percentage
 
@@ -41,11 +41,16 @@ int received_cmd = 0x00;
 int valve_state = VALVE_CLOSED;
 
 
+// function prototypes
 void send_data();
 void receive_data();
 void clear_cmd();
 void send_float(float data);
 void send_humidity_value();
+void send_solenoid_state_byte();
+void open_solenoid_valve();
+void close_solenoid_valve();
+
 
 void setup() {
   pinMode(RELAIS_PIN, OUTPUT);
@@ -93,14 +98,6 @@ void loop() {
   sensor_value = analogRead(SOIL_MOISTURE_SENSOR_PIN);    // read the value from the sensor
   humidity = (1.0 - ((float)sensor_value)/MAX_SENSOR_VALUE) * 100;
   
-  //Serial.print("humidity: ");
-  //Serial.print(humidity);
-  
-  //Serial.println("");
-  //Serial.print("value: ");
-  //Serial.print(sensor_value);
-  //Serial.println("");
-  
   if(received_cmd == CMD_OPEN_SOLENOID_VALVE) {
     open_solenoid_valve();
   } else if(received_cmd == CMD_CLOSE_SOLENOID_VALVE) {
@@ -126,10 +123,16 @@ void receive_data(int byteCount){
  */
 void send_humidity_value() {
   sensor_value = analogRead(SOIL_MOISTURE_SENSOR_PIN);    // read the value from the sensor
-  humidity = (1.0 - ((float)sensor_value)/MAX_SENSOR_VALUE) * 100;
+  //humidity = (1.0 - ((float)sensor_value)/MAX_SENSOR_VALUE) * 100;
+  humidity = (((float)sensor_value)/MAX_SENSOR_VALUE) * 100;
+  Serial.println(sensor_value);
   send_float(humidity);
 }
 
+
+/*
+ * Sends a float over the i2c bus.
+ */
 void send_float(float value_f) {
   float *v = &value_f;
   long *vl = (long*) v;
