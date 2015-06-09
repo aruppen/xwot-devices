@@ -44,6 +44,8 @@ int valve_state = VALVE_CLOSED;
 void send_data();
 void receive_data();
 void clear_cmd();
+void send_float(float data);
+void send_humidity_value();
 
 void setup() {
   pinMode(RELAIS_PIN, OUTPUT);
@@ -122,14 +124,24 @@ void receive_data(int byteCount){
 /*
  * Sends humidity value as word over i2c.
  */
-void send_humidity_word() {
+void send_humidity_value() {
   sensor_value = analogRead(SOIL_MOISTURE_SENSOR_PIN);    // read the value from the sensor
   humidity = (1.0 - ((float)sensor_value)/MAX_SENSOR_VALUE) * 100;
-  float hum = humidity;
-  int8_t hum_i = (int8_t) hum;
-  int8_t hum_f = (hum - hum_i) * 100;
-  char data[] = { hum_i, hum_f };
-  Wire.write(data, 2);
+  send_float(humidity);
+}
+
+void send_float(float value_f) {
+  float *v = &value_f;
+  long *vl = (long*) v;
+  long value_l = *vl;
+  
+  char data[4] = {
+    (value_l & 0xff000000) >> 24,
+    (value_l & 0x00ff0000) >> 16,
+    (value_l & 0x0000ff00) >> 8,
+    value_l & 0x000000ff
+  };
+  Wire.write(data, 4);
 }
 
 
@@ -147,7 +159,7 @@ void send_solenoid_state_byte() {
  */
 void send_data(){
   if(received_cmd == CMD_READ_SOIL_MOISTURE) {
-    send_humidity_word();
+    send_humidity_value();
     clear_cmd();  
   } else if(CMD_READ_SOLENOID_VALVE_STATE) {
     send_solenoid_state_byte();
