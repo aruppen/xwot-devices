@@ -96,7 +96,7 @@ void open_solenoid_valve() {
  */
 void loop() {
   sensor_value = analogRead(SOIL_MOISTURE_SENSOR_PIN);    // read the value from the sensor
-  humidity = (1.0 - ((float)sensor_value)/MAX_SENSOR_VALUE) * 100;
+  humidity = 100 - (((float)sensor_value)/MAX_SENSOR_VALUE) * 100;
   
   if(received_cmd == CMD_OPEN_SOLENOID_VALVE) {
     open_solenoid_valve();
@@ -124,27 +124,9 @@ void receive_data(int byteCount){
 void send_humidity_value() {
   sensor_value = analogRead(SOIL_MOISTURE_SENSOR_PIN);    // read the value from the sensor
   //humidity = (1.0 - ((float)sensor_value)/MAX_SENSOR_VALUE) * 100;
-  humidity = (((float)sensor_value)/MAX_SENSOR_VALUE) * 100;
-  Serial.println(sensor_value);
+  humidity = 100 - (((float)sensor_value)/MAX_SENSOR_VALUE) * 100;
+  //Serial.println(sensor_value);
   send_float(humidity);
-}
-
-
-/*
- * Sends a float over the i2c bus.
- */
-void send_float(float value_f) {
-  float *v = &value_f;
-  long *vl = (long*) v;
-  long value_l = *vl;
-  
-  char data[4] = {
-    (value_l & 0xff000000) >> 24,
-    (value_l & 0x00ff0000) >> 16,
-    (value_l & 0x0000ff00) >> 8,
-    value_l & 0x000000ff
-  };
-  Wire.write(data, 4);
 }
 
 
@@ -168,4 +150,46 @@ void send_data(){
     send_solenoid_state_byte();
     clear_cmd();
   }
+}
+
+
+void send_float(float value_f) {
+  float *v = &value_f;
+  long *vl = (long*) v;
+  long value_l = *vl;
+  
+  Serial.println(value_f);
+  char data[4] = {
+    (value_l & 0xff000000) >> 24,
+    (value_l & 0x00ff0000) >> 16,
+    (value_l & 0x0000ff00) >> 8,
+    value_l & 0x000000ff
+  };
+  Wire.write(data, 4);
+}
+
+
+void send_byte(char b) {
+  char data[] = { b };
+  Wire.write(data, 1);
+}
+
+
+void send_long(long value_l) {
+  char data[4] = {
+    (value_l & 0xff000000) >> 24,
+    (value_l & 0x00ff0000) >> 16,
+    (value_l & 0x0000ff00) >> 8,
+    value_l & 0x000000ff
+  };
+  Wire.write(data, 4);
+}
+
+
+void send_int(int value_i) {
+  char data[2] = {
+    (value_i & 0xff00) >> 8,
+    value_i & 0x00ff
+  };
+  Wire.write(data, 2);
 }
