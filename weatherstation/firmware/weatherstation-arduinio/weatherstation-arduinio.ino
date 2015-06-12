@@ -464,28 +464,27 @@ void receive_data(int byteCount){
 void send_data(){
   if(received_cmd == CMD_READ_TEMPERATURE_1) {
     send_float(temperature_value1);
-    //send_byte(0);
     clear_cmd();  
   } else if(received_cmd == CMD_READ_TEMPERATURE_2) {
     send_float(temperature_value2);
     clear_cmd();
   } else if(received_cmd == CMD_READ_PRESSURE) {
-    send_long(pressure_value);
+    send_int32(pressure_value);
     clear_cmd();
   } else if(received_cmd == CMD_READ_HUMIDITY) {
     send_float(humidity_value);
     clear_cmd();
   } else if(received_cmd == CMD_READ_ALTITUDE) {
-    send_long(altitude_value);
+    send_int32(altitude_value);
     clear_cmd();
   } else if(received_cmd == CMD_READ_COLOR_K) {
-    send_long(color_temp);
+    send_int32(color_temp);
     clear_cmd();
   } else if(received_cmd == CMD_READ_COLOR_LUX) {
-    send_long(color_lux);
+    send_int32(color_lux);
     clear_cmd();
   } else if(received_cmd == CMD_READ_ILLUMINANCE) {
-    send_long(illuminance_value);
+    send_int32(illuminance_value);
     clear_cmd();
   } else {
     send_byte(0xA);
@@ -494,12 +493,14 @@ void send_data(){
 }
 
 
+/*
+ * Sends a float in the big-endian format over the i2c bus.
+ */
 void send_float(float value_f) {
   float *v = &value_f;
   long *vl = (long*) v;
   long value_l = *vl;
   
-  Serial.println(value_f);
   char data[4] = {
     (value_l & 0xff000000) >> 24,
     (value_l & 0x00ff0000) >> 16,
@@ -510,13 +511,19 @@ void send_float(float value_f) {
 }
 
 
+/*
+ * Sends a byte over the i2c bus.
+ */
 void send_byte(char b) {
   char data[] = { b };
   Wire.write(data, 1);
 }
 
 
-void send_long(long value_l) {
+/*
+ * Sends an 32 bit integer in the big-endian format over the i2c bus.
+ */
+void send_int32(long value_l) {
   char data[4] = {
     (value_l & 0xff000000) >> 24,
     (value_l & 0x00ff0000) >> 16,
@@ -527,7 +534,10 @@ void send_long(long value_l) {
 }
 
 
-void send_int(int value_i) {
+/*
+ * Sends an 16 bit integer in the big-endian format over the i2c bus.
+ */
+void send_int16(int value_i) {
   char data[2] = {
     (value_i & 0xff00) >> 8,
     value_i & 0x00ff
