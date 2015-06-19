@@ -6,13 +6,14 @@ from xwot.model.examples import LightBulb as Model
 
 annotator = xwot_device.annotator
 
+MODEL = Model()
 
 class LightBulb(object):
 
     __expose__ = ['name', 'state', 'sensor']
 
     def __init__(self):
-        self._model = Model()
+        self._model = MODEL
         self._name = "xWoT Lightbulb"
 
     @property
@@ -28,7 +29,9 @@ class LightBulb(object):
         return '/lightbulb/sensor'
 
     def update(self, dic):
-        lightbulb_dic = dic.get(self.__class__.__name__, False)
+        lightbulb_dic = dic
+        if dic.get(self.__class__.__name__, False):
+            lightbulb_dic = dic.get(self.__class__.__name__, False)
 
         if lightbulb_dic:
             if lightbulb_dic.get('state', None) == 'on':
@@ -59,11 +62,11 @@ class IlluminanceSensor(object):
     __expose__ = ['measurement', 'unit', 'measures']
 
     def __init__(self):
-        pass
+        self._model = MODEL
 
     @property
     def measurement(self):
-        return '100'
+        return self._model.illuminance
 
     @property
     def unit(self):
