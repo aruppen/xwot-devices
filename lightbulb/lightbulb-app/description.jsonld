@@ -1,0 +1,36 @@
+{
+    "@context": [
+        "http://xwot.lexruee.ch/contexts/xwot.jsonld"
+    ],
+    "@id": "/",
+    "@type": "Description",
+    "knows": [
+        {
+            "@id": "/lightbulb",
+            "@type": "Context",
+            "additionalType": {
+                "@id": "http://www.productontology.org/id/Scope_(computer_science)"
+            },
+            "knows": [
+                {
+                    "@id": "/lightbulb/sensor",
+                    "@type": "Sensor",
+                    "additionalType": {
+                        "@id": "http://www.productontology.org/id/Sensor"
+                    },
+                    "knows": [],
+                    "name": "Sensor",
+                    "sameAs": "http://www.productontology.org/id/Sensor",
+                    "uri": {
+                        "@id": "/lightbulb/sensor"
+                    }
+                }
+            ],
+            "name": "Ligthbulb",
+            "sameAs": "http://www.productontology.org/id/Scope_(computer_science)",
+            "uri": {
+                "@id": "/lightbulb"
+            }
+        }
+    ]
+}
