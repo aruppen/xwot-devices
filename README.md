@@ -2,7 +2,7 @@
 
 This repository hosts the final RESTful applications for the developed xWoT devices.
 
-Implemented RESTful applications:
+Overview of the implemented RESTful applications:
  * light bulb
  * water dispenser
  * weather station
