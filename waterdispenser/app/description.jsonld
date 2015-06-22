@@ -1,0 +1,49 @@
+{
+    "@context": [
+        "http://xwot.lexruee.ch/contexts/xwot"
+    ],
+    "@id": "/",
+    "@type": "xwot:Description",
+    "knows": [
+        {
+            "@id": "/waterdispenser",
+            "@type": "xwot:Context",
+            "additionalType": {
+                "@id": "http://xwot.lexruee.ch/vocab/core#Context"
+            },
+            "knows": [
+                {
+                    "@id": "/waterdispenser/sensor",
+                    "@type": "xwot:Sensor",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                    },
+                    "knows": [],
+                    "name": "Sensor",
+                    "sameAs": "http://www.productontology.org/id/Sensor",
+                    "uri": {
+                        "@id": "/waterdispenser/sensor"
+                    }
+                },
+                {
+                    "@id": "/waterdispenser/valve",
+                    "@type": "xwot:Context",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Context"
+                    },
+                    "knows": [],
+                    "name": "Valve",
+                    "sameAs": "http://www.productontology.org/id/Context",
+                    "uri": {
+                        "@id": "/waterdispenser/valve"
+                    }
+                }
+            ],
+            "name": "WaterDispenser",
+            "sameAs": "http://www.productontology.org/id/Context",
+            "uri": {
+                "@id": "/waterdispenser"
+            }
+        }
+    ]
+}
