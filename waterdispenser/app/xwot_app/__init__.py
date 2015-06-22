@@ -30,8 +30,8 @@ from flask.ext.twisted import Twisted
 app = Flask(__name__)
 twisted = Twisted(app)
 
-import Root
-import WaterDispenser
-import Sensor
-import Valve
+import RootResource
+import WaterDispenserResource
+import SensorResource
+import ValveResource
 
