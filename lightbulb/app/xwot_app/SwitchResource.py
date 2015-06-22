@@ -33,7 +33,6 @@ def handle_lightbulb_switch_POST():
     content_type = request.headers.get('content-type')
     dic = deserialize(data, content_type)
     switch.update(dic, content_type)
-    time.sleep(0.2)
 
     return make_response(switch)
 
@@ -46,7 +45,7 @@ def handle_lightbulb_switch_PUT():
     content_type = request.headers.get('content-type')
     dic = deserialize(data, content_type)
     switch.update(dic, content_type)
-    time.sleep(0.2)
+
 
     return make_response(switch)
 
