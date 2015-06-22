@@ -64,7 +64,7 @@ sudo nano /etc/modules
 and these two lines:
 
 ```
-i2c-bcm2708&nbsp;
+i2c-bcm2708
 i2c-dev
 ```
 
