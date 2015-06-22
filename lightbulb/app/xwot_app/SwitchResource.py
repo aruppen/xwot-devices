@@ -9,10 +9,9 @@
 
 from flask import request
 from xwot_app import app
+from xwot.device.lightbulb import Switch
 from xwot.util.flask import make_response
 from xwot.util import deserialize
-from xwot.device.lightbulb import Switch
-import time
 
 switch = Switch(name='Switch')
 
@@ -45,7 +44,6 @@ def handle_lightbulb_switch_PUT():
     content_type = request.headers.get('content-type')
     dic = deserialize(data, content_type)
     switch.update(dic, content_type)
-
 
     return make_response(switch)
 

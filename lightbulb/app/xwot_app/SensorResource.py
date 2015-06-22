@@ -8,9 +8,8 @@
 #
 
 from xwot_app import app
-from xwot.util.flask import make_response
 from xwot.device.lightbulb import Sensor
-
+from xwot.util.flask import make_response
 
 sensor = Sensor()
 
