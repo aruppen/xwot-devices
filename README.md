@@ -38,3 +38,8 @@ Finally, install i2c-tools, libi2c-dev and python-smbus via:
 ```
 sudo apt-get install python-smbus i2c-tools libi2c-dev
 ```
+
+Add user pi to group i2c:
+```
+sudo usermod -a -G i2c pi
+```
