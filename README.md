@@ -91,6 +91,13 @@ git clone https://github.com/lexruee/xwot-devices
 cd xwot-devices/{xwot-device}/app
 ```
 
+Before running `runserver.py` please install all necessary dependencies:
+
+```
+sudo pip install -r requirements.txt
+```
+
+Finally, run it via:
 ```
 python runserver.py
 ```
