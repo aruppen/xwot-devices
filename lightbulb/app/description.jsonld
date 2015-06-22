@@ -1,0 +1,49 @@
+{
+    "@context": [
+        "http://xwot.lexruee.ch/contexts/xwot"
+    ],
+    "@id": "/",
+    "@type": "xwot:Description",
+    "knows": [
+        {
+            "@id": "/lightbulb",
+            "@type": "xwot:Context",
+            "additionalType": {
+                "@id": "http://xwot.lexruee.ch/vocab/core#Context"
+            },
+            "knows": [
+                {
+                    "@id": "/lightbulb/switch",
+                    "@type": "xwot:Context",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Context"
+                    },
+                    "knows": [],
+                    "name": "SwitchResource",
+                    "sameAs": "http://www.productontology.org/id/Context",
+                    "uri": {
+                        "@id": "/lightbulb/switch"
+                    }
+                },
+                {
+                    "@id": "/lightbulb/sensor",
+                    "@type": "xwot:Sensor",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                    },
+                    "knows": [],
+                    "name": "SensorResource",
+                    "sameAs": "http://www.productontology.org/id/Sensor",
+                    "uri": {
+                        "@id": "/lightbulb/sensor"
+                    }
+                }
+            ],
+            "name": "LightbulbResource",
+            "sameAs": "http://www.productontology.org/id/Context",
+            "uri": {
+                "@id": "/lightbulb"
+            }
+        }
+    ]
+}
