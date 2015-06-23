@@ -12,7 +12,7 @@ from xwot_app import app
 from xwot.util.flask import make_response
 from . import sensors
 
-temperature_1 = sensors['temperature']
+temperature_1 = sensors['temperature_1']
 
 #
 # GET '/weatherstation/sensors/temperature1'
