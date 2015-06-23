@@ -11,9 +11,9 @@
 
 from xwot_app import app
 from xwot.util.flask import make_response
-from . import sensors
+from . import sensors_dic
 
-pressure_sensor = sensors['pressure']
+pressure_sensor = sensors_dic['pressure']
 
 #
 # GET '/weatherstation/sensors/pressure'

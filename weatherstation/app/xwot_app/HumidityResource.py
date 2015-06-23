@@ -10,9 +10,9 @@
 
 from xwot_app import app
 from xwot.util.flask import make_response
-from . import sensors
+from . import sensors_dic
 
-humidity_sensor = sensors['humidity']
+humidity_sensor = sensors_dic['humidity']
 
 #
 # GET '/weatherstation/sensors/humidity'

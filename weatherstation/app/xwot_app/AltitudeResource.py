@@ -10,9 +10,9 @@
 
 from xwot_app import app
 from xwot.util.flask import make_response
-from . import sensors
+from . import sensors_dic
 
-altitude_sensor = sensors['altitude']
+altitude_sensor = sensors_dic['altitude']
 
 
 #
