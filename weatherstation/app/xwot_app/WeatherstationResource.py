@@ -14,10 +14,32 @@ from . import weatherstation
 from xwot.util.flask import make_response
 
 
-
 #
 # GET '/weatherstation'
 #
 @app.route('/weatherstation', methods=['GET'])
 def handle_weatherstation_GET():
     return make_response(weatherstation)
+
+
+#
+# POST '/weatherstation'
+#
+@app.route('/weatherstation', methods=['POST'])
+def handle_weatherstation_POST():
+    return "Name: WeatherstationResource , Hello at: /weatherstation"
+
+#
+# PUT '/weatherstation'
+#
+@app.route('/weatherstation', methods=['PUT'])
+def handle_weatherstation_PUT():
+    return "Name: WeatherstationResource , Hello at: /weatherstation"
+
+#
+# DELETE '/weatherstation'
+#
+@app.route('/weatherstation', methods=['DELETE'])
+def handle_weatherstation_DELETE():
+    return "Name: WeatherstationResource , Hello at: /weatherstation"
+
