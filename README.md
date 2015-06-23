@@ -101,3 +101,9 @@ Finally, run it via:
 ```
 python runserver.py
 ```
+
+## Hnady tools
+
+Because the xwot applications are RESTful they are browsable through so called REST clients:
+
+* [Advanced REST client / chrome](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo)
