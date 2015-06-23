@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xwot:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xwot="http://diuf.unifr.ch/softeng">
+	<PhysicalEntity name="Weatherstation" xsi:type="xwot:Device">
+		<Component composed="true" name="Sensors" xsi:type="xwot:Device">
+			<Component name="Pressure" xsi:type="xwot:Sensor"/>
+			<Component name="Temperature1" xsi:type="xwot:Sensor"/>
+			<Component name="Altitude" xsi:type="xwot:Sensor"/>
+			<Component name="Humidity" xsi:type="xwot:Sensor"/>
+			<Component name="Illuminance" xsi:type="xwot:Sensor"/>
+			<Component name="Color" xsi:type="xwot:Sensor"/>
+			<Component name="Temperature2" xsi:type="xwot:Sensor"/>
+		</Component>
+	</PhysicalEntity>
+	<VirtualEntity name="WeatherstationResource" uri="weatherstation" xsi:type="xwot:Resource">
+		<Resource composed="true" name="SensorsResource" uri="sensors" xsi:type="xwot:Resource">
+			<Resource name="PressureResource" uri="pressure" xsi:type="xwot:SensorResource"/>
+			<Resource name="Temperature1Resource" uri="temperature1" xsi:type="xwot:SensorResource"/>
+			<Resource name="AltitudeResource" uri="altitude" xsi:type="xwot:SensorResource"/>
+			<Resource name="HumidityResource" uri="humidity" xsi:type="xwot:SensorResource"/>
+			<Resource name="IlluminanceResource" uri="illuminance" xsi:type="xwot:SensorResource"/>
+			<Resource name="ColorResource" uri="color" xsi:type="xwot:SensorResource"/>
+			<Resource name="Temperature2Resource" uri="temperature2" xsi:type="xwot:SensorResource"/>
+		</Resource>
+	</VirtualEntity>
+</xwot:Entity>
