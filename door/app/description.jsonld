@@ -1,0 +1,49 @@
+{
+    "@context": [
+        "http://xwot.lexruee.ch/contexts/xwot"
+    ],
+    "@id": "/",
+    "@type": "xwot:Description",
+    "knows": [
+        {
+            "@id": "/door",
+            "@type": "xwot:Resource",
+            "additionalType": {
+                "@id": "http://xwot.lexruee.ch/vocab/core#Resource"
+            },
+            "knows": [
+                {
+                    "@id": "/door/handle",
+                    "@type": "xwot:Context",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Context"
+                    },
+                    "knows": [],
+                    "name": "HandleResource",
+                    "sameAs": "http://www.productontology.org/id/Context",
+                    "uri": {
+                        "@id": "/door/handle"
+                    }
+                },
+                {
+                    "@id": "/door/lock",
+                    "@type": "xwot:Context",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Context"
+                    },
+                    "knows": [],
+                    "name": "LockResource",
+                    "sameAs": "http://www.productontology.org/id/Context",
+                    "uri": {
+                        "@id": "/door/lock"
+                    }
+                }
+            ],
+            "name": "DoorResource",
+            "sameAs": "http://www.productontology.org/id/Web_resource",
+            "uri": {
+                "@id": "/door"
+            }
+        }
+    ]
+}
