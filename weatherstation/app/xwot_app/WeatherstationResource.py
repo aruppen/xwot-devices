@@ -11,6 +11,7 @@
 from flask import request
 from xwot_app import app
 from . import weatherstation
+from xwot.util import deserialize
 from xwot.util.flask import make_response
 
 
@@ -27,19 +28,23 @@ def handle_weatherstation_GET():
 #
 @app.route('/weatherstation', methods=['POST'])
 def handle_weatherstation_POST():
-    return "Name: WeatherstationResource , Hello at: /weatherstation"
+    data = request.data
+    content_type = request.headers.get('content-type')
+    dic = deserialize(data, content_type)
+    status = weatherstation.update(dic, content_type)
+
+    return make_response(weatherstation, status=status)
 
 #
 # PUT '/weatherstation'
 #
 @app.route('/weatherstation', methods=['PUT'])
 def handle_weatherstation_PUT():
-    return "Name: WeatherstationResource , Hello at: /weatherstation"
+    data = request.data
+    content_type = request.headers.get('content-type')
+    dic = deserialize(data, content_type)
+    status = weatherstation.update(dic, content_type)
 
-#
-# DELETE '/weatherstation'
-#
-@app.route('/weatherstation', methods=['DELETE'])
-def handle_weatherstation_DELETE():
-    return "Name: WeatherstationResource , Hello at: /weatherstation"
+    return make_response(weatherstation, status=status)
+
 
