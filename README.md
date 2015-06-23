@@ -1,13 +1,22 @@
-# xWoT devices - RESTful applications
+# xWoT devices - RESTful API servers
 
-This repository hosts the final RESTful applications for the developed xWoT devices.
+This repository hosts the final RESTful API servers for the developed xWoT devices.
 
-Overview of the implemented RESTful applications:
+
+## RESTful APIs
+
+Overview of the implemented RESTful APIs:
  * light bulb
  * water dispenser
  * weather station
  * door
 
+All APIs support the following content types:
+ * application/ld+json
+ * application/json
+ * application/xml
+ * text/html (TODO)
+ * text/plain (TODO)
 
 ## Basic configuration
 
