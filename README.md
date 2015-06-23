@@ -60,6 +60,11 @@ Example: add user pi to i2c group
 sudo usermod -a -G i2c pi
 ```
 
+Reboot:
+```
+sudo reboot
+```
+
 ## Raspberry pi configuration
 
 See the [adafruit i2c config guide](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c).
