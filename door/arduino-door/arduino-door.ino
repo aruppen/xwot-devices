@@ -24,8 +24,8 @@
 #define SERVO_PIN 9 // uses timer 1
 Servo servo;
 
-#define UNLOCK_ANGLE 80
-#define LOCK_ANGLE 110
+#define UNLOCK_ANGLE 92
+#define LOCK_ANGLE 120
 
 // motor
 #define MOTOR_PIN 11 // uses timer 2
@@ -36,14 +36,14 @@ Servo servo;
 #define LED_PIN 13
 
 // senses if the door is open
-#define MAGNETIC_SENSOR_OPEN_PIN A2
+#define MAGNETIC_SENSOR_OPEN_PIN 1
 
 // senses if the door is closed
-#define MAGNETIC_SENSOR_CLOSE_PIN A0
+#define MAGNETIC_SENSOR_CLOSE_PIN 0
 
 // states
-#define DOOR_LOCK_STATE 0
-#define DOOR_UNLOCK_STATE 1
+#define DOOR_LOCK_STATE 1
+#define DOOR_UNLOCK_STATE 0
 
 #define DOOR_CLOSE_STATE 0
 #define DOOR_OPEN_STATE 1
@@ -96,16 +96,16 @@ void setup()
 /*
  * Returns 1 if the door is located at the close position.
  */
-int is_closed() {
-  return analogRead(MAGNETIC_SENSOR_CLOSE_PIN) > 1000; 
+int is_in_closed_position() {
+  return analogRead(MAGNETIC_SENSOR_CLOSE_PIN) < 700; 
 }
 
 
 /*
  * Returns 1 if the door is located at the open position.
  */
-int is_open() {
-  return analogRead(MAGNETIC_SENSOR_OPEN_PIN) > 1000; 
+int is_in_open_position() {
+  return analogRead(MAGNETIC_SENSOR_OPEN_PIN) < 700; 
 }
 
 
@@ -135,7 +135,7 @@ void lock_door() {
 void close_door() {
   digitalWrite(MOTOR_IN1, HIGH);
   digitalWrite(MOTOR_IN2, LOW);
-  analogWrite(MOTOR_PIN, 180);
+  analogWrite(MOTOR_PIN, 255);
 }
 
 
@@ -145,7 +145,7 @@ void close_door() {
 void open_door() {
   digitalWrite(MOTOR_IN1, LOW);
   digitalWrite(MOTOR_IN2, HIGH);
-  analogWrite(MOTOR_PIN, 180);
+  analogWrite(MOTOR_PIN, 255);
 }
 
 
@@ -190,10 +190,10 @@ void send_lock_state_byte() {
 void send_close_state_byte() {
   char val = DOOR_TRANSITION_STATE;
   
-  if(is_open()) {
+  if(is_in_open_position()) {
     val = DOOR_OPEN_STATE;
   }
-  if(is_closed()) {
+  if(is_in_closed_position()) {
    val = DOOR_CLOSE_STATE; 
   }
   
@@ -216,10 +216,22 @@ void send_data(){
 }
 
 
+
+int ignore_door_sensor = 0;
+unsigned long start_time = 0;
+unsigned long closing_time = 0;
+int closing = 0;
+
 /*
  * Main loop.
  */
 void loop() {
+   if(millis() - start_time > 1000) {
+     start_time = 0;
+     ignore_door_sensor = 0;
+   }
+    
+  
   if(received_cmd == CMD_UNLOCK_DOOR){
     unlock_door();
     clear_cmd();
@@ -229,10 +241,14 @@ void loop() {
     clear_cmd();
     
   } else if(received_cmd == CMD_OPEN_DOOR) {
+    ignore_door_sensor = 1;
+    start_time = millis();
     open_door();
     clear_cmd();
     
   } else if(received_cmd == CMD_CLOSE_DOOR) {
+    ignore_door_sensor = 1;
+    start_time = millis();
     close_door();
     clear_cmd();
     
@@ -241,15 +257,25 @@ void loop() {
   }
   
   // ensure that the motor is stopped before we oversteer...  
-  if(is_open()){
-   stop_motor(); 
+  if(is_in_open_position() && ignore_door_sensor == 0){
+   delay(10);
+    stop_motor(); 
   }
   
   // ensure that the motor is stopped before we oversteer...
-  if(is_closed()){
+  if(is_in_closed_position() && ignore_door_sensor == 0){
+   delay(60);
    stop_motor();
-  }
+   closing_time = millis();
+   closing = 1;
+  } 
   
+ 
+//  Serial.println("open pin");
+//  Serial.println(analogRead(MAGNETIC_SENSOR_OPEN_PIN));
+//  Serial.println("closed pin");
+//  Serial.println(analogRead(MAGNETIC_SENSOR_CLOSE_PIN));
+//  delay(1000);
 }
 
 

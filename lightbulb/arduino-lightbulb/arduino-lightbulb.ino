@@ -53,9 +53,17 @@ void switch_on();
 void switch_off();
 void clear_cmd();
 void receive_data(int byte_count);
-void send_data();
-void send_state_byte();
+
+void send_state();
+
+void send_data(char c);
+void send_int32(long value);
+void send_int16(int value);
+void send_float(float value);
+
 void update_sensor_value();
+void upadate_led();
+int is_light_on();
 
 
 void setup() {
@@ -91,14 +99,30 @@ void loop() {
   if(millis() - last_update > INTERVAL) {
     last_update = millis();
     update_sensor_value();
+    update_led();
   }
 }
 
 
+/*
+ * Updates the illuminance sensor value.
+ */
 void update_sensor_value() {
   sensors_event_t event;
   tsl.getEvent(&event);
   lux_value = event.light; 
+}
+
+
+/*
+ * Updates the led.
+ */
+void update_led(){
+ if(is_light_on()) {
+  digitalWrite(LED_PIN, HIGH); 
+ } else {
+  digitalWrite(LED_PIN, LOW); 
+ }
 }
 
 
@@ -114,7 +138,6 @@ void clear_cmd() {
  * Turns on the light.
  */
 void switch_on() {
-  digitalWrite(LED_PIN, HIGH);
   rc_switch.switchOn(ADDRESS_CODE, CHANNEL_CODE);
 }
 
@@ -123,8 +146,15 @@ void switch_on() {
  * Turns off the light.
  */
 void switch_off() {
-  digitalWrite(LED_PIN, LOW);
   rc_switch.switchOff(ADDRESS_CODE, CHANNEL_CODE);
+}
+
+
+/*
+ * Returns 1 if the light is on otherwise 0. 
+ */
+int is_light_on() {
+  return lux_value > LUX_TRESHOLD;
 }
 
 
@@ -151,7 +181,7 @@ void receive_data(int byte_count){
  */
 void send_data(){
   if(received_cmd == CMD_READ_STATE) {
-    send_state_byte();
+    send_state();
     clear_cmd();
   } else if(received_cmd == CMD_READ_ILLUMINANCE) {
     send_int32(lux_value);
@@ -160,7 +190,10 @@ void send_data(){
 }
 
 
-void send_state_byte() {
+/*
+ * Send the state of this light bulb over the i2c bus.
+ */
+void send_state() {
   char data[] = {
     lux_value > LUX_TRESHOLD
   };
