@@ -25,8 +25,8 @@
 // use DHT11 for dht 11 sensor
 #define DHT_TYPE DHT22 
 
-#define CMD_READ_TEMPERATURE 0x03
-#define CMD_READ_HUMIDITY 0x04
+#define CMD_READ_TEMPERATURE 0x01
+#define CMD_READ_HUMIDITY 0x02
 
 
 float humidity = 0;
