@@ -7,8 +7,8 @@
  * The arduino is connected to a DHT 22 sensor and responds to two different commands.
  * 
  * Commands:
- * - 0X03 : Reads the measured temperature value.
- * - 0X04 : Reads the measured humidity value.
+ * - 0X01 : Reads the measured temperature value.
+ * - 0X02 : Reads the measured humidity value.
  *
  *
  * Dependency: https://github.com/adafruit/DHT-sensor-library
