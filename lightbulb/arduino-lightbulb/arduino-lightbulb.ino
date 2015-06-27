@@ -43,10 +43,6 @@ Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 1234
 #define LUX_TRESHOLD 1500
 long lux_value = 0;
 
-// states
-#define LIGHTBULB_ON 0
-#define LIGHTBULB_OFF 1
-
 int received_cmd = 0x00;
 
 void switch_on();
@@ -70,10 +66,9 @@ void setup() {
   Serial.begin(9600);
   pinMode(LED_PIN, OUTPUT);
   
-  // hack: 16/12 * 350 = 466.7
   // trinket pro (3V3) uses a 12 Mhz clock
   // arduino uno use a 16 Mhz clock
-  rc_switch.setPulseLength(466); 
+  rc_switch.setPulseLength(466); // works best with this pulse length. Don't ask me why. 16/12 * 300 = 466 ???
   rc_switch.enableTransmit(RC_SWITCH_PIN);
   
   if(!tsl.begin()) { // i2c sensor
@@ -88,12 +83,13 @@ void setup() {
   Wire.onRequest(send_data);
 }
 
+
 /*
- * main loop.
+ * Main loop.
  */
 
 long last_update = millis();
-#define INTERVAL 2000
+#define INTERVAL 1500
 
 void loop() {
   if(millis() - last_update > INTERVAL) {
