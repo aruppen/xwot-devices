@@ -21,6 +21,6 @@ humidity_sensor = HumiditySensor()
 # GET '/sensor/temperature'
 #
 @app.route('/sensing-device/humidity', methods=['GET'])
-def handle_sensor_temperature_GET():
+def handle_sensor_humidity_GET():
     return make_response(humidity_sensor)
 
