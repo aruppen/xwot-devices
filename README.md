@@ -10,6 +10,7 @@ Overview of the implemented RESTful APIs:
  * water dispenser
  * weather station
  * door
+ * sensing-device (uses dht22 sensor)
 
 All APIs support the following content types:
  * application/ld+json
