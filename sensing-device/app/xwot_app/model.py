@@ -30,6 +30,11 @@ class SensingDevice(XWOTDevice, BaseModel):
         self.add_link('temperature')
         self.add_link('humidity')
 
+
+    @property
+    def resource_path(self):
+        return '/sensing-device'
+
     @property
     def name(self):
         return self._dic['name']
@@ -75,6 +80,10 @@ class TemperatureSensor(XWOTSensor, Model):
         self.add_type('http://xwot.lexruee.ch/vocab/core-ext#TemperatureSensor')
 
     @property
+    def resource_path(self):
+        return '/sensing-device/temperature'
+
+    @property
     def back_link(self):
         return '/sensing-device'
 
@@ -118,6 +127,10 @@ class HumiditySensor(XWOTSensor, Model):
         self._dht_adapter = dht_adapter
         self.add_link('back_link')
         self.add_type('http://xwot.lexruee.ch/vocab/core-ext#HumiditySensor')
+
+    @property
+    def resource_path(self):
+        return '/sensing-device/humidity'
 
     @property
     def back_link(self):
