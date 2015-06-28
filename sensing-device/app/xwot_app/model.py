@@ -93,7 +93,10 @@ class TemperatureSensor(XWOTSensor, Model):
 
     @property
     def measurement(self):
-        return self._dht_adapter.temperature
+        val = self._dht_adapter.temperature
+        if type(val) is float:
+            return round(val, 2)
+        return val
 
     def handle_update(self, dic):
         pass
@@ -135,7 +138,10 @@ class HumiditySensor(XWOTSensor, Model):
 
     @property
     def measurement(self):
-        return self._dht_adapter.temperature
+        val = self._dht_adapter.temperature
+        if type(val) is float:
+            return round(val, 2)
+        return val
 
     def handle_update(self, dic):
         pass
