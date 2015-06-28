@@ -11,7 +11,7 @@
 			<Component name="Temperature2" xsi:type="xwot:Sensor"/>
 		</Component>
 	</PhysicalEntity>
-	<VirtualEntity name="WeatherstationResource" uri="weatherstation" xsi:type="xwot:Resource">
+	<VirtualEntity name="WeatherstationResource" uri="weatherstation" xsi:type="xwot:DeviceResource">
 		<Resource composed="true" name="SensorsResource" uri="sensors" xsi:type="xwot:Resource">
 			<Resource name="PressureResource" uri="pressure" xsi:type="xwot:SensorResource"/>
 			<Resource name="Temperature1Resource" uri="temperature1" xsi:type="xwot:SensorResource"/>

@@ -4,7 +4,7 @@
 		<Component name="temperature" xsi:type="xwot:Sensor"/>
 		<Component name="humidity" xsi:type="xwot:Sensor"/>
 	</PhysicalEntity>
-	<VirtualEntity composed="true" name="SensingDeviceResource" uri="sensing-device" xsi:type="xwot:Resource">
+	<VirtualEntity composed="true" name="SensingDeviceResource" uri="sensing-device" xsi:type="xwot:DeviceResource">
 		<Resource name="TemperatureSensorResource" uri="temperature" xsi:type="xwot:SensorResource"/>
 		<Resource name="HumiditySensorResource" uri="humidity" xsi:type="xwot:SensorResource"/>
 	</VirtualEntity>
