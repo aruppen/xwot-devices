@@ -1,0 +1,49 @@
+{
+    "@context": [
+        "http://xwot.lexruee.ch/contexts/xwot"
+    ],
+    "@id": "/",
+    "@type": "xwot:Description",
+    "knows": [
+        {
+            "@id": "/sensing-device",
+            "@type": "xwot:Resource",
+            "additionalType": {
+                "@id": "http://xwot.lexruee.ch/vocab/core#Resource"
+            },
+            "knows": [
+                {
+                    "@id": "/sensing-device/temperature",
+                    "@type": "xwot:Sensor",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                    },
+                    "knows": [],
+                    "name": "TemperatureSensorResource",
+                    "sameAs": "http://www.productontology.org/id/Sensor",
+                    "uri": {
+                        "@id": "/sensing-device/temperature"
+                    }
+                },
+                {
+                    "@id": "/sensing-device/humidity",
+                    "@type": "xwot:Sensor",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                    },
+                    "knows": [],
+                    "name": "HumiditySensorResource",
+                    "sameAs": "http://www.productontology.org/id/Sensor",
+                    "uri": {
+                        "@id": "/sensing-device/humidity"
+                    }
+                }
+            ],
+            "name": "SensingDeviceResource",
+            "sameAs": "http://www.productontology.org/id/Web_resource",
+            "uri": {
+                "@id": "/sensing-device"
+            }
+        }
+    ]
+}

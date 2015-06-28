@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xwot:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xwot="http://diuf.unifr.ch/softeng">
+	<PhysicalEntity composed="true" name="SensingDeviceResource" xsi:type="xwot:Device">
+		<Component name="temperature" xsi:type="xwot:Sensor"/>
+		<Component name="humidity" xsi:type="xwot:Sensor"/>
+	</PhysicalEntity>
+	<VirtualEntity composed="true" name="SensingDeviceResource" uri="sensing-device" xsi:type="xwot:Resource">
+		<Resource name="TemperatureSensorResource" uri="temperature" xsi:type="xwot:SensorResource"/>
+		<Resource name="HumiditySensorResource" uri="humidity" xsi:type="xwot:SensorResource"/>
+	</VirtualEntity>
+</xwot:Entity>
