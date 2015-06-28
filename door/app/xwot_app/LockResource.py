@@ -9,27 +9,29 @@
 #
 
 from flask import request
+from xwot.util.flask import make_response
+from xwot.util import deserialize
+from xwot.device.door import Lock
 from xwot_app import app
 
+lock = Lock(name='Door lock')
 
 #
 # GET '/door/lock'
 #
 @app.route('/door/lock', methods=['GET'])
 def handle_door_lock_GET():
-    return "Name: LockResource , Hello at: /door/lock"
-
-#
-# POST '/door/lock'
-#
-@app.route('/door/lock', methods=['POST'])
-def handle_door_lock_POST():
-    return "Name: LockResource , Hello at: /door/lock"
+    return make_response(lock)
 
 #
 # PUT '/door/lock'
 #
 @app.route('/door/lock', methods=['PUT'])
 def handle_door_lock_PUT():
-    return "Name: LockResource , Hello at: /door/lock"
+    data = request.data
+    content_type = request.headers.get('content-type')
+    dic = deserialize(data, content_type)
+    lock.update(dic, content_type)
+
+    return make_response(lock)
 

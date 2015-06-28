@@ -9,27 +9,29 @@
 #
 
 from flask import request
+from xwot.util.flask import make_response
+from xwot.util import deserialize
+from xwot.device.door import Handle
 from xwot_app import app
 
+handle = Handle(name='Door handle')
 
 #
 # GET '/door/handle'
 #
 @app.route('/door/handle', methods=['GET'])
 def handle_door_handle_GET():
-    return "Name: HandleResource , Hello at: /door/handle"
-
-#
-# POST '/door/handle'
-#
-@app.route('/door/handle', methods=['POST'])
-def handle_door_handle_POST():
-    return "Name: HandleResource , Hello at: /door/handle"
+    return make_response(handle)
 
 #
 # PUT '/door/handle'
 #
 @app.route('/door/handle', methods=['PUT'])
 def handle_door_handle_PUT():
-    return "Name: HandleResource , Hello at: /door/handle"
+    data = request.data
+    content_type = request.headers.get('content-type')
+    dic = deserialize(data, content_type)
+    handle.update(dic, content_type)
+
+    return make_response(handle)
 

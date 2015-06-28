@@ -9,34 +9,31 @@
 #
 
 from flask import request
+from xwot.util.flask import make_response
+from xwot.util import deserialize
+from xwot.device.door import Door
 from xwot_app import app
 
+door = Door(name='xWot Door', street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
+            postal_code='1700', address_locality='Fribourg', room_address='A410')
 
 #
 # GET '/door'
 #
 @app.route('/door', methods=['GET'])
 def handle_door_GET():
-    return "Name: DoorResource , Hello at: /door"
-
-#
-# POST '/door'
-#
-@app.route('/door', methods=['POST'])
-def handle_door_POST():
-    return "Name: DoorResource , Hello at: /door"
+    return make_response(door)
 
 #
 # PUT '/door'
 #
 @app.route('/door', methods=['PUT'])
 def handle_door_PUT():
-    return "Name: DoorResource , Hello at: /door"
+    data = request.data
+    content_type = request.headers.get('content-type')
+    dic = deserialize(data, content_type)
+    door.update(dic, content_type)
 
-#
-# DELETE '/door'
-#
-@app.route('/door', methods=['DELETE'])
-def handle_door_DELETE():
-    return "Name: DoorResource , Hello at: /door"
+    return make_response(door)
+
 
