@@ -13,6 +13,7 @@ from xwot.i2c.adapter import DHTAdapter
 
 
 class SensingDevice(XWOTDevice, BaseModel):
+
     __mutable_props__ = ['name', 'streetAddress', 'roomAddress', 'postalCode', 'addressLocality']
     __expose__ = __mutable_props__ + ['description', 'temperature', 'humidity']
 

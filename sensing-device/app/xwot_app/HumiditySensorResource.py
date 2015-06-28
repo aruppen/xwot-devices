@@ -5,8 +5,8 @@
 # Flask xwot application.
 #
 # Type:       xwot:SensorResource
-# Resource:   temperatureResource
-# Path:       /sensor/humidity
+# Resource:   HumiditySensorResource
+# Path:       /sensing-device/humidity
 #
 
 from flask import request
