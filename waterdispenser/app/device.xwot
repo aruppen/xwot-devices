@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xwot:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xwot="http://diuf.unifr.ch/softeng" name="Root">
-  <VirtualEntity xsi:type="xwot:ContextResource" name="WaterDispenser" uri="waterdispenser">
+  <VirtualEntity xsi:type="xwot:DeviceResource" name="WaterDispenser" uri="waterdispenser">
     <Resource xsi:type="xwot:SensorResource" name="Sensor" uri="sensor"/>
     <Resource xsi:type="xwot:ContextResource" name="Valve" uri="valve"/>
   </VirtualEntity>

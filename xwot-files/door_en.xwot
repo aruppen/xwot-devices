@@ -10,7 +10,7 @@
 			<Component name="Lock" xsi:type="xwot:Actuator"/>
 		</Component>
 	</PhysicalEntity>
-	<VirtualEntity composed="true" name="DoorResource" uri="door" xsi:type="xwot:Resource">
+	<VirtualEntity composed="true" name="DoorResource" uri="door" xsi:type="xwot:DeviceResource">
 		<Resource name="HandleResource" uri="handle" xsi:type="xwot:ContextResource"/>
 		<Resource name="LockResource" uri="lock" xsi:type="xwot:ContextResource"/>
 	</VirtualEntity>
