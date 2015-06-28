@@ -138,7 +138,7 @@ class HumiditySensor(XWOTSensor, Model):
 
     @property
     def measurement(self):
-        val = self._dht_adapter.temperature
+        val = self._dht_adapter.humidity
         if val is not None:
             return round(val, 2)
 
