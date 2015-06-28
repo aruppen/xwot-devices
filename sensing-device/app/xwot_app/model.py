@@ -1,4 +1,10 @@
-# coding: utf-8
+#encoding: utf-8
+"""
+@author     Alexander Rüedlinger <a.rueedlinger@gmail.com>
+@date       28.06.2015
+
+"""
+
 from xwot.model import Device as XWOTDevice
 from xwot.model import Sensor as XWOTSensor
 from xwot.model import BaseModel
