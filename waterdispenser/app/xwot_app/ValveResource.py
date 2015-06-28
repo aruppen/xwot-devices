@@ -21,17 +21,6 @@ valve = Valve(name='Valve')
 def handle_waterdispenser_valve_GET():
     return make_response(valve)
 
-#
-# POST '/waterdispenser/valve'
-#
-@app.route('/waterdispenser/valve', methods=['POST'])
-def handle_waterdispenser_valve_POST():
-    data = request.data
-    content_type = request.headers.get('content-type')
-    dic = deserialize(data, content_type)
-    status = valve.update(dic, content_type)
-
-    return make_response(valve, status=status)
 
 #
 # PUT '/waterdispenser/valve'
@@ -39,7 +28,7 @@ def handle_waterdispenser_valve_POST():
 @app.route('/waterdispenser/valve', methods=['PUT'])
 def handle_waterdispenser_valve_PUT():
     data = request.data
-    content_type = request.headers.get('content-type')
+    content_type = request.headers.get('Content-Type')
     dic = deserialize(data, content_type)
     status = valve.update(dic, content_type)
 

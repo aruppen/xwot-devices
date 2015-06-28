@@ -29,7 +29,7 @@ def handle_door_lock_GET():
 @app.route('/door/lock', methods=['PUT'])
 def handle_door_lock_PUT():
     data = request.data
-    content_type = request.headers.get('content-type')
+    content_type = request.headers.get('Content-Type')
     dic = deserialize(data, content_type)
     lock.update(dic, content_type)
 

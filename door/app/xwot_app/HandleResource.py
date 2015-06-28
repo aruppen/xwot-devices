@@ -29,7 +29,7 @@ def handle_door_handle_GET():
 @app.route('/door/handle', methods=['PUT'])
 def handle_door_handle_PUT():
     data = request.data
-    content_type = request.headers.get('content-type')
+    content_type = request.headers.get('Content-Type')
     dic = deserialize(data, content_type)
     handle.update(dic, content_type)
 

@@ -30,7 +30,7 @@ def handle_sensor_GET():
 @app.route('/sensing-device', methods=['PUT'])
 def handle_sensor_PUT():
     data = request.data
-    content_type = request.headers.get('content-type')
+    content_type = request.headers.get('Content-Type')
     dic = deserialize(data, content_type)
     sensing_device.update(dic, content_type)
 

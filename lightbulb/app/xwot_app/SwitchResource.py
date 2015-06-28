@@ -22,26 +22,13 @@ switch = Switch(name='Switch')
 def handle_lightbulb_switch_GET():
     return make_response(switch)
 
-
-#
-# POST '/lightbulb/switch'
-#
-@app.route('/lightbulb/switch', methods=['POST'])
-def handle_lightbulb_switch_POST():
-    data = request.data
-    content_type = request.headers.get('content-type')
-    dic = deserialize(data, content_type)
-    switch.update(dic, content_type)
-
-    return make_response(switch)
-
 #
 # PUT '/lightbulb/switch'
 #
 @app.route('/lightbulb/switch', methods=['PUT'])
 def handle_lightbulb_switch_PUT():
     data = request.data
-    content_type = request.headers.get('content-type')
+    content_type = request.headers.get('Content-Type')
     dic = deserialize(data, content_type)
     switch.update(dic, content_type)
 

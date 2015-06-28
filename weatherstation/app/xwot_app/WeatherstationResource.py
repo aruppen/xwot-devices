@@ -22,26 +22,13 @@ from xwot.util.flask import make_response
 def handle_weatherstation_GET():
     return make_response(weatherstation)
 
-
-#
-# POST '/weatherstation'
-#
-@app.route('/weatherstation', methods=['POST'])
-def handle_weatherstation_POST():
-    data = request.data
-    content_type = request.headers.get('content-type')
-    dic = deserialize(data, content_type)
-    status = weatherstation.update(dic, content_type)
-
-    return make_response(weatherstation, status=status)
-
 #
 # PUT '/weatherstation'
 #
 @app.route('/weatherstation', methods=['PUT'])
 def handle_weatherstation_PUT():
     data = request.data
-    content_type = request.headers.get('content-type')
+    content_type = request.headers.get('Content-Type')
     dic = deserialize(data, content_type)
     status = weatherstation.update(dic, content_type)
 

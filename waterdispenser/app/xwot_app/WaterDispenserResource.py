@@ -24,24 +24,12 @@ def handle_waterdispenser_GET():
     return make_response(waterdispener)
 
 #
-# POST '/waterdispenser'
-#
-@app.route('/waterdispenser', methods=['POST'])
-def handle_waterdispenser_POST():
-    data = request.data
-    content_type = request.headers.get('content-type')
-    dic = deserialize(data, content_type)
-    status = waterdispener.update(dic, content_type)
-
-    return make_response(waterdispener, status=status)
-
-#
 # PUT '/waterdispenser'
 #
 @app.route('/waterdispenser', methods=['PUT'])
 def handle_waterdispenser_PUT():
     data = request.data
-    content_type = request.headers.get('content-type')
+    content_type = request.headers.get('Content-Type')
     dic = deserialize(data, content_type)
     status = waterdispener.update(dic, content_type)
 

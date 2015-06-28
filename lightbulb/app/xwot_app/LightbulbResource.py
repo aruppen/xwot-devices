@@ -24,24 +24,12 @@ def handle_lightbulb_GET():
     return make_response(lightbulb)
 
 #
-# POST '/lightbulb'
-#
-@app.route('/lightbulb', methods=['POST'])
-def handle_lightbulb_POST():
-    data = request.data
-    content_type = request.headers.get('content-type')
-    dic = deserialize(data, content_type)
-    status = lightbulb.update(dic, content_type)
-
-    return make_response(lightbulb, status=status)
-
-#
 # PUT '/lightbulb'
 #
 @app.route('/lightbulb', methods=['PUT'])
 def handle_lightbulb_PUT():
     data = request.data
-    content_type = request.headers.get('content-type')
+    content_type = request.headers.get('Content-Type')
     dic = deserialize(data, content_type)
     status = lightbulb.update(dic, content_type)
 
