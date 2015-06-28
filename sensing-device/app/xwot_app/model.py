@@ -77,7 +77,7 @@ class TemperatureSensor(XWOTSensor, Model):
         super(TemperatureSensor, self).__init__()
         self._dht_adapter = dht_adapter
         self.add_link('back_link')
-        self.add_type('http://xwot.lexruee.ch/vocab/core-ext#TemperatureSensor')
+        self.add_type('xwot-ext:TemperatureSensor')
 
     @property
     def resource_path(self):
@@ -126,7 +126,7 @@ class HumiditySensor(XWOTSensor, Model):
         super(HumiditySensor, self).__init__()
         self._dht_adapter = dht_adapter
         self.add_link('back_link')
-        self.add_type('http://xwot.lexruee.ch/vocab/core-ext#HumiditySensor')
+        self.add_type('xwot-ext:HumiditySensor')
 
     @property
     def resource_path(self):
