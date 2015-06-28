@@ -13,6 +13,7 @@ from xwot.util.flask import make_response
 from xwot.util import deserialize
 from xwot.device.door import Handle
 from xwot_app import app
+import time
 
 handle = Handle(name='Door handle')
 
@@ -32,6 +33,7 @@ def handle_door_handle_PUT():
     content_type = request.headers.get('Content-Type')
     dic = deserialize(data, content_type)
     handle.update(dic, content_type)
+    time.sleep(0.2)
 
     return make_response(handle)
 

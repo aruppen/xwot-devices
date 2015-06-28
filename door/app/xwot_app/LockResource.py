@@ -13,6 +13,7 @@ from xwot.util.flask import make_response
 from xwot.util import deserialize
 from xwot.device.door import Lock
 from xwot_app import app
+import time
 
 lock = Lock(name='Door lock')
 
@@ -32,6 +33,7 @@ def handle_door_lock_PUT():
     content_type = request.headers.get('Content-Type')
     dic = deserialize(data, content_type)
     lock.update(dic, content_type)
+    time.sleep(0.2)
 
     return make_response(lock)
 
