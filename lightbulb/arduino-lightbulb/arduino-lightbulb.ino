@@ -40,7 +40,7 @@ RCSwitch rc_switch = RCSwitch();
 // light sensor
 Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 12345);
 
-#define LUX_TRESHOLD 1500
+#define LUX_TRESHOLD 500
 long lux_value = 0;
 
 int received_cmd = 0x00;
