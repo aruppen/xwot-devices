@@ -117,6 +117,19 @@ Finally, run it via:
 python runserver.py
 ```
 
+### twistd deployment
+Running the server as daemon:
+```
+twistd -y runserver.tac
+```
+
+Stopping the server:
+```
+sudo kill `cat twistd.pid`
+```
+
+
+
 ## Handy tools
 
 Because the xwot applications are RESTful they are browsable through so called REST clients:
