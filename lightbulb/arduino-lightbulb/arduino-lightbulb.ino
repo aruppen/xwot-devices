@@ -26,6 +26,7 @@ RCSwitch rc_switch = RCSwitch();
 
 // led
 #define LED_PIN 11
+#define LED_PIN_DEBUG 13
  
  // i2c
 #include <Wire.h>
@@ -40,7 +41,7 @@ RCSwitch rc_switch = RCSwitch();
 // light sensor
 Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 12345);
 
-#define LUX_TRESHOLD 500
+#define LUX_TRESHOLD 1500
 long lux_value = 0;
 
 int received_cmd = 0x00;
@@ -65,6 +66,7 @@ int is_light_on();
 void setup() {
   Serial.begin(9600);
   pinMode(LED_PIN, OUTPUT);
+  pinMode(LED_PIN_DEBUG, OUTPUT);
   
   // trinket pro (3V3) uses a 12 Mhz clock
   // arduino uno use a 16 Mhz clock
@@ -88,14 +90,25 @@ void setup() {
  * Main loop.
  */
 
-long last_update = millis();
-#define INTERVAL 1500
+unsigned long last_update = millis();
+#define INTERVAL 2000
 
 void loop() {
   if(millis() - last_update > INTERVAL) {
     last_update = millis();
     update_sensor_value();
     update_led();
+    digitalWrite(LED_PIN_DEBUG, HIGH);
+  } else {
+   digitalWrite(LED_PIN_DEBUG, LOW); 
+  }
+  
+  if(received_cmd == CMD_LIGHT_ON) {
+    switch_on();
+    clear_cmd();
+  } else if(received_cmd == CMD_LIGHT_OFF) {
+    switch_off();
+    clear_cmd(); 
   }
 }
 
@@ -114,7 +127,7 @@ void update_sensor_value() {
  * Updates the led.
  */
 void update_led(){
- if(is_light_on()) {
+ if(lux_value > LUX_TRESHOLD) {
   digitalWrite(LED_PIN, HIGH); 
  } else {
   digitalWrite(LED_PIN, LOW); 
@@ -147,27 +160,11 @@ void switch_off() {
 
 
 /*
- * Returns 1 if the light is on otherwise 0. 
- */
-int is_light_on() {
-  return lux_value > LUX_TRESHOLD;
-}
-
-
-/*
  * i2c receive data.
  */
 void receive_data(int byte_count){ 
   while(Wire.available()) {
    received_cmd = Wire.read();
-  }
-  
-  if(received_cmd == CMD_LIGHT_ON) {
-    switch_on();
-    clear_cmd();
-  } else if(received_cmd == CMD_LIGHT_OFF) {
-    switch_off();
-    clear_cmd(); 
   }
 }
 
