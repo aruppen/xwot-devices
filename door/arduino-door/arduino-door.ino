@@ -240,12 +240,9 @@ void send_close_state_byte() {
 }
 
 
-
-
 int ignore_door_sensor = 0;
 unsigned long start_time = 0;
 unsigned long closing_time = 0;
-int closing = 0;
 
 
 /*
@@ -292,7 +289,6 @@ void loop() {
    delay(60);
    stop_motor();
    closing_time = millis();
-   closing = 1;
   }
 
 
