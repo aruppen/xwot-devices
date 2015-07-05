@@ -24,7 +24,7 @@ All APIs support the following content types:
 
 ### Python / pip / build tools
 ```
-sudo apt-get install python-pip python-dev build-essential
+sudo apt-get install python-pip python-dev build-essential libffi-dev
 ```
 
 
