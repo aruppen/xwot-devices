@@ -15,7 +15,7 @@ from xwot.util.flask import make_response
 from xwot.util import deserialize
 
 
-window = Window(name='xWot Window', street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
+window = Window(name='xWoT Window', street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
                 postal_code='1700', address_locality='Fribourg', room_address='A410')
 
 #

@@ -33,7 +33,7 @@ from xwot.device.weatherstation import WeatherStation
 from xwot.device.weatherstation import create_sensors
 from xwot.device.weatherstation import SensorCollection
 
-weatherstation = WeatherStation(name='xWot Weather station',
+weatherstation = WeatherStation(name='xWoT Weather station',
                                 street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
                                 postal_code='1700', address_locality='Fribourg', room_address='A410')
 sensors_dic = create_sensors()

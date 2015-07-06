@@ -12,7 +12,7 @@ from xwot.util.flask import make_response
 from xwot.util import deserialize
 from xwot.device.waterdispenser import WaterDispenser
 
-waterdispener = WaterDispenser(name='xWot WaterDispenser',
+waterdispener = WaterDispenser(name='xWot Water dispenser',
                                street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
                                postal_code='1700', address_locality='Fribourg', room_address='A410')
 
