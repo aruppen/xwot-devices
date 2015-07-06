@@ -1,6 +1,6 @@
 # xWoT Devices
 
-This repository hosts the following resources for xWoT devices.:
+This repository hosts the following resources for the xWoT devices:
  * RESTful API servers
  * firmwares
  * schematic files
