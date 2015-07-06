@@ -1,6 +1,6 @@
 # xWoT devices - RESTful API servers
 
-This repository hosts the final RESTful API servers for the developed xWoT devices.
+This repository hosts the final RESTful API servers and firmwares for the developed xWoT devices.
 
 
 ## RESTful APIs
@@ -28,6 +28,9 @@ The firmware for the xwot devices / arduino microcontrollers are available in th
 ### Schematic files
 
 The schematic files can be found in the directory [schematic-files](https://github.com/lexruee/xwot-devices/tree/master/schematic-files).
+
+### Architecture
+![Architecture](https://raw.github.com/lexruee/xwot-devices/master/hardware_architecture.png)
 
 ## Basic configuration
 
