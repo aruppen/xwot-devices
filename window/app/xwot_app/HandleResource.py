@@ -12,7 +12,9 @@ from flask import request
 from xwot_app import app
 from xwot.device.window import Handle
 from xwot.util.flask import make_response
-from xwot.util import  deserialize
+from xwot.util import deserialize
+import time
+
 
 handle = Handle(name="Window handle")
 
@@ -32,6 +34,7 @@ def handle_window_handle_PUT():
     content_type = request.headers.get('Content-Type')
     dic = deserialize(data, content_type)
     handle.update(dic, content_type)
+    time.sleep(0.1)
 
     return make_response(handle)
 
