@@ -29,7 +29,7 @@ The firmware for the xwot devices / arduino microcontrollers are available in th
 
 The schematic files can be found in the directory [schematic-files](https://github.com/lexruee/xwot-devices/tree/master/schematic-files).
 
-### Architecture
+### Software-Hardware-Architecture
 ![Architecture](https://raw.githubusercontent.com/lexruee/xwot-devices/master/hardware_architecture.png?token=AAnofA3_C5XZoIGqjzJt-Ds7_U7EJe_gks5VoxWZwA%3D%3D)
 
 ## Basic configuration
