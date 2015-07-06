@@ -5,7 +5,7 @@ This repository hosts the final RESTful API servers for the developed xWoT devic
 
 ## RESTful APIs
 
-Overview of the implemented RESTful APIs:
+Overview of the implemented RESTful API servers:
  * [light bulb](https://github.com/lexruee/xwot-devices/tree/master/lightbulb)
  * [water dispenser](https://github.com/lexruee/xwot-devices/tree/master/waterdispenser)
  * [weather station](https://github.com/lexruee/xwot-devices/tree/master/weatherstation)
@@ -19,6 +19,15 @@ All APIs support the following content types:
  * application/xml
  * text/html (TODO)
  * text/plain (TODO)
+
+## Hardware
+### Arduino firmware
+
+The firmware for the xwot devices / arduino microcontrollers are available in the directory [firmware](https://github.com/lexruee/xwot-devices/tree/master/firmware).
+
+### Schematic files
+
+The schematic files can be found in the directory [schematic-files](https://github.com/lexruee/xwot-devices/tree/master/schematic-files).
 
 ## Basic configuration
 
