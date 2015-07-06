@@ -1,9 +1,13 @@
-# xWoT devices - RESTful API servers
+# xWoT Devices
 
-This repository hosts the final RESTful API servers and firmwares for the developed xWoT devices.
+This repository hosts the following resources for developed xWoT devices.:
+ * RESTful API servers
+ * firmwares
+ * schematic files
+ * xwot files
 
 
-## RESTful APIs
+## RESTful API Servers
 
 Overview of the implemented RESTful API servers:
  * [light bulb](https://github.com/lexruee/xwot-devices/tree/master/lightbulb)
