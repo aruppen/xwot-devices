@@ -13,7 +13,7 @@ from xwot.util.flask import make_response
 from xwot.util import deserialize
 from xwot.device.lightbulb import LightBulb
 
-lightbulb = LightBulb(name='xWot LightBulb 1', street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
+lightbulb = LightBulb(name='xWot LightBulb', street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
                       postal_code='1700', address_locality='Fribourg', room_address='A410')
 
 #
