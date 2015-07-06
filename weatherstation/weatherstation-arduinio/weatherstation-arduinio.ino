@@ -5,10 +5,14 @@
  * Firmware for the weatherstation device.
  * 
  * Commands:
- * - 0X01 : TODO
- * - 0X02 : TODO
- * - 0X09 : TODO
- *
+ * - 0X01 : Retrieves the temperature value of the first temperature sensor.
+ * - 0X02 : Retrieves the temperature value of the second temperature sensor.
+ * - 0X03 : Retrieves the pressure value.
+ * - 0X04 : Retrieves the humidity value.
+ * - 0X05 : Retrieves the altitude value.
+ * - 0X06 : Retrieves the illuminance value.
+ * - 0X07 : Retrieves the color temperature value.
+ * - 0X08 : Retrieves the color illuminance value.
  */
 
 #include <stdint.h>
