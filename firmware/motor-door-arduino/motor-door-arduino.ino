@@ -3,7 +3,7 @@
  * @author  Alexander Rüedlinger <a.rueedlinger@gmail.com>
  *
  *
- * Sketch for the I2C door device.
+ * Sketch for the I2C motor door device.
  *
  * Commands:
  * - 0X01 : Unlocks the door.
