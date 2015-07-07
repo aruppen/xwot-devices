@@ -44,6 +44,14 @@ Servo right_servo;
 #define OPEN 0
 
 
+// window angles
+#define LEFT_WINDOW_OPEN_ANGLE 150
+#define LEFT_WINDOW_CLOSE_ANGLE 25
+
+#define RIGHT_WINDOW_OPEN_ANGLE 40
+#define RIGHT_WINDOW_CLOSE_ANGLE 158
+
+
 // window functions
 
 void close_right_window();
@@ -182,7 +190,7 @@ void close_window() {
  * Closes the right window.
  */
 void close_right_window() {
-  right_servo.write(158);
+  right_servo.write(RIGHT_WINDOW_CLOSE_ANGLE);
 }
 
 
@@ -190,7 +198,7 @@ void close_right_window() {
  * Opens the right window.
  */
 void open_right_window() {
-  right_servo.write(40);
+  right_servo.write(RIGHT_WINDOW_OPEN_ANGLE);
 }
 
 
@@ -198,7 +206,7 @@ void open_right_window() {
  * Closes the left window.
  */
 void close_left_window() {
-  left_servo.write(25);
+  left_servo.write(LEFT_WINDOW_CLOSE_ANGLE);
 }
 
 
@@ -206,7 +214,7 @@ void close_left_window() {
  * Opens the left window.
  */
 void open_left_window() {
-  left_servo.write(150);
+  left_servo.write(LEFT_WINDOW_OPEN_ANGLE);
 }
 
 
