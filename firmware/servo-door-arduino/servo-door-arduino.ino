@@ -32,10 +32,15 @@ int received_cmd = 0x00;
 // servo 
 #include <Servo.h>
 #define DOOR_SERVO_PIN 10
-#define CLOSE_ANGLE 35
+#define LOCK_SERVO_PIN 9
+
+#define CLOSE_ANGLE (35)
 #define OPEN_ANGLE (35+105)
+#define LOCK_ANGLE (90)
+#define UNLOCK_ANGLE (140)
 
 Servo door_servo;
+Servo lock_servo;
 
 // magnetic sensor
 #define MAGNETIC_SENSOR_PIN 4
@@ -74,6 +79,7 @@ void setup() {
   
   // setup servos
   door_servo.attach(DOOR_SERVO_PIN);
+  lock_servo.attach(LOCK_SERVO_PIN);
   
   // setup magnetic sensor pin
   pinMode(MAGNETIC_SENSOR_PIN, INPUT);
@@ -147,6 +153,7 @@ void clear_cmd() {
  * Sets the door into the initial state.
  */
 void init_door() {
+  unlock_door();
   close_door();
 }
 
@@ -187,7 +194,7 @@ int is_door_open() {
  * Locks the window.
  */
 void lock_door() {
-  // TODO  
+  lock_servo.write(LOCK_ANGLE);
 }
 
 
@@ -195,7 +202,7 @@ void lock_door() {
  * Unlocks the window.
  */
 void unlock_door() {
-  // TODO
+  lock_servo.write(UNLOCK_ANGLE);
 }
 
 
