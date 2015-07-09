@@ -70,6 +70,7 @@ Some useful resources about the I2C bus:
 * [Linux kernel smbus-protocol](https://www.kernel.org/doc/Documentation/i2c/smbus-protocol)
 * [I2C python documentation](http://wiki.erazor-zone.de/wiki:linux:python:smbus:doc)
 * [Using the I2C Interface](http://www.raspberry-projects.com/pi/programming-in-python/i2c-programming-in-python/using-the-i2c-interface-2)
+* [Connecting an arduino to a Raspberry Pi using I2C](http://blog.retep.org/2014/02/15/connecting-an-arduino-to-a-raspberry-pi-using-i2c/)
 
 Install i2c-tools, libi2c-dev and python-smbus via:
 
