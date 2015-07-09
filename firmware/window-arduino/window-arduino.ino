@@ -259,7 +259,7 @@ int is_window_locked() {
 
 
 /*
- * Checks if the window is locked.
+ * Checks if the window is unlocked.
  */
 int is_window_unlocked() {
   return locked_state == UNLOCKED_STATE;
