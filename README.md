@@ -65,6 +65,12 @@ sudo python setup.py install
 
 ### I2C
 
+Some useful resources about the I2C bus:
+* [Wikipedia I2C](https://en.wikipedia.org/wiki/I%C2%B2C)
+* [Linux kernel smbus-protocol](https://www.kernel.org/doc/Documentation/i2c/smbus-protocol)
+* [I2C python documentation](http://wiki.erazor-zone.de/wiki:linux:python:smbus:doc)
+* [Using the I2C Interface](http://www.raspberry-projects.com/pi/programming-in-python/i2c-programming-in-python/using-the-i2c-interface-2)
+
 Install i2c-tools, libi2c-dev and python-smbus via:
 
 ```
