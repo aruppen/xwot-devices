@@ -33,9 +33,11 @@ int received_cmd = 0x00;
 #include <Servo.h>
 #define LEFT_SERVO_PIN 10
 #define RIGHT_SERVO_PIN 9
+#define LOCK_SERVO_PIN 8
 
 Servo left_servo;
 Servo right_servo;
+Servo lock_servo;
 
 
 // magnetic sensor
@@ -50,6 +52,9 @@ Servo right_servo;
 
 #define RIGHT_WINDOW_OPEN_ANGLE 40
 #define RIGHT_WINDOW_CLOSE_ANGLE 158
+
+#define LOCK_ANGLE 90
+#define UNLOCK_ANGLE 135
 
 
 // window functions
@@ -90,6 +95,7 @@ void setup() {
   // setup servos
   left_servo.attach(LEFT_SERVO_PIN);
   right_servo.attach(RIGHT_SERVO_PIN);
+  lock_servo.attach(LOCK_SERVO_PIN);
   
   // setup magnetic sensor pin
   pinMode(MAGNETIC_SENSOR_PIN, INPUT);
@@ -165,6 +171,7 @@ void clear_cmd() {
 void init_window() {
   close_left_window();
   close_right_window();
+  unlock_window();
 }
 
 
@@ -238,7 +245,7 @@ int is_window_open() {
  * Locks the window.
  */
 void lock_window() {
-  // TODO  
+  lock_servo.write(LOCK_ANGLE);  
 }
 
 
@@ -246,7 +253,7 @@ void lock_window() {
  * Unlocks the window.
  */
 void unlock_window() {
-  // TODO
+  lock_servo.write(UNLOCK_ANGLE);
 }
 
 
