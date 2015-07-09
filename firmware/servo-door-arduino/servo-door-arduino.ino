@@ -52,6 +52,8 @@ Servo lock_servo;
 
 int is_door_closed();
 int is_door_opened();
+int is_door_locked();
+int is_door_unlocked();
 
 void init_door();
 void open_door();
@@ -69,6 +71,13 @@ void unlock_door();
 
 #define CMD_READ_LOCK_STATE 0x09
 #define CMD_READ_CLOSE_STATE 0x0A
+
+
+// state variables
+#define UNLOCKED_STATE 0
+#define LOCKED_STATE 1
+
+int locked_state = UNLOCKED_STATE;
 
 
 /*
@@ -124,8 +133,8 @@ void send_data() {
     send_byte(closed_state);
     clear_cmd();
   } else if(received_cmd == CMD_READ_LOCK_STATE) {
-    // TODO
-    send_byte(1);
+    char locked_state = is_door_locked();
+    send_byte(locked_state);
     clear_cmd();
   }
 }
@@ -191,10 +200,27 @@ int is_door_open() {
 
 
 /*
+ * Checks if the door is locked.
+ */
+int is_door_locked() {
+  return locked_state == LOCKED_STATE;
+}
+
+
+/*
+ * Checks if the door is unlocked.
+ */
+int is_door_unlocked() {
+  return locked_state == UNLOCKED_STATE;
+}
+
+
+/*
  * Locks the window.
  */
 void lock_door() {
   lock_servo.write(LOCK_ANGLE);
+  locked_state = LOCKED_STATE;
 }
 
 
@@ -203,6 +229,7 @@ void lock_door() {
  */
 void unlock_door() {
   lock_servo.write(UNLOCK_ANGLE);
+  locked_state = UNLOCKED_STATE;
 }
 
 
