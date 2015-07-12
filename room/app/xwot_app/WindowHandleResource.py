@@ -83,12 +83,16 @@ handle = WindowHandle()
 def handle_room_window_handle_GET(request):
     if xwot_app.resources['window_handle']:
         accept = request.getHeader('Accept')
-        d = treq.get(xwot_app.resources['window_handle'], headers={'Accept': accept})
+        d = treq.get(xwot_app.resources['window_handle'], headers={'Accept': 'application/json'})
         request.setHeader('Content-Type', accept)
         d.addCallback(treq.content)
-        
+        d.addCallback(handle.parse, accept)
+        d.addCallback(handle.serialize)
+
         return d
-    return {}
+    else:
+        request.setResponseCode(404)
+    return ''
 
 #
 # PUT '/room/window/handle'

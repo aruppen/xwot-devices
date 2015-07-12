@@ -140,5 +140,5 @@ client.browse()
 
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=xwot_app.port)
+    app.run(host='0.0.0.0', port=xwot_app.port)
 
