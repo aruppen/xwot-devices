@@ -8,12 +8,12 @@ import xwot_app
 from xwot_app import app
 
 import yadp
-yadp.debug()
+#yadp.debug()
 
 from yadp import service
 from yadp.device import Device
 from yadp.semantic import client
-from twisted.internet import task
+from twisted.internet import task, reactor
 
 client = client()
 
@@ -23,8 +23,8 @@ service = service()
 service.register(device=device, passive=True)
 
 
-def find_window(client):
-    triples = client.sparql_query("""
+def find_window(_client):
+    triples = _client.sparql_query("""
     PREFIX xwot: <http://xwot.lexruee.ch/vocab/core#>
     PREFIX xwot-ext: <http://xwot.lexruee.ch/vocab/core-ext#>
     PREFIX schema: <http://schema.org/>
@@ -39,8 +39,8 @@ def find_window(client):
         ?handle a xwot-ext:Handle.
         ?lock a xwot-ext:Lock.
 
-        FILTER(?room = "%s")
-    }""" % xwot_app.room_address)
+        FILTER(?room = "A410")
+    }""")
 
     triples = [map(str, triple) for triple in triples]
     for triple in triples:
@@ -58,8 +58,8 @@ def find_window(client):
     return len(triples) != 0
 
 
-def find_door(client):
-    triples = client.sparql_query("""
+def find_door(_client):
+    triples = _client.sparql_query("""
     PREFIX xwot: <http://xwot.lexruee.ch/vocab/core#>
     PREFIX xwot-ext: <http://xwot.lexruee.ch/vocab/core-ext#>
     PREFIX schema: <http://schema.org/>
@@ -74,8 +74,8 @@ def find_door(client):
         ?handle a xwot-ext:Handle.
         ?lock a xwot-ext:Lock.
 
-        FILTER(?room = "%s")
-    }""" % xwot_app.room_address)
+        FILTER(?room = "A410")
+    }""")
 
     triples = [map(str, triple) for triple in triples]
     for triple in triples:
@@ -93,8 +93,8 @@ def find_door(client):
     return len(triples) != 0
 
 
-def find_lightbulb(client):
-    triples = client.sparql_query("""
+def find_lightbulb(_client):
+    triples = _client.sparql_query("""
     PREFIX xwot: <http://xwot.lexruee.ch/vocab/core#>
     PREFIX xwot-ext: <http://xwot.lexruee.ch/vocab/core-ext#>
     PREFIX schema: <http://schema.org/>
@@ -109,8 +109,8 @@ def find_lightbulb(client):
         ?switch a xwot-ext:Switch.
         ?sensor a xwot-ext:IlluminanceSensor.
 
-        FILTER(?room = "%s")
-    }""" % xwot_app.room_address)
+        FILTER(?room = "A410")
+    }""")
     triples = [map(str, triple) for triple in triples]
     for triple in triples:
         lightbulb_url, switch_url, sensor_url = triple
@@ -131,8 +131,11 @@ def loop(_client, _service, _device):
     global once
     send_update = find_door(_client) and find_lightbulb(_client) and find_window(_client)
     if send_update and once is False:
-        _service.update(_device)
+        ##_service.update(_device)
+        reactor.callLater(5.0, _service.update, _device)
         once = True
+
+    print xwot_app.resources
 
 _loop = task.LoopingCall(loop, client, service, device)
 _loop.start(5.0)
