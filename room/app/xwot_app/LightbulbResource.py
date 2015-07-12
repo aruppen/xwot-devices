@@ -35,6 +35,10 @@ class LightBulb(XWOTDevice, BaseModel):
         self.add_link('sensor_link')
 
     @property
+    def resource_path(self):
+        return '/room/lightbulb'
+
+    @property
     def name(self):
         return self._dic['name']
 

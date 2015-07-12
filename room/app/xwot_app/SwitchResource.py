@@ -35,6 +35,10 @@ class Switch(XWOTService, BaseModel):
         self.add_link('lightbulb_link')
 
     @property
+    def resource_path(self):
+        return '/room/lightbulb/switch'
+
+    @property
     def state(self):
         return self._dic['state']
 

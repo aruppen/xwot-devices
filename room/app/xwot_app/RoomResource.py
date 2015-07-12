@@ -33,6 +33,11 @@ class Room(XWOTDevice, BaseModel):
         self.add_link('lightbulb_link')
 
     @property
+    def resource_path(self):
+        return '/room'
+
+
+    @property
     def name(self):
         return self._dic['name']
 

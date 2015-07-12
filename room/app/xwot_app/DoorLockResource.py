@@ -36,6 +36,10 @@ class DoorLock(XWOTService, BaseModel):
         self.add_link('door_link')
 
     @property
+    def resource_path(self):
+        return '/room/door/lock'
+
+    @property
     def name(self):
         return self._dic['name']
 

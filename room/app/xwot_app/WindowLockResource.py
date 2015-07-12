@@ -35,6 +35,10 @@ class WindowLock(XWOTService, BaseModel):
         self.add_link('window_link')
 
     @property
+    def resource_path(self):
+        return '/room/window/lock'
+
+    @property
     def name(self):
         return self._dic['name']
 

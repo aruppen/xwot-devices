@@ -38,6 +38,10 @@ class Sensor(XWOTService, BaseModel):
         self.add_link('lightbulb_link')
 
     @property
+    def resource_path(self):
+        return '/room/lightbulb/sensor'
+
+    @property
     def measurement(self):
         return self._dic['measurement']
 
