@@ -28,7 +28,6 @@ class Room(XWOTDevice, BaseModel):
             'description': None
         }
         self._proxy_dic = {}
-        self.add_type('xwot-ext:LightBulb')
         self.add_link('window_link')
         self.add_link('door_link')
         self.add_link('lightbulb_link')
