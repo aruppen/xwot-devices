@@ -1,0 +1,137 @@
+{
+    "@context": [
+        "http://xwot.lexruee.ch/contexts/xwot"
+    ],
+    "@id": "/",
+    "@type": "xwot:Description",
+    "knows": [
+        {
+            "@id": "/room",
+            "@type": "xwot:Resource",
+            "additionalType": {
+                "@id": "http://xwot.lexruee.ch/vocab/core#Resource"
+            },
+            "knows": [
+                {
+                    "@id": "/room/window",
+                    "@type": "xwot:Resource",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Resource"
+                    },
+                    "knows": [
+                        {
+                            "@id": "/room/window/handle",
+                            "@type": "xwot:Service",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Service"
+                            },
+                            "name": "WindowHandleResource",
+                            "sameAs": "http://www.productontology.org/id/Service",
+                            "uri": {
+                                "@id": "/room/window/handle"
+                            }
+                        },
+                        {
+                            "@id": "/room/window/lock",
+                            "@type": "xwot:Service",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Service"
+                            },
+                            "name": "WindowLockResource",
+                            "sameAs": "http://www.productontology.org/id/Service",
+                            "uri": {
+                                "@id": "/room/window/lock"
+                            }
+                        }
+                    ],
+                    "name": "WindowResource",
+                    "sameAs": "http://www.productontology.org/id/Web_resource",
+                    "uri": {
+                        "@id": "/room/window"
+                    }
+                },
+                {
+                    "@id": "/room/door",
+                    "@type": "xwot:Resource",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Resource"
+                    },
+                    "knows": [
+                        {
+                            "@id": "/room/door/handle",
+                            "@type": "xwot:Service",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Service"
+                            },
+                            "name": "DoorHandleResource",
+                            "sameAs": "http://www.productontology.org/id/Service",
+                            "uri": {
+                                "@id": "/room/door/handle"
+                            }
+                        },
+                        {
+                            "@id": "/room/door/lock",
+                            "@type": "xwot:Service",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Service"
+                            },
+                            "name": "DoorLockResource",
+                            "sameAs": "http://www.productontology.org/id/Service",
+                            "uri": {
+                                "@id": "/room/door/lock"
+                            }
+                        }
+                    ],
+                    "name": "DoorResource",
+                    "sameAs": "http://www.productontology.org/id/Web_resource",
+                    "uri": {
+                        "@id": "/room/door"
+                    }
+                },
+                {
+                    "@id": "/room/lightbulb",
+                    "@type": "xwot:Resource",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Resource"
+                    },
+                    "knows": [
+                        {
+                            "@id": "/room/lightbulb/switch",
+                            "@type": "xwot:Service",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Service"
+                            },
+                            "name": "SwitchResource",
+                            "sameAs": "http://www.productontology.org/id/Service",
+                            "uri": {
+                                "@id": "/room/lightbulb/switch"
+                            }
+                        },
+                        {
+                            "@id": "/room/lightbulb/sensor",
+                            "@type": "xwot:Service",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Service"
+                            },
+                            "name": "SensorResource",
+                            "sameAs": "http://www.productontology.org/id/Service",
+                            "uri": {
+                                "@id": "/room/lightbulb/sensor"
+                            }
+                        }
+                    ],
+                    "name": "LightbulbResource",
+                    "sameAs": "http://www.productontology.org/id/Web_resource",
+                    "uri": {
+                        "@id": "/room/lightbulb"
+                    }
+                }
+            ],
+            "name": "RoomResource",
+            "sameAs": "http://www.productontology.org/id/Web_resource",
+            "uri": {
+                "@id": "/room"
+            }
+        }
+    ]
+}

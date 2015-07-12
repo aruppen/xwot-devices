@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xwot:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xwot="http://diuf.unifr.ch/softeng" name="RootResource">
+  <VirtualEntity xsi:type="xwot:Resource" name="RoomResource" uri="room" composed="true">
+    <Resource xsi:type="xwot:Resource" name="WindowResource" uri="window" composed="true">
+      <Resource xsi:type="xwot:ServiceResource" name="WindowHandleResource" uri="handle"/>
+      <Resource xsi:type="xwot:ServiceResource" name="WindowLockResource" uri="lock"/>
+    </Resource>
+    <Resource xsi:type="xwot:Resource" name="DoorResource" uri="door" composed="true">
+      <Resource xsi:type="xwot:ServiceResource" name="DoorHandleResource" uri="handle"/>
+      <Resource xsi:type="xwot:ServiceResource" name="DoorLockResource" uri="lock"/>
+    </Resource>
+    <Resource xsi:type="xwot:Resource" name="LightbulbResource" uri="lightbulb" composed="true">
+      <Resource xsi:type="xwot:ServiceResource" name="SwitchResource" uri="switch"/>
+      <Resource xsi:type="xwot:ServiceResource" name="SensorResource" uri="sensor"/>
+    </Resource>
+  </VirtualEntity>
+</xwot:Entity>
