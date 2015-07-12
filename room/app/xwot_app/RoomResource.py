@@ -8,15 +8,85 @@
 # Path:       /room
 #
 
+import xwot_app
 from xwot_app import app
+import treq
+import json
+from xwot.model import Device as XWOTDevice
+from xwot.model import BaseModel
+from xwot.util import deserialize
 
+
+class Room(XWOTDevice, BaseModel):
+
+    __expose__ = ['name', 'window_link', 'door_link', 'lightbulb_link', 'description']
+
+    def __init__(self):
+        super(Room, self).__init__()
+        self._dic = {
+            'name': None,
+            'description': None
+        }
+        self._proxy_dic = {}
+        self.add_type('xwot-ext:LightBulb')
+        self.add_link('window_link')
+        self.add_link('door_link')
+        self.add_link('lightbulb_link')
+
+    @property
+    def name(self):
+        return self._dic['name']
+
+    @property
+    def description(self):
+        return self._dic['description']
+
+    @property
+    def door_link(self):
+        return '/room/door'
+
+    @property
+    def window_link(self):
+        return '/room/window'
+
+    @property
+    def lightbulb_link(self):
+        return '/room/lightbulb'
+
+    @property
+    def state(self):
+        return self._dic['state']
+
+    def parse(self, data, accept):
+        dic = json.loads(data)
+        self._proxy_dic = dic
+        self._dic['name'] = self._proxy_dic.get('name', None)
+        self._dic['description'] = self._proxy_dic.get('description', None)
+        return accept
+
+    def serialize(self, content_type):
+        if content_type == 'application/json':
+            return self.to_json()
+
+        if content_type == 'application/ld+json':
+            return self.to_jsonld()
+
+        if content_type == 'application/xml':
+            return self.to_xml()
+
+        return None
+
+room = Room()
 
 #
 # GET '/room'
 #
 @app.route('/room', methods=['GET'])
 def handle_room_GET(request):
-    return "Name: RoomResource , Hello at: /room"
+    accept = request.getHeader('Accept')
+    request.setHeader('Content-Type', accept)
+
+    return room.serialize(accept)
 
 #
 # PUT '/room'
