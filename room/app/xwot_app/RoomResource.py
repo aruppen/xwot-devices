@@ -24,8 +24,8 @@ class Room(XWOTDevice, BaseModel):
     def __init__(self):
         super(Room, self).__init__()
         self._dic = {
-            'name': None,
-            'description': None
+            'name': 'A410',
+            'description': 'Room A410'
         }
         self._proxy_dic = {}
         self.add_link('window_link')
