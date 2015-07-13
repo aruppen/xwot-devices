@@ -31,7 +31,7 @@ def handle_door_lock_PUT(request):
     data = request.content.read()
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
-    task.deferLater(reactor, 0, lock.update, dic, content_type)
+    task.deferLater(reactor, 0.2, lock.update, dic, content_type)
     deferred_response = task.deferLater(reactor, 0, make_response, lock, request)
 
     return deferred_response
