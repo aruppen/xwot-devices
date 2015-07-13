@@ -171,7 +171,9 @@ void init_door() {
  * Closes the door.
  */
 void close_door() {
-  door_servo.write(CLOSE_ANGLE);
+  if(is_door_unlocked()) {
+    door_servo.write(CLOSE_ANGLE);
+  }
 }
 
 
@@ -179,7 +181,9 @@ void close_door() {
  * Opens the door.
  */
 void open_door() {
-  door_servo.write(OPEN_ANGLE);
+  if(is_door_unlocked()) {
+    door_servo.write(OPEN_ANGLE);
+  }
 }
 
 
