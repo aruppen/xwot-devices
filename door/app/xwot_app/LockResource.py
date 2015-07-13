@@ -12,6 +12,7 @@ from xwot.util.klein import make_response
 from xwot.util import deserialize
 from xwot.device.door import Lock
 from xwot_app import app
+from twisted.internet import task, reactor
 
 lock = Lock(name='Door lock')
 
@@ -30,7 +31,8 @@ def handle_door_lock_PUT(request):
     data = request.content.read()
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
-    lock.update(dic, content_type)
+    task.deferLater(reactor, 0, lock.update, dic, content_type)
+    deferred_response = task.deferLater(reactor, 0, make_response, lock, request)
 
-    return make_response(lock, request)
+    return deferred_response
 
