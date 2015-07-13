@@ -188,8 +188,10 @@ void init_window() {
  * Opens the left and right window.
  */
 void open_window() {
-  open_left_window();
-  open_right_window();
+  if(is_window_unlocked()) {
+    open_left_window();
+    open_right_window();
+  }
 }
 
 
@@ -197,8 +199,10 @@ void open_window() {
  * Closes the left and right window.
  */
 void close_window() {
-  close_left_window();
-  close_right_window(); 
+  if(is_window_unlocked()) {
+    close_left_window();
+    close_right_window();
+  }
 }
 
 
