@@ -155,9 +155,11 @@ void lock_door() {
  * Closes the door.
  */
 void close_door() {
-  digitalWrite(MOTOR_IN1, HIGH);
-  digitalWrite(MOTOR_IN2, LOW);
-  analogWrite(MOTOR_PIN, 255);
+  if(lock_state == UNLOCK_STATE) {
+    digitalWrite(MOTOR_IN1, HIGH);
+    digitalWrite(MOTOR_IN2, LOW);
+    analogWrite(MOTOR_PIN, 255);
+  }
 }
 
 
@@ -165,9 +167,11 @@ void close_door() {
  * Opens the door.
  */
 void open_door() {
-  digitalWrite(MOTOR_IN1, LOW);
-  digitalWrite(MOTOR_IN2, HIGH);
-  analogWrite(MOTOR_PIN, 255);
+  if(lock_state == UNLOCK_STATE) {
+    digitalWrite(MOTOR_IN1, LOW);
+    digitalWrite(MOTOR_IN2, HIGH);
+    analogWrite(MOTOR_PIN, 255);
+  }
 }
 
 
@@ -232,7 +236,7 @@ void send_close_state_byte() {
   }
 
   if(is_in_closed_position()) {
-   val = CLOSE_STATE;
+    val = CLOSE_STATE;
   }
 
   char data[] = { val };
