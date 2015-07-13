@@ -27,6 +27,7 @@ class Room(XWOTDevice, BaseModel):
             'name': 'A410',
             'description': 'Room A410'
         }
+        self.add_type('xwot-ext:Room')
         self._proxy_dic = {}
         self.add_link('window_link')
         self.add_link('door_link')
