@@ -6,9 +6,8 @@
 # Path:       /waterdispenser
 #
 
-from flask import request
 from xwot_app import app
-from xwot.util.flask import make_response
+from xwot.util.klein import make_response
 from xwot.util import deserialize
 from xwot.device.waterdispenser import WaterDispenser
 
@@ -20,18 +19,18 @@ waterdispener = WaterDispenser(name='xWot Water dispenser',
 # GET '/waterdispenser'
 #
 @app.route('/waterdispenser', methods=['GET'])
-def handle_waterdispenser_GET():
-    return make_response(waterdispener)
+def handle_waterdispenser_GET(request):
+    return make_response(waterdispener, request)
 
 #
 # PUT '/waterdispenser'
 #
 @app.route('/waterdispenser', methods=['PUT'])
-def handle_waterdispenser_PUT():
-    data = request.data
-    content_type = request.headers.get('Content-Type')
+def handle_waterdispenser_PUT(request):
+    data = request.content.read()
+    content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     status = waterdispener.update(dic, content_type)
 
-    return make_response(waterdispener, status=status)
+    return make_response(waterdispener, request=request, status=status)
 
