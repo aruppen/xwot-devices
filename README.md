@@ -45,6 +45,12 @@ sudo apt-get install python-pip python-dev build-essential libffi-dev
 
 
 ### Python dependencies
+
+#### twisted / klein / treq
+```
+sudo pip install twisted klein treq
+```
+
 #### yadp
 ```
 git clone https://github.com/lexruee/yadp
