@@ -26,7 +26,7 @@ def handle_lightbulb_switch_GET(request):
 #
 @app.route('/lightbulb/switch', methods=['PUT'])
 def handle_lightbulb_switch_PUT(request):
-    data = request.data
+    data = request.content.read()
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     switch.update(dic, content_type)
