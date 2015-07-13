@@ -24,12 +24,9 @@ xwot_file = os.path.join(app_dir_path, "device.xwot")
 jsonld_description_str = create_description(xwot_file=xwot_file, base=http_addr)
 yadp_description = Description(content_type="application/ld+json", content=jsonld_description_str)
 
+from klein import Klein
 
-from flask import Flask
-from flask.ext.twisted import Twisted
-
-app = Flask(__name__)
-twisted = Twisted(app)
+app = Klein()
 
 import RootResource
 import LightbulbResource

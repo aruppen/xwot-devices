@@ -7,12 +7,12 @@
 # Path:       /
 #
 
-from flask import Response
 import xwot_app
 from xwot_app import app
 
 
 @app.route('/')
-def home():
-    return Response(response=xwot_app.jsonld_description_str, status=200, content_type="application/ld+json")
+def home(request):
+    request.setHeader('Content-Type', 'application/ld+json')
+    return xwot_app.jsonld_description_str
 

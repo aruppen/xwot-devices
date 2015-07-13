@@ -9,7 +9,7 @@
 
 from xwot_app import app
 from xwot.device.lightbulb import Sensor
-from xwot.util.flask import make_response
+from xwot.util.klein import make_response
 
 sensor = Sensor()
 
@@ -17,6 +17,6 @@ sensor = Sensor()
 # GET '/lightbulb/sensor'
 #
 @app.route('/lightbulb/sensor', methods=['GET'])
-def handle_lightbulb_sensor_GET():
-    return make_response(sensor)
+def handle_lightbulb_sensor_GET(request):
+    return make_response(sensor, request)
 

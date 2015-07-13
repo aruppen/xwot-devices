@@ -7,9 +7,8 @@
 # Path:       /lightbulb
 #
 
-from flask import request
 from xwot_app import app
-from xwot.util.flask import make_response
+from xwot.util.klein import make_response
 from xwot.util import deserialize
 from xwot.device.lightbulb import LightBulb
 
@@ -20,18 +19,18 @@ lightbulb = LightBulb(name='xWoT Light bulb', street_address="Bd de Perolles 90 
 # GET '/lightbulb'
 #
 @app.route('/lightbulb', methods=['GET'])
-def handle_lightbulb_GET():
-    return make_response(lightbulb)
+def handle_lightbulb_GET(request):
+    return make_response(lightbulb, request)
 
 #
 # PUT '/lightbulb'
 #
 @app.route('/lightbulb', methods=['PUT'])
-def handle_lightbulb_PUT():
+def handle_lightbulb_PUT(request):
     data = request.data
-    content_type = request.headers.get('Content-Type')
+    content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     status = lightbulb.update(dic, content_type)
 
-    return make_response(lightbulb, status=status)
+    return make_response(lightbulb, request=request, status=status)
 
