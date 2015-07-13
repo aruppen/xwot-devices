@@ -54,8 +54,8 @@ Servo servo;
 #define LOCK_STATE 1
 #define UNLOCK_STATE 0
 
-#define CLOSE_STATE 0
-#define OPEN_STATE 1
+#define CLOSE_STATE 1
+#define OPEN_STATE 0
 #define TRANSITION_STATE 2
 
 
