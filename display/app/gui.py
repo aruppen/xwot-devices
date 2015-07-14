@@ -100,14 +100,20 @@ class MyFrame(wx.Frame):
         panel = wx.Panel(self)
         font = wx.Font(30, wx.SWISS, wx.NORMAL, wx.NORMAL)
 
-        self._temperature_text = wx.StaticText(panel, label="temperature: ", pos=(20, 20))
-        self.temperature_value = wx.StaticText(panel, label="?", pos=(400, 20))
+        room = wx.StaticText(panel, label="room: ", pos=(20, 20))
+        room_addr = wx.StaticText(panel, label="A410", pos=(400, 20))
+
+        room.SetFont(font)
+        room_addr.SetFont(font)
+
+        self._temperature_text = wx.StaticText(panel, label="temperature: ", pos=(20, 100))
+        self.temperature_value = wx.StaticText(panel, label="?", pos=(400, 100))
 
         self._temperature_text.SetFont(font)
         self.temperature_value.SetFont(font)
 
-        self._humdity_text = wx.StaticText(panel, label="humidity: ", pos=(20, 100))
-        self.humidity_value = wx.StaticText(panel, label="?", pos=(400, 100))
+        self._humdity_text = wx.StaticText(panel, label="humidity: ", pos=(20, 180))
+        self.humidity_value = wx.StaticText(panel, label="?", pos=(400, 180))
 
         self._humdity_text.SetFont(font)
         self.humidity_value.SetFont(font)
