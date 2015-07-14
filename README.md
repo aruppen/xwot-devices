@@ -17,7 +17,7 @@ Overview of the implemented RESTful API servers:
      * [door](https://github.com/lexruee/xwot-devices/tree/master/door)
      * [window](https://github.com/lexruee/xwot-devices/tree/master/window)
      * [sensing-device (uses dht22 sensor)](https://github.com/lexruee/xwot-devices/tree/master/sensing-device)
- * basic services:
+ * composite devices:
      * [room](https://github.com/lexruee/xwot-devices/tree/master/room)
      * [display](https://github.com/lexruee/xwot-devices/tree/master/display)
 
