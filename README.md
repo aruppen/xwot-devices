@@ -10,14 +10,16 @@ This repository hosts the following resources for the xWoT devices:
 ## RESTful API Servers
 
 Overview of the implemented RESTful API servers:
- * [light bulb](https://github.com/lexruee/xwot-devices/tree/master/lightbulb)
- * [water dispenser](https://github.com/lexruee/xwot-devices/tree/master/waterdispenser)
- * [weather station](https://github.com/lexruee/xwot-devices/tree/master/weatherstation)
- * [door](https://github.com/lexruee/xwot-devices/tree/master/door)
- * [window](https://github.com/lexruee/xwot-devices/tree/master/window)
- * [sensing-device (uses dht22 sensor)](https://github.com/lexruee/xwot-devices/tree/master/sensing-device)
- * [room](https://github.com/lexruee/xwot-devices/tree/master/room)
- * [display](https://github.com/lexruee/xwot-devices/tree/master/display)
+ * basic devices:
+     * [light bulb](https://github.com/lexruee/xwot-devices/tree/master/lightbulb)
+     * [water dispenser](https://github.com/lexruee/xwot-devices/tree/master/waterdispenser)
+     * [weather station](https://github.com/lexruee/xwot-devices/tree/master/weatherstation)
+     * [door](https://github.com/lexruee/xwot-devices/tree/master/door)
+     * [window](https://github.com/lexruee/xwot-devices/tree/master/window)
+     * [sensing-device (uses dht22 sensor)](https://github.com/lexruee/xwot-devices/tree/master/sensing-device)
+ * basic services:
+     * [room](https://github.com/lexruee/xwot-devices/tree/master/room)
+     * [display](https://github.com/lexruee/xwot-devices/tree/master/display)
 
 All APIs support the following content types:
  * application/ld+json
