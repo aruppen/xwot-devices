@@ -59,28 +59,6 @@ class Room(XWOTDevice, BaseModel):
     def lightbulb_link(self):
         return '/room/lightbulb'
 
-    @property
-    def state(self):
-        return self._dic['state']
-
-    def parse(self, data, accept):
-        dic = json.loads(data)
-        self._proxy_dic = dic
-        self._dic['name'] = self._proxy_dic.get('name', None)
-        self._dic['description'] = self._proxy_dic.get('description', None)
-        return accept
-
-    def serialize(self, content_type):
-        if content_type == 'application/json':
-            return self.to_json()
-
-        if content_type == 'application/ld+json':
-            return self.to_jsonld()
-
-        if content_type == 'application/xml':
-            return self.to_xml()
-
-        return None
 
 room = Room()
 
