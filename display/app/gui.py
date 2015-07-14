@@ -64,7 +64,8 @@ def find_sensors(_client):
 def _update_value(content, label):
     dic = json.loads(content)
     val = dic['measurement']
-    label.SetLabel(str(val))
+    symbol = dic['symbol']
+    label.SetLabel(str(val) + ' ' + symbol)
 
 
 def update_gui(frame):
