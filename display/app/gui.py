@@ -1,3 +1,9 @@
+# coding: utf-8
+"""
+@author     Alexander Rüedlinger <a.rueedlinger@gmail.com>
+@date       14.07.2015
+
+"""
 
 import wx
 from twisted.internet import wxreactor
