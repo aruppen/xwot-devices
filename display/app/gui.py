@@ -24,7 +24,14 @@ from yadp.device import Device
 
 import treq
 import json
+import rdflib
+from urlparse import urlparse
 
+
+def create_base(url):
+        res = urlparse(url)
+        base = res.scheme + '://' + res.netloc
+        return base
 
 def find_sensors(_client):
     triples = _client.sparql_query("""
@@ -61,11 +68,23 @@ def find_sensors(_client):
     return len(triples) != 0
 
 
-def _update_value(content, label):
-    dic = json.loads(content)
-    val = dic['measurement']
-    symbol = dic['symbol']
-    label.SetLabel(str(val) + ' ' + symbol)
+def _update_value(content, label, url):
+    base = create_base(url)
+    graph = rdflib.Graph().parse(data=content, format='json-ld', base=base)
+    qres = graph.query("""
+    PREFIX xwot-ext: <http://xwot.lexruee.ch/vocab/core-ext#>
+
+    SELECT ?measurement ?symbol WHERE {
+        ?device xwot-ext:measurement ?measurement.
+        ?device xwot-ext:symbol ?symbol.
+    }
+    """)
+    triples = [triple for triple in qres]
+    if len(triples):
+        triple = triples[0]
+        measurement, symbol = triple
+
+        label.SetLabel(str(measurement) + ' ' + symbol)
 
 
 def update_gui(frame):
@@ -76,14 +95,14 @@ def update_gui(frame):
         deferred_temp_resp = treq.get(temp_url, headers={'Accept': 'application/ld+json'})
         deferred_temp_resp.addCallback(treq.content)
         deferred_temp_resp.addErrback(log.info)
-        deferred_temp_resp.addCallback(_update_value, frame.temperature_value)
+        deferred_temp_resp.addCallback(_update_value, frame.temperature_value, temp_url)
         deferred_temp_resp.addErrback(log.info)
 
     if hum_url:
         deferred_hum_resp = treq.get(hum_url, headers={'Accept': 'application/ld+json'})
         deferred_hum_resp.addCallback(treq.content)
         deferred_hum_resp.addErrback(log.info)
-        deferred_hum_resp.addCallback(_update_value, frame.humidity_value)
+        deferred_hum_resp.addCallback(_update_value, frame.humidity_value, hum_url)
         deferred_hum_resp.addErrback(log.info)
 
 once = False
