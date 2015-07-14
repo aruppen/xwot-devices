@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xwot:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xwot="http://diuf.unifr.ch/softeng" name="RootResource">
+  <VirtualEntity xsi:type="xwot:DeviceResource" name="DisplayResource" uri="display" composed="true">
+    <Resource xsi:type="xwot:ServiceResource" name="TemperatureResource" uri="temperature"/>
+    <Resource xsi:type="xwot:ServiceResource" name="HumidityResource" uri="humidity"/>
+  </VirtualEntity>
+</xwot:Entity>

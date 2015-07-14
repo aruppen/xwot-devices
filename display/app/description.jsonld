@@ -1,0 +1,47 @@
+{
+    "@context": [
+        "http://xwot.lexruee.ch/contexts/xwot"
+    ],
+    "@id": "/",
+    "@type": "xwot:Description",
+    "knows": [
+        {
+            "@id": "/display",
+            "@type": "xwot:Resource",
+            "additionalType": {
+                "@id": "http://xwot.lexruee.ch/vocab/core#Resource"
+            },
+            "knows": [
+                {
+                    "@id": "/display/temperature",
+                    "@type": "xwot:Service",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Service"
+                    },
+                    "name": "TemperatureResource",
+                    "sameAs": "http://www.productontology.org/id/Service",
+                    "uri": {
+                        "@id": "/display/temperature"
+                    }
+                },
+                {
+                    "@id": "/display/humidity",
+                    "@type": "xwot:Service",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Service"
+                    },
+                    "name": "HumidityResource",
+                    "sameAs": "http://www.productontology.org/id/Service",
+                    "uri": {
+                        "@id": "/display/humidity"
+                    }
+                }
+            ],
+            "name": "DisplayResource",
+            "sameAs": "http://www.productontology.org/id/Web_resource",
+            "uri": {
+                "@id": "/display"
+            }
+        }
+    ]
+}
