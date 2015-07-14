@@ -148,7 +148,6 @@ class MyFrame(wx.Frame):
         self.Maximize(True)
 
 
-
 if __name__ == '__main__':
     yadp.debug()
     device = Device(urn='urn:xwot:Device', location=xwot_app.http_addr, descriptions=[xwot_app.yadp_description])
