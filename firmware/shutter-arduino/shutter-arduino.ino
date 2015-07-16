@@ -93,7 +93,7 @@ void setup() {
  * Returns 1 if the shutter is located at the top position.
  */
 int is_at_top_position() {
-  return analogRead(MAGNETIC_SENSOR_TOP_PIN) > 700;
+  return analogRead(MAGNETIC_SENSOR_TOP_PIN) > 800;
 }
 
 
@@ -101,7 +101,7 @@ int is_at_top_position() {
  * Returns 1 if the shutter is located at the bottom position.
  */
 int is_at_bottom_position() {
-  return analogRead(MAGNETIC_SENSOR_BOTTOM_PIN) > 700;
+  return analogRead(MAGNETIC_SENSOR_BOTTOM_PIN) > 800;
 }
 
 
@@ -113,7 +113,7 @@ void move_shutter_upwards() {
     Serial.println("up");
     digitalWrite(MOTOR_IN1, HIGH);
     digitalWrite(MOTOR_IN2, LOW);
-    analogWrite(MOTOR_PIN, 255);
+    analogWrite(MOTOR_PIN, 50);
     motor_state = MOTOR_STATE_UP;
   }
 }
@@ -127,7 +127,7 @@ void move_shutter_downwards() {
     Serial.println("down");
     digitalWrite(MOTOR_IN1, LOW);
     digitalWrite(MOTOR_IN2, HIGH);
-    analogWrite(MOTOR_PIN, 255);
+    analogWrite(MOTOR_PIN, 50);
     motor_state = MOTOR_STATE_DOWN;
   }
 }
@@ -228,13 +228,11 @@ void loop() {
 
   // ensure that the motor is stopped before we oversteer...
   if(is_at_top_position() && ignore_sensor == 0) {
-   delay(10);
     stop_motor();
   }
 
   // ensure that the motor is stopped before we oversteer...
   if(is_at_bottom_position() && ignore_sensor == 0) {
-   delay(60);
    stop_motor();
    closing_time = millis();
   }
