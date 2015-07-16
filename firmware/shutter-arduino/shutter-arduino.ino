@@ -31,6 +31,10 @@ int received_cmd = 0x00;
 #define MOTOR_IN1 3
 #define MOTOR_IN2 4
 
+#define MOTOR_STATE_STOP 0
+#define MOTOR_STATE_UP 1
+#define MOTOR_STATE_DOWN 2
+
 // senses if the shutter is the top position
 #define MAGNETIC_SENSOR_TOP_PIN 0
 
@@ -58,6 +62,8 @@ void move_shutter_downwards();
 void stop_motor();
 
 void send_state_byte();
+
+int motor_state = MOTOR_STATE_STOP;
 
 
 /*
@@ -103,10 +109,13 @@ int is_at_bottom_position() {
  * Moves the shutter upwards.
  */
 void move_shutter_upwards() {
-  Serial.println("up");
-  digitalWrite(MOTOR_IN1, HIGH);
-  digitalWrite(MOTOR_IN2, LOW);
-  analogWrite(MOTOR_PIN, 160);
+  if(motor_state == MOTOR_STATE_STOP) {
+    Serial.println("up");
+    digitalWrite(MOTOR_IN1, HIGH);
+    digitalWrite(MOTOR_IN2, LOW);
+    analogWrite(MOTOR_PIN, 255);
+    motor_state = MOTOR_STATE_UP;
+  }
 }
 
 
@@ -114,10 +123,13 @@ void move_shutter_upwards() {
  * Moves the shutter downwards.
  */
 void move_shutter_downwards() {
-  Serial.println("down");
-  digitalWrite(MOTOR_IN1, LOW);
-  digitalWrite(MOTOR_IN2, HIGH);
-  analogWrite(MOTOR_PIN, 160);
+  if(motor_state == MOTOR_STATE_STOP) {
+    Serial.println("down");
+    digitalWrite(MOTOR_IN1, LOW);
+    digitalWrite(MOTOR_IN2, HIGH);
+    analogWrite(MOTOR_PIN, 255);
+    motor_state = MOTOR_STATE_DOWN;
+  }
 }
 
 
@@ -126,6 +138,7 @@ void move_shutter_downwards() {
  */
 void stop_motor() {
   analogWrite(MOTOR_PIN, 0);
+  motor_state = MOTOR_STATE_STOP;
 }
 
 
@@ -196,7 +209,6 @@ void loop() {
     ignore_sensor = 1;
     start_time = millis();
     stop_motor();
-    delay(20);
     move_shutter_upwards();
     clear_cmd();
 
@@ -204,7 +216,6 @@ void loop() {
     ignore_sensor = 1;
     start_time = millis();
     stop_motor();
-    delay(20);
     move_shutter_downwards();
     clear_cmd();
 
