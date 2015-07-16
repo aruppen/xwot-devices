@@ -2,7 +2,7 @@
 
 This repository hosts the following resources for the xWoT devices:
  * [RESTful API servers](https://github.com/lexruee/xwot-devices/tree/master/api_servers)
- * [firmwares](https://github.com/lexruee/xwot-devices/tree/master/api_servers)
+ * [firmwares](https://github.com/lexruee/xwot-devices/tree/master/firmware)
  * [schematic files](https://github.com/lexruee/xwot-devices/tree/master/schematic-files)
  * [xwot files](https://github.com/lexruee/xwot-devices/tree/master/xwot-files)
 
