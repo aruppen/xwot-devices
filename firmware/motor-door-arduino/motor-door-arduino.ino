@@ -89,8 +89,7 @@ int lock_state = UNLOCK_STATE;
 /*
  * Setups this device.
  */
-void setup()
-{
+void setup() {
   // setup servo
   servo.attach(SERVO_PIN); // servo on digital pin 10
   pinMode(LED_PIN, OUTPUT);
