@@ -195,12 +195,16 @@ void loop() {
   if(received_cmd == CMD_UP) {
     ignore_sensor = 1;
     start_time = millis();
+    stop_motor();
+    delay(20);
     move_shutter_upwards();
     clear_cmd();
 
   } else if(received_cmd == CMD_DOWN) {
     ignore_sensor = 1;
     start_time = millis();
+    stop_motor();
+    delay(20);
     move_shutter_downwards();
     clear_cmd();
 
@@ -223,11 +227,4 @@ void loop() {
    stop_motor();
    closing_time = millis();
   }
-
-
-//  Serial.println("open pin");
-//  Serial.println(analogRead(MAGNETIC_SENSOR_OPEN_PIN));
-//  Serial.println("closed pin");
-//  Serial.println(analogRead(MAGNETIC_SENSOR_CLOSE_PIN));
-//  delay(1000);
 }
