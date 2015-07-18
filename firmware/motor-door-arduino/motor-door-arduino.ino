@@ -77,6 +77,7 @@ void lock_door();
 void close_door();
 void open_door();
 void stop_motor();
+void init_door();
 
 void send_lock_state_byte();
 void send_close_state_byte();
@@ -109,8 +110,15 @@ void setup() {
   Wire.onRequest(send_data);
 
   // init
+  init_door();
+}
+
+
+/*
+ * Sets the shutter into the initial state.
+ */
+void init_door() {
   unlock_door();
-  //delay(2000);
 }
 
 
@@ -266,16 +274,20 @@ void loop() {
     clear_cmd();
 
   } else if(received_cmd == CMD_OPEN) {
-    ignore_door_sensor = 1;
-    start_time = millis();
-    open_door();
-    clear_cmd();
+    if(!is_in_open_position()) {
+      ignore_door_sensor = 1;
+      start_time = millis();
+      open_door();
+      clear_cmd();
+    }
 
   } else if(received_cmd == CMD_CLOSE) {
-    ignore_door_sensor = 1;
-    start_time = millis();
-    close_door();
-    clear_cmd();
+    if(!is_in_closed_position()) {
+      ignore_door_sensor = 1;
+      start_time = millis();
+      close_door();
+      clear_cmd();
+    }
 
   } else {
 
