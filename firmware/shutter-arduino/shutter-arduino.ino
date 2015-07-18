@@ -35,11 +35,13 @@ int received_cmd = 0x00;
 #define MOTOR_STATE_UP 1
 #define MOTOR_STATE_DOWN 2
 
+#define MOTOR_SPEED 60
+
 // senses if the shutter is the top position
 #define MAGNETIC_SENSOR_TOP_PIN 0
 
 // senses if the shutter is the bottom position
-#define MAGNETIC_SENSOR_BOTTOM_PIN 0
+#define MAGNETIC_SENSOR_BOTTOM_PIN 1
 
 
 // states
@@ -61,9 +63,8 @@ void move_shutter_upwards();
 void move_shutter_downwards();
 void stop_motor();
 
-void send_state_byte();
 
-int motor_state = MOTOR_STATE_STOP;
+void send_state_byte();
 
 
 /*
@@ -84,16 +85,15 @@ void setup() {
   // define callbacks for i2c communication
   Wire.onReceive(receive_data);
   Wire.onRequest(send_data);
-  // init
-  //delay(2000);
 }
+
 
 
 /*
  * Returns 1 if the shutter is located at the top position.
  */
 int is_at_top_position() {
-  return analogRead(MAGNETIC_SENSOR_TOP_PIN) > 800;
+  return analogRead(MAGNETIC_SENSOR_TOP_PIN) > 1000;
 }
 
 
@@ -101,7 +101,7 @@ int is_at_top_position() {
  * Returns 1 if the shutter is located at the bottom position.
  */
 int is_at_bottom_position() {
-  return analogRead(MAGNETIC_SENSOR_BOTTOM_PIN) > 800;
+  return analogRead(MAGNETIC_SENSOR_BOTTOM_PIN);
 }
 
 
@@ -109,13 +109,10 @@ int is_at_bottom_position() {
  * Moves the shutter upwards.
  */
 void move_shutter_upwards() {
-  if(motor_state == MOTOR_STATE_STOP) {
-    Serial.println("up");
-    digitalWrite(MOTOR_IN1, HIGH);
-    digitalWrite(MOTOR_IN2, LOW);
-    analogWrite(MOTOR_PIN, 50);
-    motor_state = MOTOR_STATE_UP;
-  }
+  Serial.println("up");
+  digitalWrite(MOTOR_IN1, HIGH);
+  digitalWrite(MOTOR_IN2, LOW);
+  analogWrite(MOTOR_PIN, MOTOR_SPEED);
 }
 
 
@@ -123,13 +120,10 @@ void move_shutter_upwards() {
  * Moves the shutter downwards.
  */
 void move_shutter_downwards() {
-  if(motor_state == MOTOR_STATE_STOP) {
-    Serial.println("down");
-    digitalWrite(MOTOR_IN1, LOW);
-    digitalWrite(MOTOR_IN2, HIGH);
-    analogWrite(MOTOR_PIN, 50);
-    motor_state = MOTOR_STATE_DOWN;
-  }
+  Serial.println("down");
+  digitalWrite(MOTOR_IN1, LOW);
+  digitalWrite(MOTOR_IN2, HIGH);
+  analogWrite(MOTOR_PIN, MOTOR_SPEED);
 }
 
 
@@ -138,7 +132,6 @@ void move_shutter_downwards() {
  */
 void stop_motor() {
   analogWrite(MOTOR_PIN, 0);
-  motor_state = MOTOR_STATE_STOP;
 }
 
 
@@ -194,30 +187,35 @@ void send_state_byte() {
 int ignore_sensor = 0;
 unsigned long start_time = 0;
 unsigned long closing_time = 0;
+int run_once = 0;
 
 
 /*
  * Main loop.
  */
 void loop() {
-  if(millis() - start_time > 1000) {
+  if(millis() - start_time > 1500) {
     start_time = 0;
     ignore_sensor = 0;
   }
 
   if(received_cmd == CMD_UP) {
-    ignore_sensor = 1;
-    start_time = millis();
-    stop_motor();
-    move_shutter_upwards();
-    clear_cmd();
+    if(!is_at_top_position()) {
+      ignore_sensor = 1;
+      start_time = millis();
+      stop_motor();
+      move_shutter_upwards();
+      clear_cmd();
+    }
 
   } else if(received_cmd == CMD_DOWN) {
-    ignore_sensor = 1;
-    start_time = millis();
-    stop_motor();
-    move_shutter_downwards();
-    clear_cmd();
+    if(!is_at_bottom_position()) {
+      ignore_sensor = 1;
+      start_time = millis();
+      stop_motor();
+      move_shutter_downwards();
+      clear_cmd();
+    }
 
   } else if(received_cmd == CMD_STOP) {
     stop_motor();
@@ -228,12 +226,12 @@ void loop() {
 
   // ensure that the motor is stopped before we oversteer...
   if(is_at_top_position() && ignore_sensor == 0) {
+    delay(100);
     stop_motor();
   }
 
   // ensure that the motor is stopped before we oversteer...
   if(is_at_bottom_position() && ignore_sensor == 0) {
-   stop_motor();
-   closing_time = millis();
+    stop_motor();
   }
 }
