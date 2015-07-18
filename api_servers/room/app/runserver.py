@@ -17,7 +17,7 @@ from twisted.internet import task, reactor
 
 client = client()
 
-device = Device(urn='urn:xwot:Device', location=xwot_app.http_addr, descriptions=[xwot_app.yadp_description])
+device = Device(urn='urn:xwot:Resource', location=xwot_app.http_addr, descriptions=[xwot_app.yadp_description])
 
 service = service()
 service.register(device=device, passive=True)
@@ -144,4 +144,3 @@ client.browse()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=xwot_app.port)
-
