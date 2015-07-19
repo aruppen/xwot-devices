@@ -2,6 +2,9 @@
  * @date    16.07.2015
  * @author  Alexander Rüedlinger <a.rueedlinger@gmail.com>
  *
+ * !!!PLEASE USE FOR THE MOTOR A FULLY CHARGED 9 VOLT BATTERY, 
+ * OTHERWISE THE TIMINGS ARE INCORRECT!!!
+ *
  *
  * Sketch for the I2C shutter device.
  *
