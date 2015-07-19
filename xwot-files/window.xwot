@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xwot:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xwot="http://diuf.unifr.ch/softeng">
+<xwot:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xwot="http://diuf.unifr.ch/softeng" name="RootResource">
 	<PhysicalEntity composed="true" name="Window" xsi:type="xwot:Device">
 		<Component composed="true" name="handledevice" xsi:type="xwot:Device">
 			<Component name="Sensor" xsi:type="xwot:Sensor"/>
