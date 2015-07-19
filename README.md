@@ -1,6 +1,6 @@
 # xWoT Devices
 
-This repository hosts the following resources for the xWoT devices:
+This repository hosts the following resources for the xWoT devices of the [Software Engineering Research Group](https://diuf.unifr.ch/drupal/softeng/):
  * [RESTful API servers](https://github.com/lexruee/xwot-devices/tree/master/api_servers)
  * [firmwares](https://github.com/lexruee/xwot-devices/tree/master/firmware)
  * [schematic files](https://github.com/lexruee/xwot-devices/tree/master/schematic-files)
