@@ -3,6 +3,10 @@
  * @author  Alexander Rüedlinger <a.rueedlinger@gmail.com>
  *
  *
+ * !!!PLEASE USE FOR THE SOLENOID VALVE A CHARGED VOLT BATTERY 
+ * IN THE RANGE OF 12-24 VOLT!!!
+ *
+ *
  * Firmware for a I2C plant device.
  * 
  * Commands:
