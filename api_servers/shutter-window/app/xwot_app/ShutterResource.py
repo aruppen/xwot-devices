@@ -9,7 +9,7 @@
 #
 
 from xwot_app import app
-from xwot.device.window import Shutter
+from xwot.device.shutter import Shutter
 from xwot.util.klein import make_response
 from xwot.util import deserialize
 
