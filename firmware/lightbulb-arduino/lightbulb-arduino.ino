@@ -3,7 +3,11 @@
  * @author  Alexander Rüedlinger <a.rueedlinger@gmail.com>
  *
  *
- * Skeleton for a I2C plant device.
+ * !!!PLEASE USE FOR THE RF433 MHZ TRANSMITTER 
+ * A FULLY CHARGED 9 VOLT BATTERY!!!
+ *
+ *
+ * Skeleton for a I2C light bulb device.
  * 
  * Commands:
  * - 0x01 : Turns the lightbulb on.
@@ -68,11 +72,13 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
   pinMode(LED_PIN_DEBUG, OUTPUT);
   
-  // trinket pro (3V3) uses a 12 Mhz clock
-  // arduino uno use a 16 Mhz clock
-  rc_switch.setPulseLength(466); // works best with this pulse length. Don't ask me why. 16/12 * 300 = 466 ???
   rc_switch.enableTransmit(RC_SWITCH_PIN);
   
+  // trinket pro (3V3) uses a 12 Mhz clock
+  // arduino uno use a 16 Mhz clock 
+  rc_switch.setPulseLength(466); // works best with this pulse length. 
+  // Don't ask me why. 16/12 * 300 = 466 ???
+   
   if(!tsl.begin()) { // i2c sensor
     Serial.println("Could not find a valid TSL2561 sensor, check wiring!");
   }
