@@ -1,0 +1,49 @@
+{
+    "@context": [
+        "http://xwot.lexruee.ch/contexts/xwot"
+    ],
+    "@id": "/",
+    "@type": "xwot:Description",
+    "knows": [
+        {
+            "@id": "/window",
+            "@type": "xwot:Device",
+            "additionalType": {
+                "@id": "http://xwot.lexruee.ch/vocab/core#Device"
+            },
+            "knows": [
+                {
+                    "@id": "/window/handle",
+                    "@type": "xwot:Context",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Context"
+                    },
+                    "knows": [],
+                    "name": "HandleResource",
+                    "sameAs": "http://www.productontology.org/id/Context",
+                    "uri": {
+                        "@id": "/window/handle"
+                    }
+                },
+                {
+                    "@id": "/window/shutter",
+                    "@type": "xwot:Context",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Context"
+                    },
+                    "knows": [],
+                    "name": "ShutterResource",
+                    "sameAs": "http://www.productontology.org/id/Context",
+                    "uri": {
+                        "@id": "/window/shutter"
+                    }
+                }
+            ],
+            "name": "WindowResource",
+            "sameAs": "http://www.productontology.org/id/Computer_apliance",
+            "uri": {
+                "@id": "/window"
+            }
+        }
+    ]
+}
