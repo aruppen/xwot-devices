@@ -2,8 +2,14 @@
  * @date    16.07.2015
  * @author  Alexander Rüedlinger <a.rueedlinger@gmail.com>
  *
- * !!!PLEASE USE FOR THE MOTOR A FULLY CHARGED 9 VOLT BATTERY, 
+ * !!!PLEASE USE FOR THE MOTOR A 5 VOLT POWER SUPPLY, 
  * OTHERWISE THE TIMINGS ARE INCORRECT!!!
+ *
+ * FOR EXAMPLE USE THE 5 VOLT PIN ON THE TRINKET PRO (5V/16MHZ) 
+ * TO POWER THE L293D IC (MOTOR POWER SUPPLY).
+ * 
+ * FOR POWERING THE TRINKET PRO USE A 9 VOLT BATTERY AND CONNECT IT
+ * TO THE BAT PIN. 
  *
  *
  * Sketch for the I2C shutter device.
@@ -38,8 +44,8 @@ int received_cmd = 0x00;
 #define MOTOR_STATE_UP 1
 #define MOTOR_STATE_DOWN 2
 
-#define MOTOR_SPEED_UP 40
-#define MOTOR_SPEED_DOWN 40
+#define MOTOR_SPEED_UP 150
+#define MOTOR_SPEED_DOWN 100
 
 // senses if the shutter is the top position
 #define MAGNETIC_SENSOR_TOP_PIN 0
@@ -97,7 +103,7 @@ void setup() {
  * Returns 1 if the shutter is located at the top position.
  */
 int is_at_top_position() {
-  return analogRead(MAGNETIC_SENSOR_TOP_PIN) > 1000;
+  return analogRead(MAGNETIC_SENSOR_TOP_PIN) > 700;
 }
 
 
