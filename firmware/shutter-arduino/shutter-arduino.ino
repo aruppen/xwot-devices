@@ -204,7 +204,7 @@ int run_once = 0;
  * Main loop.
  */
 void loop() {
-  if(millis() - start_time > 1500) {
+  if(millis() - start_time > 2000) {
     start_time = 0;
     ignore_sensor = 0;
   }
