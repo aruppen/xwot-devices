@@ -2,8 +2,14 @@
  * @date    19.05.2015
  * @author  Alexander Rüedlinger <a.rueedlinger@gmail.com>
  *
- * !!!PLEASE USE FOR THE MOTOR A FULLY CHARGED 9 VOLT BATTERY, 
+ * !!!PLEASE USE FOR THE MOTOR A 5 VOLT POWER SUPPLY, 
  * OTHERWISE THE TIMINGS ARE INCORRECT!!!
+ *
+ * FOR EXAMPLE USE THE 5 VOLT PIN ON THE TRINKET PRO (5V/16MHZ) 
+ * TO POWER THE L293D IC (MOTOR POWER SUPPLY).
+ * 
+ * FOR POWERING THE TRINKET PRO USE A 9 VOLT BATTERY AND CONNECT IT
+ * TO THE BAT PIN.
  *
  *
  * Sketch for the I2C motor door device.
@@ -44,12 +50,12 @@ Servo servo;
 #define MOTOR_IN1 3
 #define MOTOR_IN2 4
 
-#define MOTOR_SPEED_OPEN 220
-#define MOTOR_SPEED_CLOSE 220
+#define MOTOR_SPEED_OPEN 255
+#define MOTOR_SPEED_CLOSE 255
 
 // timings
-#define CLOSING_WAIT_BEFORE_STOPPING_MOTOR 40
-#define OPENING_WAIT_BEFORE_STOPPING_MOTOR 10
+#define CLOSING_WAIT_BEFORE_STOPPING_MOTOR 260
+#define OPENING_WAIT_BEFORE_STOPPING_MOTOR 80
 
 // for unlocked / locked state
 #define LED_PIN 13
@@ -136,7 +142,7 @@ void init_door() {
  * Returns 1 if the door is located at the close position.
  */
 int is_in_closed_position() {
-  return analogRead(MAGNETIC_SENSOR_CLOSE_PIN) < 700;
+  return analogRead(MAGNETIC_SENSOR_CLOSE_PIN) > 1000;
 }
 
 
@@ -144,7 +150,7 @@ int is_in_closed_position() {
  * Returns 1 if the door is located at the open position.
  */
 int is_in_open_position() {
-  return analogRead(MAGNETIC_SENSOR_OPEN_PIN) < 500;
+  return analogRead(MAGNETIC_SENSOR_OPEN_PIN) > 500;
 }
 
 
