@@ -74,11 +74,6 @@ void setup() {
   
   rc_switch.enableTransmit(RC_SWITCH_PIN);
   
-  // trinket pro (3V3) uses a 12 Mhz clock
-  // arduino uno use a 16 Mhz clock 
-  rc_switch.setPulseLength(466); // works best with this pulse length. 
-  // Don't ask me why. 16/12 * 300 = 466 ???
-   
   if(!tsl.begin()) { // i2c sensor
     Serial.println("Could not find a valid TSL2561 sensor, check wiring!");
   }
