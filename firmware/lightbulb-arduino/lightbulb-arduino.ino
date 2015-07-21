@@ -63,7 +63,7 @@ void send_int16(int value);
 void send_float(float value);
 
 void update_sensor_value();
-void upadate_led();
+void update_led();
 int is_light_on();
 
 
