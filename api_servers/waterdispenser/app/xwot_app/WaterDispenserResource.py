@@ -11,7 +11,7 @@ from xwot.util.klein import make_response
 from xwot.util import deserialize
 from xwot.device.waterdispenser import WaterDispenser
 
-waterdispener = WaterDispenser(name='xWot Water dispenser',
+waterdispener = WaterDispenser(name='Water dispenser',
                                street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
                                postal_code='1700', address_locality='Fribourg', room_address='A410')
 

@@ -24,7 +24,7 @@ class Display(XWOTDevice, BaseModel):
     def __init__(self):
         super(Display, self).__init__()
         self._dic = {
-            'name': 'xWoT Display',
+            'name': 'Display',
             'description': 'Room A410'
         }
         self.add_type('xwot-ext:Display')

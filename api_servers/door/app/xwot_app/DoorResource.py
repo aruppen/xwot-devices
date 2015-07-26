@@ -13,7 +13,7 @@ from xwot.util import deserialize
 from xwot.device.door import Door
 from xwot_app import app
 
-door = Door(name='xWoT Door', street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
+door = Door(name='Door', street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
             postal_code='1700', address_locality='Fribourg', room_address='A410')
 
 #

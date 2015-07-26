@@ -12,7 +12,7 @@ from xwot.device.lightbulb import Switch
 from xwot.util.klein import make_response
 from xwot.util import deserialize
 
-switch = Switch(name='Switch')
+switch = Switch(name='Light bulb Switch')
 
 #
 # GET '/lightbulb/switch'
