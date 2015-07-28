@@ -14,7 +14,7 @@ yadp.debug()
 from yadp import service
 from yadp.device import Device
 
-device = Device(urn='urn:xwot:Device', location=xwot_app.http_addr, descriptions=[xwot_app.yadp_description])
+device = Device(urn='urn:xwot:LightBulb', location=xwot_app.http_addr, descriptions=[xwot_app.yadp_description])
 
 service = service()
 service.register(device=device, passive=True)
