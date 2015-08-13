@@ -46,7 +46,7 @@ Servo lock_servo;
 #define OPEN 0
 
 
-#define WINDOW 2
+#define WINDOW 1
 
 // window angles
 
@@ -58,7 +58,7 @@ Servo lock_servo;
 #define RIGHT_WINDOW_CLOSE_ANGLE 155
 
 #define LOCK_ANGLE 90
-#define UNLOCK_ANGLE 135
+#define UNLOCK_ANGLE 125
 #endif
 
 #if WINDOW == 2
