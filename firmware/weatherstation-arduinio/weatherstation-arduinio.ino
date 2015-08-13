@@ -20,9 +20,9 @@
 // sensor dependencies
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
-#include <Adafruit_BMP085.h>
 #include <Adafruit_TSL2561_U.h>
-#include <Adafruit_AM2315.h>
+#include <Adafruit_BME280.h>
+#include <Adafruit_MCP9808.h>
 #include <Adafruit_TCS34725.h>
 
 // tft dependencies
@@ -47,9 +47,9 @@ Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_700MS, TCS347
 // weather station
 
 // sensors
-Adafruit_BMP085 bmp;
 Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 12345);
-Adafruit_AM2315 am2315;
+Adafruit_BME280 bme;
+Adafruit_MCP9808 mcp;
 
 
 #define VERSION "Weather Station v1.0.0"
@@ -143,8 +143,8 @@ void init_screen() {
  * Setups the sensors.
  */
 void init_sensors() {
-  if (!bmp.begin()) { // i2c sensor
-    Serial.println("Could not find a valid BMP180 sensor, check wiring!");
+  if(!mcp.begin()) { // i2c sensor
+    Serial.println("Could not find a valid MCP9808 sensor, check wiring!");
   }
   
   if(!tsl.begin()) { // i2c sensor
@@ -156,8 +156,8 @@ void init_sensors() {
     tcs.setInterrupt(true);  // turn off LED
   }
   
-  if (!am2315.begin()) {
-     Serial.println("Sensor not found, check wiring & pullups!");
+  if (!bme.begin()) { // i2c sensor
+     Serial.println("Could not find a valid BME280 sensor, check wiring!");
   }
 }
 
@@ -391,16 +391,16 @@ void print_altitude() {
 }
 
 void update_sensor_values() {
-  temperature_value1 = bmp.readTemperature();
-  pressure_value = bmp.readPressure();
-  altitude_value = round(bmp.readAltitude());
+  temperature_value1 = bme.readTemperature();
+  pressure_value = bme.readPressure();
+  altitude_value = round(bme.readAltitude());
+  humidity_value = bme.readHumidity();
   
   sensors_event_t event;
   tsl.getEvent(&event);
   illuminance_value = event.light;
   
-  humidity_value = am2315.readHumidity();
-  temperature_value2 = am2315.readTemperature();
+  temperature_value2 = mcp.readTempC();
   
   tcs.getRawData(&color_r, &color_g, &color_b, &color_c);
   color_temp = tcs.calculateColorTemperature(color_r, color_g, color_b);
