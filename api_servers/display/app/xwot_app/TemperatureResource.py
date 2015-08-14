@@ -12,11 +12,11 @@ import xwot_app
 from xwot_app import app
 import treq
 import json
-from xwot.model import Service as XWOTService
+from xwot.model import Sensor as XWOTSensor
 from xwot.model import BaseModel
 
 
-class TemperatureSensor(XWOTService, BaseModel):
+class TemperatureSensor(XWOTSensor, BaseModel):
 
     __mutable_props__ = ['name']
     __expose__ = __mutable_props__ + ['display_link', 'unit', 'measures', 'measurement', 'symbol']
