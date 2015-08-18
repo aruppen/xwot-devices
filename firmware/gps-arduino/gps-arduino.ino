@@ -33,8 +33,8 @@
 
 
 // Setup gps device
-#define GPS_TX_SERIAL 3
-#define GPS_RX_SERIAL 2
+#define GPS_TX_SERIAL 4
+#define GPS_RX_SERIAL 3
 
 SoftwareSerial gps_serial(GPS_TX_SERIAL, GPS_RX_SERIAL);
 Adafruit_GPS GPS(&gps_serial);
