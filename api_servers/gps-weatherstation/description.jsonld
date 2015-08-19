@@ -1,0 +1,141 @@
+{
+    "@context": [
+        "http://xwot.lexruee.ch/contexts/xwot"
+    ],
+    "@id": "/",
+    "@type": "xwot:Description",
+    "knows": [
+        {
+            "@id": "/weatherstation",
+            "@type": "xwot:Device",
+            "additionalType": {
+                "@id": "http://xwot.lexruee.ch/vocab/core#Device"
+            },
+            "knows": [
+                {
+                    "@id": "/weatherstation/sensors",
+                    "@type": "xwot:Resource",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Resource"
+                    },
+                    "knows": [
+                        {
+                            "@id": "/weatherstation/sensors/pressure",
+                            "@type": "xwot:Sensor",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                            },
+                            "knows": [],
+                            "label": "PressureResource",
+                            "sameAs": "http://www.productontology.org/id/Sensor",
+                            "uri": {
+                                "@id": "/weatherstation/sensors/pressure"
+                            }
+                        },
+                        {
+                            "@id": "/weatherstation/sensors/temperature1",
+                            "@type": "xwot:Sensor",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                            },
+                            "knows": [],
+                            "label": "Temperature1Resource",
+                            "sameAs": "http://www.productontology.org/id/Sensor",
+                            "uri": {
+                                "@id": "/weatherstation/sensors/temperature1"
+                            }
+                        },
+                        {
+                            "@id": "/weatherstation/sensors/altitude",
+                            "@type": "xwot:Sensor",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                            },
+                            "knows": [],
+                            "label": "AltitudeResource",
+                            "sameAs": "http://www.productontology.org/id/Sensor",
+                            "uri": {
+                                "@id": "/weatherstation/sensors/altitude"
+                            }
+                        },
+                        {
+                            "@id": "/weatherstation/sensors/humidity",
+                            "@type": "xwot:Sensor",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                            },
+                            "knows": [],
+                            "label": "HumidityResource",
+                            "sameAs": "http://www.productontology.org/id/Sensor",
+                            "uri": {
+                                "@id": "/weatherstation/sensors/humidity"
+                            }
+                        },
+                        {
+                            "@id": "/weatherstation/sensors/illuminance",
+                            "@type": "xwot:Sensor",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                            },
+                            "knows": [],
+                            "label": "IlluminanceResource",
+                            "sameAs": "http://www.productontology.org/id/Sensor",
+                            "uri": {
+                                "@id": "/weatherstation/sensors/illuminance"
+                            }
+                        },
+                        {
+                            "@id": "/weatherstation/sensors/color",
+                            "@type": "xwot:Sensor",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                            },
+                            "knows": [],
+                            "label": "ColorResource",
+                            "sameAs": "http://www.productontology.org/id/Sensor",
+                            "uri": {
+                                "@id": "/weatherstation/sensors/color"
+                            }
+                        },
+                        {
+                            "@id": "/weatherstation/sensors/temperature2",
+                            "@type": "xwot:Sensor",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                            },
+                            "knows": [],
+                            "label": "Temperature2Resource",
+                            "sameAs": "http://www.productontology.org/id/Sensor",
+                            "uri": {
+                                "@id": "/weatherstation/sensors/temperature2"
+                            }
+                        }
+                    ],
+                    "label": "SensorsResource",
+                    "sameAs": "http://www.productontology.org/id/Web_resource",
+                    "uri": {
+                        "@id": "/weatherstation/sensors"
+                    }
+                },
+                {
+                    "@id": "/weatherstation/gps",
+                    "@type": "xwot:Device",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Device"
+                    },
+                    "knows": [],
+                    "label": "GPSResource",
+                    "sameAs": "http://www.productontology.org/id/Computer_apliance",
+                    "uri": {
+                        "@id": "/weatherstation/gps"
+                    }
+                }
+            ],
+            "label": "WeatherstationResource",
+            "sameAs": "http://www.productontology.org/id/Computer_apliance",
+            "uri": {
+                "@id": "/weatherstation"
+            }
+        }
+    ]
+}
