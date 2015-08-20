@@ -17,7 +17,7 @@ from xwot.util import deserialize
 from xwot.util.klein import make_response
 
 
-def update():
+def update(gps, weatherstation):
     gps_cord = [gps.latitude, gps.longitude]
     if gps.found:
         try:
@@ -28,10 +28,10 @@ def update():
         except:
             pass
 
-update_fun = LoopingCall(update)
+update_fun = LoopingCall(update, gps, weatherstation)
 update_fun.start(60*60)  # every hour
 
-d = deferLater(reactor, 10, update_fun)  # inital call
+d = deferLater(reactor, 10, update_fun, gps, weatherstation)  # initial call
 
 
 #
