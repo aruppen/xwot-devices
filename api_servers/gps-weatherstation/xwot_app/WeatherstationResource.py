@@ -8,11 +8,27 @@
 # Path:       /weatherstation
 #
 
+import geocoder
+from twisted.internet.task import LoopingCall
 from xwot_app import app
-from . import weatherstation
+from . import weatherstation, gps
 from xwot.util import deserialize
 from xwot.util.klein import make_response
 
+
+def update():
+    gps_cord = [gps.latitude, gps.longitude]
+    if gps.found:
+        try:
+            g = geocoder.google(gps_cord, method='reverse')
+            weatherstation.postalCode = g.postal
+            weatherstation.streetAddress = g.street_long + ' ' + g.housenumber
+            weatherstation.addressLocality = g.state_long + ', ' + g.country_long
+        except:
+            pass
+
+update_fun = LoopingCall(update)
+update_fun.start(60*60)  # every hour
 
 #
 # GET '/weatherstation'
