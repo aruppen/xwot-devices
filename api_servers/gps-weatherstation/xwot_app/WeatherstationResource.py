@@ -9,7 +9,8 @@
 #
 
 import geocoder
-from twisted.internet.task import LoopingCall
+from twisted.internet import reactor
+from twisted.internet.task import LoopingCall, deferLater
 from xwot_app import app
 from . import weatherstation, gps
 from xwot.util import deserialize
@@ -29,6 +30,9 @@ def update():
 
 update_fun = LoopingCall(update)
 update_fun.start(60*60)  # every hour
+
+d = deferLater(reactor, 10, update_fun)  # inital call
+
 
 #
 # GET '/weatherstation'
