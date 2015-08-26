@@ -1,4 +1,6 @@
-# xWoT Devices
+# xwot-devices
+
+Collection of firmwares and API servers for xwot devices.
 
 This repository hosts the following resources for the xWoT devices of the [Software Engineering Research Group](https://diuf.unifr.ch/drupal/softeng/):
  * [RESTful API servers](https://github.com/lexruee/xwot-devices/tree/master/api_servers)
@@ -169,3 +171,15 @@ sudo kill `cat twistd.pid`
 Because the xwot applications are RESTful they are browsable through so called REST clients:
 
 * [Advanced REST client / chrome](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo)
+
+
+
+## License & Copyright
+
+```
+xwot-devices  - Collection of firmwares and API servers for xwot devices
+Copyright (C) 2015  Alexander Rüedlinger
+
+xwot-devices is licensed under the GPL 3.0.
+
+```
