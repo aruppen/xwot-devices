@@ -9,6 +9,7 @@
 
 from xwot_app import app
 from xwot.util.klein import make_response
+from xwot.util.klein import cors
 from xwot.util import deserialize
 from xwot.device.lightbulb import LightBulb
 
@@ -20,6 +21,7 @@ lightbulb = LightBulb(name='Light bulb', street_address="Bd de Perolles 90 - DEP
 #
 @app.route('/lightbulb', methods=['GET'])
 def handle_lightbulb_GET(request):
+    cors(request, methods=['GET', 'PUT'])
     return make_response(lightbulb, request)
 
 #
@@ -31,6 +33,6 @@ def handle_lightbulb_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     status = lightbulb.update(dic, content_type)
-
+    cors(request, methods=['GET', 'PUT'])
     return make_response(lightbulb, request=request, status=status)
 

@@ -11,6 +11,7 @@ from xwot_app import app
 from xwot.device.lightbulb import Switch
 from xwot.util.klein import make_response
 from xwot.util import deserialize
+from xwot.util.klein import cors
 
 switch = Switch(name='Light bulb Switch')
 
@@ -19,6 +20,7 @@ switch = Switch(name='Light bulb Switch')
 #
 @app.route('/lightbulb/switch', methods=['GET'])
 def handle_lightbulb_switch_GET(request):
+    cors(request, methods=['GET', 'PUT'])
     return make_response(switch, request)
 
 #
@@ -30,6 +32,6 @@ def handle_lightbulb_switch_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     switch.update(dic, content_type)
-
+    cors(request, methods=['GET', 'PUT'])
     return make_response(switch, request)
 

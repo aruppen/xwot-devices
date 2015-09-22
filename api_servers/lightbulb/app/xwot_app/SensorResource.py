@@ -10,6 +10,7 @@
 from xwot_app import app
 from xwot.device.lightbulb import Sensor
 from xwot.util.klein import make_response
+from xwot.util.klein import cors
 
 sensor = Sensor()
 
@@ -18,5 +19,6 @@ sensor = Sensor()
 #
 @app.route('/lightbulb/sensor', methods=['GET'])
 def handle_lightbulb_sensor_GET(request):
+    cors(request, methods=['GET'])
     return make_response(sensor, request)
 
