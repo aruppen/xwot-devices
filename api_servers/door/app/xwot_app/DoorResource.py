@@ -12,6 +12,7 @@ from xwot.util.klein import make_response
 from xwot.util import deserialize
 from xwot.device.door import Door
 from xwot_app import app
+from xwot.util.klein import cors
 
 door = Door(name='Door', street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
             postal_code='1700', address_locality='Fribourg', room_address='A410')
@@ -21,6 +22,7 @@ door = Door(name='Door', street_address="Bd de Perolles 90 - DEPARTEMENT D'INFOR
 #
 @app.route('/door', methods=['GET'])
 def handle_door_GET(request):
+    cors(request, methods=['GET', 'PUT'])
     return make_response(door, request)
 
 #
@@ -32,7 +34,7 @@ def handle_door_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     door.update(dic, content_type)
-
+    cors(request, methods=['GET', 'PUT'])
     return make_response(door, request)
 
 
