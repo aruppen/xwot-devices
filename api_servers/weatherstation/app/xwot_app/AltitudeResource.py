@@ -10,6 +10,7 @@
 
 from xwot_app import app
 from xwot.util.klein import make_response
+from xwot.util.klein import cors
 from . import sensors_dic
 
 altitude_sensor = sensors_dic['altitude']
@@ -20,5 +21,6 @@ altitude_sensor = sensors_dic['altitude']
 #
 @app.route('/weatherstation/sensors/altitude', methods=['GET'])
 def handle_weatherstation_sensors_altitude_GET(request):
+    cors(request, methods=['GET'])
     return make_response(altitude_sensor, request)
 

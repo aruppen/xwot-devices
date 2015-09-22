@@ -11,6 +11,7 @@
 
 from xwot_app import app
 from xwot.util.klein import make_response
+from xwot.util.klein import cors
 from . import sensors_dic
 
 pressure_sensor = sensors_dic['pressure']
@@ -20,5 +21,6 @@ pressure_sensor = sensors_dic['pressure']
 #
 @app.route('/weatherstation/sensors/pressure', methods=['GET'])
 def handle_weatherstation_sensors_pressure_GET(request):
+    cors(request, methods=['GET'])
     return make_response(pressure_sensor, request)
 

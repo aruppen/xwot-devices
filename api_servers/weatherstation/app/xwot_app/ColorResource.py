@@ -10,6 +10,7 @@
 
 from xwot_app import app
 from xwot.util.klein import make_response
+from xwot.util.klein import cors
 from . import sensors_dic
 
 color_sensor = sensors_dic['color']
@@ -19,5 +20,6 @@ color_sensor = sensors_dic['color']
 #
 @app.route('/weatherstation/sensors/color', methods=['GET'])
 def handle_weatherstation_sensors_color_GET(request):
+    cors(request, methods=['GET'])
     return make_response(color_sensor, request)
 

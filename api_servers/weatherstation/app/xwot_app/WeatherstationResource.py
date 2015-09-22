@@ -12,13 +12,14 @@ from xwot_app import app
 from . import weatherstation
 from xwot.util import deserialize
 from xwot.util.klein import make_response
-
+from xwot.util.klein import cors
 
 #
 # GET '/weatherstation'
 #
 @app.route('/weatherstation', methods=['GET'])
 def handle_weatherstation_GET(request):
+    cors(request, methods=['GET', 'PUT'])
     return make_response(weatherstation, request)
 
 #
@@ -30,7 +31,7 @@ def handle_weatherstation_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     status = weatherstation.update(dic, content_type)
-
+    cors(request, methods=['GET', 'PUT'])
     return make_response(weatherstation, request=request, status=status)
 
 
