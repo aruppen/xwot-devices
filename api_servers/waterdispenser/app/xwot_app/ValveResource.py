@@ -10,6 +10,7 @@ from xwot_app import app
 from xwot.util.klein import make_response
 from xwot.util import deserialize
 from xwot.device.waterdispenser import Valve
+from xwot.util.klein import cors
 
 valve = Valve(name='Valve')
 
@@ -18,6 +19,7 @@ valve = Valve(name='Valve')
 #
 @app.route('/waterdispenser/valve', methods=['GET'])
 def handle_waterdispenser_valve_GET(request):
+    cors(request, methods=['GET', 'PUT'])
     return make_response(valve, request)
 
 
@@ -30,6 +32,6 @@ def handle_waterdispenser_valve_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     status = valve.update(dic, content_type)
-
+    cors(request, methods=['GET', 'PUT'])
     return make_response(valve, request=request, status=status)
 

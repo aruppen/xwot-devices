@@ -11,6 +11,7 @@ from xwot_app import app
 from xwot.util.klein import make_response
 from xwot.util import deserialize
 from xwot.device.waterdispenser import Sensor
+from xwot.util.klein import cors
 
 sensor = Sensor()
 
@@ -19,5 +20,6 @@ sensor = Sensor()
 #
 @app.route('/waterdispenser/sensor', methods=['GET'])
 def handle_waterdispenser_sensor_GET(request):
+    cors(request, methods=['GET'])
     return make_response(sensor, request)
 

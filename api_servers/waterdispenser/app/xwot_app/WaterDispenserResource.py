@@ -10,6 +10,7 @@ from xwot_app import app
 from xwot.util.klein import make_response
 from xwot.util import deserialize
 from xwot.device.waterdispenser import WaterDispenser
+from xwot.util.klein import cors
 
 waterdispener = WaterDispenser(name='Water dispenser',
                                street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
@@ -20,6 +21,7 @@ waterdispener = WaterDispenser(name='Water dispenser',
 #
 @app.route('/waterdispenser', methods=['GET'])
 def handle_waterdispenser_GET(request):
+    cors(request, methods=['GET', 'PUT'])
     return make_response(waterdispener, request)
 
 #
@@ -31,6 +33,6 @@ def handle_waterdispenser_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     status = waterdispener.update(dic, content_type)
-
+    cors(request, methods=['GET', 'PUT'])
     return make_response(waterdispener, request=request, status=status)
 
