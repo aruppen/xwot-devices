@@ -14,6 +14,7 @@ import json
 from xwot.model import Device as XWOTDevice
 from xwot.model import BaseModel
 from xwot.util import deserialize
+from xwot.util.klein import cors
 from xwot.util.klein import make_response
 
 
@@ -60,6 +61,7 @@ display = Display()
 #
 @app.route('/display', methods=['GET'])
 def handle_display_GET(request):
+    cors(request, methods=['GET', 'PUT'])
     return make_response(display, request)
 
 #
@@ -71,5 +73,6 @@ def handle_display_PUT(request):
     data = request.content.read()
     dic = deserialize(data, content_type)
     display.update(dic, content_type)
+    cors(request, methods=['GET', 'PUT'])
     return make_response(display, request)
 

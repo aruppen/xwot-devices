@@ -14,6 +14,7 @@ import json
 import treq
 from xwot.model import Sensor as XWOTSensor
 from xwot.model import BaseModel
+from xwot.util.klein import cors
 
 
 class HumditySensor(XWOTSensor, BaseModel):
@@ -92,6 +93,7 @@ humidity_sensor = HumditySensor()
 #
 @app.route('/display/humidity', methods=['GET'])
 def handle_display_humidity_GET(request):
+    cors(request, methods=['GET'])
     if xwot_app.resources['humidity_sensor']:
         accept = request.getHeader('Accept')
         d = treq.get(xwot_app.resources['humidity_sensor'], headers={'Accept': 'application/json'})

@@ -14,6 +14,7 @@ import treq
 import json
 from xwot.model import Sensor as XWOTSensor
 from xwot.model import BaseModel
+from xwot.util.klein import cors
 
 
 class TemperatureSensor(XWOTSensor, BaseModel):
@@ -91,6 +92,7 @@ temperature_sensor = TemperatureSensor()
 #
 @app.route('/display/temperature', methods=['GET'])
 def handle_display_temperature_GET(request):
+    cors(request, methods=['GET'])
     if xwot_app.resources['temperature_sensor']:
         accept = request.getHeader('Accept')
         d = treq.get(xwot_app.resources['temperature_sensor'], headers={'Accept': 'application/json'})
