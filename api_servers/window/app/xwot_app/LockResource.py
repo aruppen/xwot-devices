@@ -12,7 +12,7 @@ from xwot_app import app
 from xwot.device.window import Lock
 from xwot.util.klein import make_response
 from xwot.util import deserialize
-
+from xwot.util.klein import cors
 
 lock = Lock(name="Window lock")
 
@@ -21,6 +21,7 @@ lock = Lock(name="Window lock")
 #
 @app.route('/window/lock', methods=['GET'])
 def handle_window_lock_GET(request):
+    cors(request, methods=['GET', 'PUT'])
     return make_response(lock, request)
 
 #
@@ -32,6 +33,6 @@ def handle_window_lock_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     lock.update(dic, content_type)
-
+    cors(request, methods=['GET', 'PUT'])
     return make_response(lock, request)
 

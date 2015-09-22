@@ -12,6 +12,7 @@ from xwot_app import app
 from xwot.device.window import Window
 from xwot.util.klein import make_response
 from xwot.util import deserialize
+from xwot.util.klein import cors
 
 
 window = Window(name='Window', street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
@@ -22,6 +23,7 @@ window = Window(name='Window', street_address="Bd de Perolles 90 - DEPARTEMENT D
 #
 @app.route('/window', methods=['GET'])
 def handle_window_GET(request):
+    cors(request, methods=['GET', 'PUT'])
     return make_response(window, request)
 
 #
@@ -33,6 +35,6 @@ def handle_window_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     window.update(dic, content_type)
-
+    cors(request, methods=['GET', 'PUT'])
     return make_response(window, request)
 
