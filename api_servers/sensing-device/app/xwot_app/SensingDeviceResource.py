@@ -13,6 +13,7 @@ from xwot_app import app
 from xwot.util.klein import make_response
 from xwot.util import deserialize
 from model import SensingDevice
+from xwot.util.klein import cors
 
 sensing_device = SensingDevice(name='DHT22 sensing device', street_address="Bd de Perolles 90 - DEPARTEMENT D'INFORMATIQUE",
                                postal_code='1700', address_locality='Fribourg', room_address='A410')
@@ -21,6 +22,7 @@ sensing_device = SensingDevice(name='DHT22 sensing device', street_address="Bd d
 #
 @app.route('/sensing-device', methods=['GET'])
 def handle_sensor_GET(request):
+    cors(request, methods=['GET', 'PUT'])
     return make_response(sensing_device, request)
 
 #
@@ -32,6 +34,6 @@ def handle_sensor_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     sensing_device.update(dic, content_type)
-
+    cors(request, methods=['GET', 'PUT'])
     return make_response(sensing_device, request)
 

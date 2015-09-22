@@ -12,6 +12,7 @@
 from xwot_app import app
 from xwot.util.klein import make_response
 from model import TemperatureSensor
+from xwot.util.klein import cors
 
 temperature_sensor = TemperatureSensor()
 
@@ -20,5 +21,6 @@ temperature_sensor = TemperatureSensor()
 #
 @app.route('/sensing-device/temperature', methods=['GET'])
 def handle_sensor_temperature_GET(request):
+    cors(request, methods=['GET'])
     return make_response(temperature_sensor, request)
 
