@@ -12,7 +12,7 @@ from xwot_app import app
 from xwot.device.shutter import Shutter
 from xwot.util.klein import make_response
 from xwot.util import deserialize
-
+from xwot.util.klein import cors
 
 shutter = Shutter('Window shutter')
 
@@ -22,6 +22,7 @@ shutter = Shutter('Window shutter')
 #
 @app.route('/window/shutter', methods=['GET'])
 def handle_window_shutter_GET(request):
+    cors(request, methods=['GET', 'PUT'])
     return make_response(shutter, request)
 
 
@@ -34,4 +35,6 @@ def handle_window_shutter_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type=content_type)
     shutter.update(dic, content_type)
+    cors(request, methods=['GET', 'PUT'])
+    return make_response(shutter, request)
 
