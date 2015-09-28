@@ -1,0 +1,34 @@
+#!/bin/bash
+# /etc/init.d/xwot-server
+
+### BEGIN INIT INFO
+# Provides:          xwot-server
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start a xWoT API server
+# Description:       This service is used to manage a xwot API server
+### END INIT INFO
+
+APP=weatherstation
+APP_PATH=/home/pi/xwot-devices/api_servers/$APP/app
+
+case "$1" in
+    start)
+        echo "Starting xwot-server"
+	cd $APP_PATH
+	twistd -y runserver.tac &
+        ;;
+    stop)
+        echo "Stopping xwot-server"
+	cd $APP_PATH
+        kill `cat twistd.pid`
+        ;;
+    *)
+        echo "Usage: /etc/init.d/servod start|stop"
+        exit 1
+        ;;
+esac
+
+exit 0
