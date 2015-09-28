@@ -8,12 +8,14 @@
 # Path:       /
 #
 
-from flask import Response
 import xwot_app
 from xwot_app import app
+from xwot.util.klein import make_response
+from xwot.util.klein import cors
 
 
 @app.route('/')
-def home():
-    return Response(response=xwot_app.jsonld_description_str, status=200, content_type="application/ld+json")
-
+def home(request):
+    request.setHeader('Content-Type', 'application/ld+json')
+    cors(request, methods=['GET'])
+    return xwot_app.jsonld_description_str

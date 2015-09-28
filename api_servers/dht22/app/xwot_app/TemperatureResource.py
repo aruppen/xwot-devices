@@ -8,10 +8,10 @@
 # Path:       /dht22/temperature
 #
 
-from flask import request
 from xwot_app import app
 from xwot.model import Sensor, Model
-from xwot.util.flask import make_response
+from xwot.util.klein import make_response
+from xwot.util.klein import cors
 import json
 from Arduino_Monitor import SerialData as DataGen
 
@@ -61,6 +61,7 @@ dht_temp = DHT_Temperature()
 # GET '/dht22/temperature'
 #
 @app.route('/dht22/temperature', methods=['GET'])
-def handle_dht22_temperature_GET():
-    return make_response(dht_temp)
+def handle_dht22_temperature_GET(request):
+    cors(request, methods=['GET'])
+    return make_response(dht_temp, request)
 

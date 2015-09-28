@@ -8,21 +8,23 @@
 # Path:       /dht22/temperature/pub
 #
 
-from flask import request
 from xwot_app import app
-
+from xwot.util.klein import make_response
+from xwot.util.klein import cors
 
 #
 # GET '/dht22/temperature/pub'
 #
 @app.route('/dht22/temperature/pub', methods=['GET'])
-def handle_dht22_temperature_pub_GET():
+def handle_dht22_temperature_pub_GET(request):
+    cors(request, methods=['GET', 'POST'])
     return "Name: TemperatureResourcePublisherResource , Hello at: /dht22/temperature/pub"
 
 #
 # POST '/dht22/temperature/pub'
 #
 @app.route('/dht22/temperature/pub', methods=['POST'])
-def handle_dht22_temperature_pub_POST():
+def handle_dht22_temperature_pub_POST(request):
+    cors(request, methods=['GET', 'POST'])
     return "Name: TemperatureResourcePublisherResource , Hello at: /dht22/temperature/pub"
 

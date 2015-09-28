@@ -8,9 +8,9 @@
 # Path:       /dht22/humidity
 #
 
-from flask import request
 from xwot_app import app
-from xwot.util.flask import make_response
+from xwot.util.klein import make_response
+from xwot.util.klein import cors
 from xwot.model import Sensor, Model
 import json
 from Arduino_Monitor import SerialData as DataGen
@@ -62,6 +62,7 @@ dht_humidity = DHT_Humidity()
 # GET '/dht22/humidity'
 #
 @app.route('/dht22/humidity', methods=['GET'])
-def handle_dht22_humidity_GET():
-    return make_response(dht_humidity)
+def handle_dht22_humidity_GET(request):
+    cors(request, methods=['GET'])
+    return make_response(dht_humidity, request)
 

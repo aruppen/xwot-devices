@@ -24,11 +24,9 @@ jsonld_description_str = create_description(xwot_file=xwot_file, base=http_addr)
 yadp_description = Description(content_type="application/ld+json", content=jsonld_description_str)
 
 
-from flask import Flask
-from flask.ext.twisted import Twisted
+from klein import Klein
 
-app = Flask(__name__)
-twisted = Twisted(app)
+app = Klein()
 
 import Entity
 import DHT22Resource

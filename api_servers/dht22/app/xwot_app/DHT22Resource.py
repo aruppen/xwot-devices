@@ -11,16 +11,18 @@
 from flask import request
 from xwot_app import app
 from xwot.model import Device, BaseModel
-from xwot.util.flask import make_response
+from xwot.util.klein import make_response
+from xwot.util.klein import cors
 from xwot.util import deserialize
 
-class DHT22(Device,BaseModel):
 
+class DHT22(Device, BaseModel):
 
     __mutable_props__ = ["roomAddress"]
     __expose__ = __mutable_props__ + ["name", "description", "temperature", "humidity"]
+
     def __init__(self):
-        super(DHT22,self).__init__()
+        super(DHT22, self).__init__()
         self.add_link("temperature")
         self.add_link("humidity")
         self._dic = {"roomAddress": "Bureau C412"}
@@ -55,18 +57,20 @@ dht = DHT22()
 # GET '/dht22'
 #
 @app.route('/dht22', methods=['GET'])
-def handle_dht22_GET():
-    return make_response(dht)
+def handle_dht22_GET(request):
+    cors(request, methods=['GET'])
+    return make_response(dht, request)
 
 #
 # PUT '/dht22'
 #
 @app.route('/dht22', methods=['PUT'])
-def handle_dht22_PUT():
+def handle_dht22_PUT(request):
     data = request.data
     content_type = request.headers.get("Content-Type")
     dic = deserialize(data, content_type)
     dht.update(dic, content_type)
-    return make_response(dht)
+    cors(request, methods=['GET'])
+    return make_response(dht, request)
 
 
