@@ -92,7 +92,6 @@ temperature_sensor = TemperatureSensor()
 #
 @app.route('/display/temperature', methods=['GET'])
 def handle_display_temperature_GET(request):
-    cors(request, methods=['GET'])
     if xwot_app.resources['temperature_sensor']:
         accept = request.getHeader('Accept')
         d = treq.get(xwot_app.resources['temperature_sensor'], headers={'Accept': 'application/json'})
@@ -104,5 +103,6 @@ def handle_display_temperature_GET(request):
         return d
     else:
         request.setResponseCode(404)
+    cors(request, methods=['GET'])
     return ''
 
