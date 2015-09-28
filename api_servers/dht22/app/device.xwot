@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xwot:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xwot="http://diuf.unifr.ch/softeng">
+	<PhysicalEntity name="DHT22" xsi:type="xwot:Device">
+		<Component name="Temperature" xsi:type="xwot:Sensor"/>
+		<Component name="Humidity" xsi:type="xwot:Sensor"/>
+	</PhysicalEntity>
+	<VirtualEntity name="DHT22Resource" uri="dht22" xsi:type="xwot:Resource">
+		<Resource name="TemperatureResource" uri="temperature" xsi:type="xwot:SensorResource">
+			<Resource name="TemperatureResourcePublisherResource" uri="pub" xsi:type="xwot:PublisherResource"/>
+		</Resource>
+		<Resource name="HumidityResource" uri="humidity" xsi:type="xwot:SensorResource">
+			<Resource name="HumidityResourcePublisherResource" uri="pub" xsi:type="xwot:PublisherResource"/>
+		</Resource>
+	</VirtualEntity>
+</xwot:Entity>

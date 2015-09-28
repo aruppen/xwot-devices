@@ -1,0 +1,4 @@
+flask
+Flask-Twisted
+twisted
+-e git+https://github.com/adafruit/Adafruit_Python_DHT#egg=Adafruit-DHT

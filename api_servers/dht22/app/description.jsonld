@@ -1,0 +1,77 @@
+{
+    "@context": [
+        "http://xwot.lexruee.ch/contexts/xwot"
+    ],
+    "@id": "/",
+    "@type": "xwot:Description",
+    "knows": [
+        {
+            "@id": "/dht22",
+            "@type": "xwot:Resource",
+            "additionalType": {
+                "@id": "http://xwot.lexruee.ch/vocab/core#Resource"
+            },
+            "knows": [
+                {
+                    "@id": "/dht22/temperature",
+                    "@type": "xwot:Sensor",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                    },
+                    "knows": [
+                        {
+                            "@id": "/dht22/temperature/pub",
+                            "@type": "xwot:Publisher",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Publisher"
+                            },
+                            "knows": [],
+                            "name": "TemperatureResourcePublisherResource",
+                            "sameAs": "http://www.productontology.org/id/Publish%E2%80%93subscribe_pattern",
+                            "uri": {
+                                "@id": "/dht22/temperature/pub"
+                            }
+                        }
+                    ],
+                    "name": "TemperatureResource",
+                    "sameAs": "http://www.productontology.org/id/Sensor",
+                    "uri": {
+                        "@id": "/dht22/temperature"
+                    }
+                },
+                {
+                    "@id": "/dht22/humidity",
+                    "@type": "xwot:Sensor",
+                    "additionalType": {
+                        "@id": "http://xwot.lexruee.ch/vocab/core#Sensor"
+                    },
+                    "knows": [
+                        {
+                            "@id": "/dht22/humidity/pub",
+                            "@type": "xwot:Publisher",
+                            "additionalType": {
+                                "@id": "http://xwot.lexruee.ch/vocab/core#Publisher"
+                            },
+                            "knows": [],
+                            "name": "HumidityResourcePublisherResource",
+                            "sameAs": "http://www.productontology.org/id/Publish%E2%80%93subscribe_pattern",
+                            "uri": {
+                                "@id": "/dht22/humidity/pub"
+                            }
+                        }
+                    ],
+                    "name": "HumidityResource",
+                    "sameAs": "http://www.productontology.org/id/Sensor",
+                    "uri": {
+                        "@id": "/dht22/humidity"
+                    }
+                }
+            ],
+            "name": "DHT22Resource",
+            "sameAs": "http://www.productontology.org/id/Web_resource",
+            "uri": {
+                "@id": "/dht22"
+            }
+        }
+    ]
+}
