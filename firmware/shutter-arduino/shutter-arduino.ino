@@ -44,7 +44,7 @@ int received_cmd = 0x00;
 #define MOTOR_STATE_UP 1
 #define MOTOR_STATE_DOWN 2
 
-#define MOTOR_SPEED_UP 150
+#define MOTOR_SPEED_UP 170
 #define MOTOR_SPEED_DOWN 150
 
 // senses if the shutter is the top position
