@@ -142,7 +142,7 @@ void init_door() {
  * Returns 1 if the door is located at the close position.
  */
 int is_in_closed_position() {
-  return analogRead(MAGNETIC_SENSOR_CLOSE_PIN) > 1000;
+  return analogRead(MAGNETIC_SENSOR_CLOSE_PIN) > 800;
 }
 
 
