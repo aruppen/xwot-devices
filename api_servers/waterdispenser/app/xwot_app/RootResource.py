@@ -22,5 +22,5 @@ def home(request):
 #
 @app.route('/', methods=['OPTIONS'])
 def home_OPTIONS(request):
-    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
+    cors(request, methods=['GET', 'OPTIONS'])
     request.setHeader('Allow', 'GET, OPTIONS')
