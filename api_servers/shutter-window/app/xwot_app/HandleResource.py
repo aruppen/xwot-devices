@@ -36,3 +36,11 @@ def handle_window_handle_PUT(request):
     cors(request, methods=['GET', 'PUT'])
     return make_response(handle, request)
 
+
+#
+# OPTIONS '/window/handle'
+#
+@app.route('/window/handle', methods=['OPTIONS'])
+def handle_window_handle_OPTIONS(request):
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
+    request.setHeader('Allow', 'GET, PUT, OPTIONS')

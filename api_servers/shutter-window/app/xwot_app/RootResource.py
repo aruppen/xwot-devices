@@ -18,3 +18,10 @@ def home(request):
     cors(request, methods=['GET'])
     return xwot_app.jsonld_description_str
 
+#
+# OPTIONS '/'
+#
+@app.route('/window/shutter', methods=['OPTIONS'])
+def home_OPTIONS(request):
+    cors(request, methods=['GET', 'OPTIONS'])
+    request.setHeader('Allow', 'GET, OPTIONS')

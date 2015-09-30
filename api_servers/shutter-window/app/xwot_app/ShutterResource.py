@@ -42,5 +42,10 @@ def handle_window_shutter_PUT(request):
     return deferred_response
 
 
-
-
+#
+# OPTIONS '/window/shutter'
+#
+@app.route('/window/shutter', methods=['OPTIONS'])
+def handle_window_shutter_OPTIONS(request):
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
+    request.setHeader('Allow', 'GET, PUT, OPTIONS')
