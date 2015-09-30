@@ -17,3 +17,12 @@ def home(request):
     cors(request, methods=['GET'])
     request.setHeader('Content-Type', 'application/ld+json')
     return xwot_app.jsonld_description_str
+
+
+#
+# OPTIONS '/'
+#
+@app.route('/', methods=['OPTIONS'])
+def home_OPTIONS(request):
+    cors(request, methods=['GET'])
+    request.setHeader('Allow', 'GET')

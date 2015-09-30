@@ -22,7 +22,7 @@ door = Door(name='Door', street_address="Bd de Perolles 90 - DEPARTEMENT D'INFOR
 #
 @app.route('/door', methods=['GET'])
 def handle_door_GET(request):
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(door, request)
 
 #
@@ -34,7 +34,15 @@ def handle_door_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     door.update(dic, content_type)
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(door, request)
+
+#
+# OPTIONS '/door'
+#
+@app.route('/door', methods=['OPTIONS'])
+def handle_door_OPTIONS(request):
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
+    request.setHeader('Allow', 'GET, PUT, OPTIONS')
 
 

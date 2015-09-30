@@ -39,3 +39,10 @@ def handle_door_handle_PUT(request):
 
     return deferred_response
 
+#
+# OPTIONS '/door/handle'
+#
+@app.route('/door/handle', methods=['OPTIONS'])
+def handle_door_handle_OPTIONS(request):
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
+    request.setHeader('Allow', 'GET, PUT, OPTIONS')
