@@ -19,6 +19,13 @@ sensor = Sensor()
 #
 @app.route('/lightbulb/sensor', methods=['GET'])
 def handle_lightbulb_sensor_GET(request):
-    cors(request, methods=['GET'])
+    cors(request, methods=['GET', 'OPTIONS'])
     return make_response(sensor, request)
 
+#
+# OPTIONS '/lightbulb/sensor'
+#
+@app.route('/lightbulb/sensor', methods=['OPTIONS'])
+def handle_lightbulb_sensor_OPTIONS(request):
+    cors(request, methods=['GET', 'OPTIONS'])
+    request.setHeader('Allow', 'GET, OPTIONS')

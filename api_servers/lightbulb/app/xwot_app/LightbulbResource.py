@@ -21,7 +21,7 @@ lightbulb = LightBulb(name='Light bulb', street_address="Bd de Perolles 90 - DEP
 #
 @app.route('/lightbulb', methods=['GET'])
 def handle_lightbulb_GET(request):
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(lightbulb, request)
 
 #
@@ -33,6 +33,14 @@ def handle_lightbulb_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     status = lightbulb.update(dic, content_type)
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(lightbulb, request=request, status=status)
 
+
+#
+# OPTIONS '/lightbulb'
+#
+@app.route('/lightbulb', methods=['OPTIONS'])
+def handle_lightbulb_OPTIONS(request):
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
+    request.setHeader('Allow', 'GET, PUT, OPTIONS')
