@@ -19,7 +19,7 @@ valve = Valve(name='Valve')
 #
 @app.route('/waterdispenser/valve', methods=['GET'])
 def handle_waterdispenser_valve_GET(request):
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(valve, request)
 
 
@@ -32,6 +32,13 @@ def handle_waterdispenser_valve_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     status = valve.update(dic, content_type)
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(valve, request=request, status=status)
 
+#
+# OPTIONS '/waterdispenser/valve'
+#
+@app.route('/waterdispenser/valve', methods=['OPTIONS'])
+def handle_waterdispenser_valve_OPTIONS(request):
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
+    request.setHeader('Allow', 'GET, PUT, OPTIONS')

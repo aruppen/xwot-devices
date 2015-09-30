@@ -21,7 +21,7 @@ waterdispener = WaterDispenser(name='Water dispenser',
 #
 @app.route('/waterdispenser', methods=['GET'])
 def handle_waterdispenser_GET(request):
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(waterdispener, request)
 
 #
@@ -33,6 +33,13 @@ def handle_waterdispenser_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     status = waterdispener.update(dic, content_type)
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(waterdispener, request=request, status=status)
 
+#
+# OPTIONS '/waterdispenser'
+#
+@app.route('/waterdispenser', methods=['OPTIONS'])
+def handle_waterdispenser_OPTIONS(request):
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
+    request.setHeader('Allow', 'GET, PUT, OPTIONS')

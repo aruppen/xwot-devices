@@ -20,6 +20,13 @@ sensor = Sensor()
 #
 @app.route('/waterdispenser/sensor', methods=['GET'])
 def handle_waterdispenser_sensor_GET(request):
-    cors(request, methods=['GET'])
+    cors(request, methods=['GET', 'OPTIONS'])
     return make_response(sensor, request)
 
+#
+# OPTIONS '/waterdispenser/sensor'
+#
+@app.route('/waterdispenser/sensor', methods=['OPTIONS'])
+def handle_waterdispenser_sensor_OPTIONS(request):
+    cors(request, methods=['GET', 'OPTIONS'])
+    request.setHeader('Allow', 'GET, OPTIONS')
