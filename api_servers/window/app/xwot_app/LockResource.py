@@ -36,3 +36,10 @@ def handle_window_lock_PUT(request):
     cors(request, methods=['GET', 'PUT'])
     return make_response(lock, request)
 
+#
+# OPTIONS '/window/lock'
+#
+@app.route('/window/lock', methods=['OPTIONS'])
+def handle_window_lock_OPTIONS(request):
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
+    request.setHeader('Allow', 'GET, PUT, OPTIONS')
