@@ -22,7 +22,7 @@ handle = Handle(name='Door handle')
 #
 @app.route('/door/handle', methods=['GET'])
 def handle_door_handle_GET(request):
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(handle, request)
 
 #
@@ -30,7 +30,7 @@ def handle_door_handle_GET(request):
 #
 @app.route('/door/handle', methods=['PUT'])
 def handle_door_handle_PUT(request):
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     data = request.content.read()
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
