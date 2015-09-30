@@ -23,7 +23,7 @@ shutter = Shutter('Window shutter')
 #
 @app.route('/window/shutter', methods=['GET'])
 def handle_window_shutter_GET(request):
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(shutter, request)
 
 
@@ -32,7 +32,7 @@ def handle_window_shutter_GET(request):
 #
 @app.route('/window/shutter', methods=['PUT'])
 def handle_window_shutter_PUT(request):
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     data = request.content.read()
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type=content_type)

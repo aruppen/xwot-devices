@@ -21,7 +21,7 @@ handle = Handle(name="Window handle")
 #
 @app.route('/window/handle', methods=['GET'])
 def handle_window_handle_GET(request):
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(handle, request)
 
 #
@@ -33,7 +33,7 @@ def handle_window_handle_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     handle.update(dic, content_type)
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(handle, request)
 
 

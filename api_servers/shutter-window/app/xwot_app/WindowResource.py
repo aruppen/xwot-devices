@@ -22,7 +22,7 @@ window = Window(name='Window', street_address="Bd de Perolles 90 - DEPARTEMENT D
 #
 @app.route('/window', methods=['GET'])
 def handle_window_GET(request):
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(window, request)
 
 #
@@ -34,7 +34,7 @@ def handle_window_PUT(request):
     content_type = request.getHeader('Content-Type')
     dic = deserialize(data, content_type)
     window.update(dic, content_type)
-    cors(request, methods=['GET', 'PUT'])
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     return make_response(window, request)
 
 #
