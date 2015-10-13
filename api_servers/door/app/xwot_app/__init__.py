@@ -31,4 +31,8 @@ import RootResource
 import DoorResource
 import HandleResource
 import LockResource
+import HandlePublisher
+import HandlePublisherClient
+import LockPublisher
+import LockPublisherClient
 
