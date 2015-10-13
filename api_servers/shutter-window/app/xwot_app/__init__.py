@@ -31,4 +31,8 @@ import RootResource
 import WindowResource
 import HandleResource
 import ShutterResource
+import HandlePublisher
+import HandlePublisherClient
+import ShutterPublisher
+import ShutterPublisherClient
 
