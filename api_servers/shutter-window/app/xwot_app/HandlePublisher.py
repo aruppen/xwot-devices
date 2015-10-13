@@ -36,7 +36,7 @@ from xwot.util.SampleHardware import SampleHardware
 def handle_windows_windows_pub_GET(request):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
-    dbclient = SubscriberDB.getAllClients()
+    dbclient = SubscriberDB.getAllClients('1')
     logging.debug(request.requestHeaders)
     accept_type = request.requestHeaders.getRawHeaders("Accept")[0]
     clients = ""

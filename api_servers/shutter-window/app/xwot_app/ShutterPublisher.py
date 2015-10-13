@@ -35,7 +35,7 @@ from xwot.util.SampleHardware import SampleHardware
 def handle_windows_windows_pub_GET(request):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
-    dbclient = SubscriberDB.getAllClients()
+    dbclient = SubscriberDB.getAllClients('2')
     logging.debug(request.requestHeaders)
     accept_type = request.requestHeaders.getRawHeaders("Accept")[0]
     clients = ""
@@ -68,7 +68,7 @@ def handle_windows_windows_pub_POST(request):
     logging.debug(json_data)
     logging.debug(request.requestHeaders)
     accept_type = request.requestHeaders.getRawHeaders("Accept")[0]
-    lastrowid = SubscriberDB.insertClient(json_data['uri'], json_data['method'], json_data['accept'], '1')
+    lastrowid = SubscriberDB.insertClient(json_data['uri'], json_data['method'], json_data['accept'], '2')
     if not None:
         if accept_type == "application/json":
             request.setHeader("Content-Type", "application/json; charset=UTF-8")
