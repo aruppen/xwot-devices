@@ -31,7 +31,10 @@ app = Klein()
 import Entity
 import DHT22Resource
 import TemperatureResource
-import TemperatureResourcePublisherResource
 import HumidityResource
-import HumidityResourcePublisherResource
+import TemperaturePublisher
+import TemperaturePublisherClient
+import HumidityPublisher
+import HumidityPublisherClient
+
 
