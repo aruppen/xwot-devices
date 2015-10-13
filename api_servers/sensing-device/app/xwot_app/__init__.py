@@ -33,4 +33,8 @@ import RootResource
 import HumiditySensorResource
 import TemperatureSensorResource
 import SensingDeviceResource
+import TemperaturePublisher
+import TemperaturePublisherClient
+import HumidityPublisher
+import HumidityPublisherClient
 
