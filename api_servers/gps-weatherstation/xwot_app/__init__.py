@@ -50,3 +50,20 @@ import ColorResource
 import Temperature2Resource
 import GPSResource
 
+import AltitudePublisher
+import AltitudePublisherClient
+import ColorPublisher
+import ColorPublisherClient
+import GPSPublisher
+import GPSPublisherClient
+import HumidityPublisher
+import HumidityPublisherClient
+import IlluminancePublisher
+import IlluminancePublisherClient
+import PressurePublisher
+import PressurePublisherClient
+import Temperature1Publisher
+import Temperature1PublisherClient
+import Temperature2Publisher
+import Temperature2PublisherClient
+
