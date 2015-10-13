@@ -32,4 +32,7 @@ import RootResource
 import LightbulbResource
 import SwitchResource
 import SensorResource
-
+import SensorPublisher
+import SensorPublisherClient
+import SwitchPublisher
+import SwitchPublisherClient
