@@ -91,7 +91,7 @@ def handle_windows_windows_pub_POST(request):
 def handle_windows_windows_pub_ws(request):
     ServerFactory = xWoTBroadcastFactory
     switch = Switch(name='Light bulb Switch')
-    factory = ServerFactory("ws://localhost:5000/", sensor, debug = False,  debugCodePaths = False)
+    factory = ServerFactory("ws://localhost:5000/", switch, debug = False,  debugCodePaths = False)
     factory.protocol = xWoTStreamerProtocol
     factory.setProtocolOptions(allowHixie76 = True)
     return WebSocketResource(factory)

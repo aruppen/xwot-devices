@@ -24,14 +24,14 @@ from  xwot.util.SubscriberDB import SubscriberDB
 
 ## OPTIONS '/windows/windows/pub/<clientid>'
 #
-@app.route('/lightbulb/sensor/pub/<clientid>', methods=['OPTIONS'])
+@app.route('/lightbulb/switch/pub/<clientid>', methods=['OPTIONS'])
 def handle_windows_windows_pub_clientid_OPTIONS(request, clientid):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
 
 ## GET '/windows/windows/pub/<clientid>'
 #
-@app.route('/lightbulb/sensor/pub/<clientid>', methods=['GET'])
+@app.route('/lightbulb/switch/pub/<clientid>', methods=['GET'])
 def handle_windows_windows_pub_clientid_GET(request, clientid):
     logging.debug(request.requestHeaders)
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
@@ -53,7 +53,7 @@ def handle_windows_windows_pub_clientid_GET(request, clientid):
 
 ## PUT '/windows/windows/pub/<clientid>'
 #
-@app.route('/lightbulb/sensor/pub/<clientid>', methods=['PUT'])
+@app.route('/lightbulb/switch/pub/<clientid>', methods=['PUT'])
 def handle_windows_windows_pub_clientid_PUT(request, clientid):
     logging.debug(request.requestHeaders)
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
@@ -78,7 +78,7 @@ def handle_windows_windows_pub_clientid_PUT(request, clientid):
 
 ## DELETE '/windows/windows/pub/<clientid>'
 #
-@app.route('/lightbulb/sensor/pub/<clientid>', methods=['DELETE'])
+@app.route('/lightbulb/switch/pub/<clientid>', methods=['DELETE'])
 def handle_windows_windows_pub_clientid_DELETE(request, clientid):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
