@@ -30,7 +30,7 @@ from xwot.device.window import Lock
 #
 # GET '/windows/windows/pub'
 #
-@app.route('/window/shutter/pub', methods=['GET'])
+@app.route('/window/lock/pub', methods=['GET'])
 def handle_windows_windows_pub_GET(request):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
@@ -59,7 +59,7 @@ def handle_windows_windows_pub_GET(request):
 #
 # POST '/windows/windows/pub'
 #
-@app.route('/window/shutter/pub', methods=['POST'])
+@app.route('/window/lock/pub', methods=['POST'])
 def handle_windows_windows_pub_POST(request):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
@@ -85,7 +85,7 @@ def handle_windows_windows_pub_POST(request):
 #
 # WS '/windows/windows/pub'
 #
-@app.route('/window/shutter/pub/', branch=True)
+@app.route('/window/lock/pub/', branch=True)
 def handle_windows_windows_pub_ws(request):
     ServerFactory = xWoTBroadcastFactory
     lock = Lock(name="Window lock")
@@ -97,7 +97,7 @@ def handle_windows_windows_pub_ws(request):
 #
 # OPTIONS '/windows/windows/pub'
 #
-@app.route('/window/shutter/pub', methods=['OPTIONS'])
+@app.route('/window/lock/pub', methods=['OPTIONS'])
 def handle_windows_windows_pub_OPTIONS(request):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
