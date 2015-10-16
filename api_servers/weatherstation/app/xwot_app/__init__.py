@@ -49,3 +49,16 @@ import IlluminanceResource
 import ColorResource
 import Temperature2Resource
 
+import AltitudePublisher
+import AltitudePublisherClient
+import ColorPublisher
+import ColorPublisherClient
+import HumidityPublisher
+import HumidityPublisherClient
+import PressurePublisher
+import PressurePublisherClient
+import Temperature1Publisher
+import Temperature1PublisherClient
+import Temperature2Publisher
+import Temperature2PublisherClient
+
