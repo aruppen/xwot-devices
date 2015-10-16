@@ -33,3 +33,7 @@ import WindowResource
 import HandleResource
 import LockResource
 
+import HandlePublisher
+import HandlePublisherClient
+import LockPublisher
+import LockPublisherClient
