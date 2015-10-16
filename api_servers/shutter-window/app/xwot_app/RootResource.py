@@ -28,5 +28,5 @@ def static_files(request):
 #
 @app.route('/window/shutter', methods=['OPTIONS'])
 def home_OPTIONS(request):
-    cors(request, methods=['GET', 'OPTIONS'])
-    request.setHeader('Allow', 'GET, OPTIONS')
+    cors(request, methods=['GET', 'PUT', 'OPTIONS'])
+    request.setHeader('Allow', 'GET, PUT, OPTIONS')
