@@ -25,7 +25,7 @@ from  xwot.util.SubscriberDB import SubscriberDB
 ## OPTIONS '/windows/windows/pub/<clientid>'
 #
 @app.route('/door/handle/pub/<clientid>', methods=['OPTIONS'])
-def handle_windows_windows_pub_clientid_OPTIONS(request, clientid):
+def handle_windows_windows_pub_clientid_OPTIONS2(request, clientid):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
 
