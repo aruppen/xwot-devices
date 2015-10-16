@@ -53,6 +53,8 @@ import AltitudePublisher
 import AltitudePublisherClient
 import ColorPublisher
 import ColorPublisherClient
+import IlluminancePublisher
+import IlluminancePublisherClient
 import HumidityPublisher
 import HumidityPublisherClient
 import PressurePublisher
