@@ -32,4 +32,7 @@ import RootResource
 import WaterDispenserResource
 import SensorResource
 import ValveResource
-
+import SensorPublisher
+import SensorPublisherClient
+import ValvePublisher
+import ValvePublisherClient
