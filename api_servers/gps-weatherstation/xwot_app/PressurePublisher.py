@@ -33,7 +33,7 @@ from xwot.util.SampleHardware import SampleHardware
 # GET '/windows/windows/pub'
 #
 @app.route('/weatherstation/sensors/pressure/pub', methods=['GET'])
-def handle_windows_windows_pub_GET(request):
+def handle_windows_windows_pub_GET5(request):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
     dbclient = SubscriberDB.getAllClients('6')
@@ -62,7 +62,7 @@ def handle_windows_windows_pub_GET(request):
 # POST '/windows/windows/pub'
 #
 @app.route('/weatherstation/sensors/pressure/pub', methods=['POST'])
-def handle_windows_windows_pub_POST(request):
+def handle_windows_windows_pub_POST5(request):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
     json_data = json.loads(request.content.getvalue())
@@ -88,7 +88,7 @@ def handle_windows_windows_pub_POST(request):
 # WS '/windows/windows/pub'
 #
 @app.route('/weatherstation/sensors/pressure/pub/', branch=True)
-def handle_windows_windows_pub_ws(request):
+def handle_windows_windows_pub_ws5(request):
     ServerFactory = xWoTBroadcastFactory
     pressure_sensor = sensors_dic['pressure']
     factory = ServerFactory("ws://localhost:5000/", pressure_sensor, debug = False,  debugCodePaths = False)
@@ -100,7 +100,7 @@ def handle_windows_windows_pub_ws(request):
 # OPTIONS '/windows/windows/pub'
 #
 @app.route('/weatherstation/sensors/pressure/pub', methods=['OPTIONS'])
-def handle_windows_windows_pub_OPTIONS(request):
+def handle_windows_windows_pub_OPTIONS5(request):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
 

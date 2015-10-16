@@ -25,14 +25,14 @@ from  xwot.util.SubscriberDB import SubscriberDB
 ## OPTIONS '/windows/windows/pub/<clientid>'
 #
 @app.route('/weatherstation/sensors/temperature2/pub/<clientid>', methods=['OPTIONS'])
-def handle_windows_windows_pub_clientid_OPTIONS(request, clientid):
+def handle_windows_windows_pub_clientid_OPTIONS7(request, clientid):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
 
 ## GET '/windows/windows/pub/<clientid>'
 #
 @app.route('/weatherstation/sensors/temperature2/pub/<clientid>', methods=['GET'])
-def handle_windows_windows_pub_clientid_GET(request, clientid):
+def handle_windows_windows_pub_clientid_GET7(request, clientid):
     logging.debug(request.requestHeaders)
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     accept_type = request.requestHeaders.getRawHeaders('Accept')[0].split(',')[0]
@@ -54,7 +54,7 @@ def handle_windows_windows_pub_clientid_GET(request, clientid):
 ## PUT '/windows/windows/pub/<clientid>'
 #
 @app.route('/weatherstation/sensors/temperature2/pub/<clientid>', methods=['PUT'])
-def handle_windows_windows_pub_clientid_PUT(request, clientid):
+def handle_windows_windows_pub_clientid_PUT7(request, clientid):
     logging.debug(request.requestHeaders)
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
@@ -79,7 +79,7 @@ def handle_windows_windows_pub_clientid_PUT(request, clientid):
 ## DELETE '/windows/windows/pub/<clientid>'
 #
 @app.route('/weatherstation/sensors/temperature2/pub/<clientid>', methods=['DELETE'])
-def handle_windows_windows_pub_clientid_DELETE(request, clientid):
+def handle_windows_windows_pub_clientid_DELETE7(request, clientid):
     cors(request, methods=['GET', 'PUT', 'OPTIONS'])
     request.setHeader('Allow', 'GET, PUT, OPTIONS')
     logging.debug(request.requestHeaders)
